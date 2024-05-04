@@ -1,0 +1,65 @@
+/* Main content area that holds the image and the form */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%; /* Ensure it covers the full width of the screen */
+    height: 100%; /* Ensure it covers the full height of the screen */
+    box-sizing: border-box; /* This ensures padding does not add to the total width */
+    background-color: #f0f0f0 ;
+}
+
+.section-container {
+    margin-top: 50px;
+    width: 260%; /* The container will take up 80% of the page width */
+}
+
+.content-section {
+    display: flex;
+    align-items: left;
+    justify-content: center;
+    background-color: #f0f0f0;
+    margin-top: -20px;
+    margin-right: -200px;
+}
+
+/* Style for the registration form container */
+.register-form {
+    flex-basis: 100%; /* take up 40% of the flex container width */
+    margin-top: 50px;
+
+}
+
+.content-section h2 {
+    color: rgb(211, 55, 55); /* This will set the text color to the red shade you've specified */
+}
+
+.btn-outline-info {
+    background-color: rgb(179, 49, 49); /* Sets the background color */
+    color: #fff; /* Sets the text color to white for better contrast */
+    border-color: rgb(179, 49, 49); /* Sets the border color to match the background */
+}
+
+.btn-outline-info:hover {
+    background-color: rgb(199, 69, 69); /* Lighter shade for hover state */
+    border-color: rgb(199, 69, 69); /* Border color to match the background on hover */
+}
+
+
+/* Style for the image container */
+.register-background {
+    flex-basis: 100%; /* take up 60% of the flex container width */
+    display: flex;
+    align-items: right;
+    justify-content: center;
+    margin-left: 400px; /* Optional: Adjusts the spacing between image and form */
+}
+
+/* Responsive image styling */
+.register-background img {
+    float: right;
+    width: 800px;
+    padding: 0px;
+    height: 810px;
+}
+
+

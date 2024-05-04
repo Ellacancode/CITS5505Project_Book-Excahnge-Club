@@ -1,0 +1,89 @@
+/* style for Intro Banner Section */
+html, body {
+    padding: 0 ;
+    margin: 0 ;
+    /* background: linear-gradient(to right, #f9f9f9 0%, #faece9 99%, #f9dfd9 100%); */
+  }
+
+.container-for-sections {
+    max-width: 1000px; /* Set maximum width of the content area */
+    padding: 20px; /* Optional: if you want some space inside the container */
+    background-color: rgb(254, 248, 248); /* Keeping your background color */
+}
+
+.intro-banner {
+    margin-top: -17px;
+    width: 100%;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+    text-align: center;
+}
+
+.banner-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.banner-content .welcome {
+    margin-left: 20px;
+}
+
+.banner-content .banner-img {
+    width: 300px;
+    height: auto;
+}
+
+.start-sharing-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #f06292;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    align-items: center;
+}
+
+
+div.container-for-sections {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(254, 248, 248); /* 设置背景颜色为白色 */
+    padding: 20px; 
+}
+
+
+div.join, div.find, div.exchange {
+    flex-basis: calc(33.333% - 40px); 
+    text-align: center; 
+    margin: 20px; 
+}
+
+
+div.join img, div.find img, div.exchange img {
+    max-width: 100%; 
+    height: auto; 
+}
+
+
+div.join button, div.find button, div.exchange button {
+    color: white;
+    background-color: #f9a9c3;
+    border: none;
+    margin-top: 10px; 
+    width: 100%; 
+    border-radius: 40px;
+}
+
+div.join p, div.find p, div.exchange p {
+    margin-top: 10px; 
+    
+}
