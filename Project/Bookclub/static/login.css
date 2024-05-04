@@ -1,0 +1,73 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%; /* Ensure it covers the full width of the screen */
+    height: 100%; /* Ensure it covers the full height of the screen */
+    box-sizing: border-box; /* This ensures padding does not add to the total width */
+    background-color: #f0f0f0;
+}
+
+.login-container {
+    display: flex;
+    align-items: left;
+    justify-content: center;
+    background-color: #f0f0f0;
+    margin-top: -20px;
+}
+
+.login-form {
+    width: 800px;
+    padding: 200px;
+    height: 810px;
+    background: #f0f0f0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-right: 0px;
+}
+
+.login-form h2 {
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-check-input {
+    margin-top: 6px;
+}
+
+.form-check-label {
+    margin-left: 20px;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: rgb(211, 55, 55);
+}
+
+
+.btn-signup {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: rgb(14, 13, 13);
+    color: white;
+}
+
+
+.invalid-feedback {
+    display: block;
+    color: #dc3545;
+}
+
+
+.login-background img {
+    float: right;
+    padding-right: 0px;
+    width: 910px;
+    padding: 0px;
+    height: 810px;
+}
+

@@ -1,0 +1,63 @@
+/* Custom styles for a larger navbar */
+.navbar {
+  padding: 20px 15px;  /* Increases padding to make the navbar taller */
+  font-size: 18px;     /* Larger font size for better readability */
+  background-color: white; 
+  box-shadow: 3px 3px 3px 1px gray;
+}
+.navbar-brand {
+  font-size: 25px;     /* Slightly larger font size for the brand/logo */
+  letter-spacing: 5px;
+}
+.nav-item{
+  font-size: 18px;
+  letter-spacing: 1px;
+  transform: scaleY(0.9);
+  margin-left: 12px;
+  font-weight: 500;
+}
+.btn{
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  width: 120px;
+  height: 40px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+.btn:hover{
+  font-weight: bold;
+  border: solid 1px black;
+}
+.btn_red{
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  color: white;
+  background-color: rgb(211, 55, 55);
+  width: 120px;
+  height: 40px;
+  border-radius: 20px;
+  margin-right: 15px;
+}
+.btn_red:hover{
+  background-color: rgb(107, 31, 31);
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure the body fills the viewport */
+}
+
+.footer {
+  margin-top: auto; /* Push the footer to the bottom */
+  width: 100%;
+  background-color: #f8f9fa; /* Background color for the footer */
+  padding: 20px 0; /* Add padding for better appearance */
+  text-align: center;
+  letter-spacing: 1px;
+}

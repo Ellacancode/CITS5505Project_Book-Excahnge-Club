@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block page_specific_css %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='login.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <div class="login-form">
+        <h2>Bookclubs member? Log In</h2>
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.email.label() }}
+                {{ form.email() }}
+                {% if form.email.errors %}
+                    <div class="invalid-feedback">
+                        {% for error in form.email.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ form.password.label() }}
+                {{ form.password() }}
+                {% if form.password.errors %}
+                    <div class="invalid-feedback">
+                        {% for error in form.password.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="form-group form-check">
+                {{ form.remember(class="form-check-input") }}
+                {{ form.remember.label(class="form-check-label") }}
+            </div>
+            <button type="submit" class="btn btn-primary">LOG IN NOW</button>
+            <small class="form-text text-muted">
+                <a href="#">Forgot password?</a>
+            </small>
+        </form>
+    
+        <a class="btn btn-signup" href="{{ url_for('register') }}">SIGN UP</a>
+    </div>
+    <div class="login-background">
+        <img src="{{ url_for('static', filename='login_pics/' +'login_bg.jpg') }}" alt="Login Background">
+    </div>
+</div>
+{% endblock content %}
