@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block page_specific_css %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='forum.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="forum">
+    <div class="container">
+        {% for post in posts %}
+        <div class="post-card">
+            <div class="post-header">
+                <img class="profile-pic" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="Profile Picture">
+                <div class="post-title">
+                    <a class="username" href=" ">{{ post.author.username }}</a >
+                    <span class="date-posted">{{ post.date_posted.strftime('%Y-%m-%d') }}</span>
+                </div>
+            </div>
+            <h2 class="title"><a href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a ></h2>
+            <p class="content">{{ post.content }}</p >
+                <div>
+                        {% if post.image_file != 'default.jpg' %}
+                        <img class="post-image" src="{{ url_for('static', filename='post_images/' + post.image_file) }}" alt="Post Image">
+                        {% endif %}
+                </div>
+                    
+                
+                
+        </div>
+
+        
+
+        {% else %}
+        <p>No posts have been made yet.</p >
+        {% endfor %}
+    </div>
+</section>
+{% endblock content %}
