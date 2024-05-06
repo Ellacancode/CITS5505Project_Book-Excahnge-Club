@@ -33,8 +33,32 @@ class LoginForm(FlaskForm):
     remember = BooleanField('Remember Me')
     submit = SubmitField('Login')
 
+# Form for updating user account information
+class UpdateAccountForm(FlaskForm):
+    username = StringField('Username',validators=[DataRequired(), Length(min=2, max=20)])
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png'])])
+    about_me = TextAreaField('About Me', validators=[Length(min=0, max=250)])
+    submit = SubmitField('Update')
 
-# Form for search functionality
-class SearchForm(FlaskForm):
-	searched = StringField("Searched", validators=[DataRequired()])
-	submit = SubmitField("Submit") 
+    # Custom validator to check if the username is taken and it's not the current user's
+    def validate_username(self, username):
+        if username.data != current_user.username:
+            user = User.query.filter_by(username=username.data).first()
+            if user:
+                raise ValidationError('That username is taken. Please choose a different one.')
+
+    # Custom validator to check if the email is taken and it's not the current user's
+    def validate_email(self, email):
+        if email.data != current_user.email:
+            user = User.query.filter_by(email=email.data).first()
+            if user:
+                raise ValidationError('That email is taken. Please choose a different one.')
+
+# Form for creating or editing a post
+class PostForm(FlaskForm):
+    title = StringField('Title', validators=[DataRequired()])
+    content = TextAreaField('Content', validators=[DataRequired()])
+    picture = FileField('Upload Image', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
+    submit = SubmitField('Post')
+
