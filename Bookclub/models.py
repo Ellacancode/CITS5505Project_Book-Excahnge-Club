@@ -50,4 +50,16 @@ class Post(db.Model):
         return f"Post('{self.title}', '{self.date_posted}','{self.image_file}')"
     
 
+#Comment model to represent comments on blog posts
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    to_post_id = db.Column(db.Integer, nullable=False)
+    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    content = db.Column(db.Text, nullable=False)
+    image_file = db.Column(db.String(50), nullable=True, default='default.jpg')
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    def __repr__(self):
+        return f"Comment('{self.title}', '{self.date_posted}','{self.image_file}')"
+
 

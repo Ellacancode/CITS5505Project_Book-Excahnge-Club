@@ -3,11 +3,12 @@ import secrets
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, abort
 from Bookclub import app, db, bcrypt # Main application, database, and encryption module imports
-from Bookclub.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm # Import forms for user registration, login, and post creation
+from Bookclub.forms import RegistrationForm, LoginForm, UpdateAccountForm, PostForm,SearchForm, CommentForm # Import forms for user registration, login, and post creation
 from Bookclub.models import User, Post, Book, Comment
 from flask_login import login_user, current_user, logout_user, login_required  # Import functions for user session management
 from werkzeug.utils import secure_filename
-
+from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
 
 # Home page route: Displays the home page
 @app.route("/")
@@ -60,14 +61,18 @@ def logout():
     return redirect(url_for('home'))
 
 # Helper function to handle image file uploads within forms
-def upload_images(form_picture, storage_path):
+def upload_images(form_picture, storage_path, output_size=(125, 125)):
+    # Generate a unique file name
     random_hex = secrets.token_hex(8)
     _, f_ext = os.path.splitext(form_picture.filename)
     picture_fn = random_hex + f_ext
+
+    # Determine the path to save the image
     picture_path = os.path.join(app.root_path, storage_path, picture_fn)
-    output_size = (125, 125)
+
+    # Open the image and create a thumbnail
     i = Image.open(form_picture)
-    i.thumbnail(output_size)
+    i.thumbnail(output_size)  # Resize the image using the provided output_size
     i.save(picture_path)
 
     return picture_fn
@@ -100,47 +105,48 @@ def profile():
 
 
 # Route to create a new post, requires login to access
-@app.route("/post/new", methods=['GET', 'POST'])
-@login_required
-def new_post():
-    form = PostForm()
-    if form.validate_on_submit():
-        post = Post(title=form.title.data, content=form.content.data, author=current_user)
-        if form.picture.data:
-            print(form.picture.data)
-            picture_file = upload_images(form.picture.data, 'static/post_images')
-            post.image_file = picture_file  # Ensure your Post model has an image_file field
-        db.session.add(post)
-        db.session.commit()
-        flash('Your post has been created!', 'success')
-        return redirect(url_for('forum'))
-    return render_template('create_post.html', title='New Post',
-                           form=form, legend='New Post')
-
 @app.route("/post/<int:post_id>", methods=['GET', 'POST'])
 def post(post_id):
     post = Post.query.get_or_404(post_id)
     allComments = Comment.query.filter_by(to_post_id=post_id).all()
-    
-
     for i, comment_item in enumerate(allComments):
         class Comment_return:
-            def __init__(self, content, to_post_id, author):
+            def __init__(self, content, to_post_id, author, image_file, date_posted):
                 self.content = content
                 self.to_post_id = to_post_id
-                self.author = author
-        allComments[i] = Comment_return( comment_item.content, comment_item.to_post_id, User.query.filter_by(id=comment_item.user_id).first().username)
-    form = CommentForm()
-    
+                self.author = author  # author is now a User object
+                self.image_file = image_file
+                self.date_posted = date_posted
 
+        user = User.query.filter_by(id=comment_item.user_id).first()
+        allComments[i] = Comment_return(
+            comment_item.content,
+            comment_item.to_post_id,
+            user,  # Pass the User object instead of just the username
+            comment_item.image_file,
+            comment_item.date_posted
+        )
+
+    form = CommentForm()
     if form.validate_on_submit():
-        comment = Comment(to_post_id=post_id, content=form.content.data, user_id=current_user.id)
+        if form.picture.data:
+            picture_file = upload_images(form.picture.data, 'static/comment_pics',output_size=(500,500))
+        else:
+            picture_file = 'default.jpg'
+
+        comment = Comment(
+            to_post_id=post_id,
+            content=form.content.data,
+            user_id=current_user.id,
+            image_file=picture_file
+        )
         db.session.add(comment)
         db.session.commit()
         flash('Your comment has been created!', 'success')
-        return redirect(url_for('home'))
-    return render_template('post.html', postTitle=post.title, post=post,
-                           form=form, legend='New comment', comments=allComments)
+        return redirect(url_for('post', post_id=post_id))
+
+    return render_template('post.html', postTitle=post.title, post=post, form=form, legend='New comment', comments=allComments)
+
 
 # Route to update an existing post, requires login and user must be the author
 @app.route("/post/<int:post_id>/update", methods=['GET', 'POST'])
