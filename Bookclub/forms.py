@@ -62,3 +62,24 @@ class PostForm(FlaskForm):
     picture = FileField('Upload Image', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
     submit = SubmitField('Post')
 
+# Form for creating a comment
+class CommentForm(FlaskForm):
+    content = TextAreaField('Content', validators=[DataRequired()])
+    submit = SubmitField('Post')
+
+# Form for search functionality
+class SearchForm(FlaskForm):
+	searched = StringField("Searched", validators=[DataRequired()])
+	submit = SubmitField("Submit") 
+
+# Empty form for CSRF protection
+class EmptyForm(FlaskForm):
+    submit = SubmitField('Submit')
+
+# Form for following users
+class FollowForm(FlaskForm):
+    submit = SubmitField('Follow', validators=[DataRequired()])
+
+# Form for unfollowing users
+class UnfollowForm(FlaskForm):
+    submit = SubmitField('Unfollow', validators=[DataRequired()])
