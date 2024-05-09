@@ -6,11 +6,12 @@
 
 {% endblock %}
 {% block content %}
+<div class="registration-page">
     <div class="content-section">
         <form method="POST" action="">
             {{ form.hidden_tag() }}
             <div class="section-container">
-                <h2>Join a Community of Readers</h2>
+                <h2 class="community-header">Join a Community of Readers</h2>
                 <fieldset class="form-group">
                     <legend class="border-bottom mb-4">Join Today</legend>
                     <div class="form-group">
@@ -67,7 +68,7 @@
                     </div>
                 </fieldset>
                 <div class="form-group">
-                    {{ form.submit(class="btn btn-outline-info") }}
+                    {{ form.submit(class="btn btn-signup") }}  <!-- Applied the btn-signup class -->
                 </div>
                 <div class="border-top pt-3">
                     <small class="text-muted">
@@ -76,8 +77,6 @@
                 </div>
             </form>
         </div>
-        <div class="register-background">
-            <img src="{{ url_for('static', filename='register_pics/' +'register_bg.jpg') }}" alt="Register Background">
-        </div>
+
     </div>
 {% endblock content %}

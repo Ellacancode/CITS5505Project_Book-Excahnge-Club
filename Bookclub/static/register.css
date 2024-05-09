@@ -1,65 +1,93 @@
-/* Main content area that holds the image and the form */
 html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%; /* Ensure it covers the full width of the screen */
-    height: 100%; /* Ensure it covers the full height of the screen */
-    box-sizing: border-box; /* This ensures padding does not add to the total width */
-    background-color: #f0f0f0 ;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow-x: hidden; /* Prevents horizontal scrolling */
 }
 
-.section-container {
-    margin-top: 50px;
-    width: 260%; /* The container will take up 80% of the page width */
+.registration-page {
+    display: flex;
+    align-items: center; /* Centers vertically */
+    justify-content: center; /* Centers horizontally */
+    background: url('register_pics/register_bg.jpg') no-repeat center center fixed;
+    background-size: cover; /* Ensures it covers the full area */
+    min-height: 100vh; /* This ensures the minimum height of the element is the full viewport height */
+    width: 100vw; /* This ensures the width is the full viewport width */
 }
 
 .content-section {
     display: flex;
-    align-items: left;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    background-color: #f0f0f0;
-    margin-top: -20px;
-    margin-right: -200px;
+    min-height: 60vh; /* Adjust height as needed */
+    width: 40%; /* Maintain the width or adjust as needed */
+    margin: auto; /* Center the box horizontally */
+    background-color: rgba(255, 255, 255, 0.65); /* Semi-transparent white */
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 10px;
 }
 
-/* Style for the registration form container */
-.register-form {
-    flex-basis: 100%; /* take up 40% of the flex container width */
-    margin-top: 50px;
-
-}
-
-.content-section h2 {
-    color: rgb(211, 55, 55); /* This will set the text color to the red shade you've specified */
-}
-
-.btn-outline-info {
-    background-color: rgb(179, 49, 49); /* Sets the background color */
-    color: #fff; /* Sets the text color to white for better contrast */
-    border-color: rgb(179, 49, 49); /* Sets the border color to match the background */
-}
-
-.btn-outline-info:hover {
-    background-color: rgb(199, 69, 69); /* Lighter shade for hover state */
-    border-color: rgb(199, 69, 69); /* Border color to match the background on hover */
-}
-
-
-/* Style for the image container */
-.register-background {
-    flex-basis: 100%; /* take up 60% of the flex container width */
+.section-container {
     display: flex;
-    align-items: right;
-    justify-content: center;
-    margin-left: 400px; /* Optional: Adjusts the spacing between image and form */
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 
-/* Responsive image styling */
-.register-background img {
-    float: right;
-    width: 800px;
-    padding: 0px;
-    height: 810px;
+.form-group {
+    width: 80%; /* Adjust to fit your design */
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
+input, button {
+    width: 100%;
+    padding: 8px 15px;
+    box-sizing: border-box;
+}
 
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    width: 100%;
+}
+
+fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+legend {
+    text-align: center;
+    width: 100%;
+    padding: 10px;
+}
+
+.btn-signup {
+    background-color: #ff5447; /* Red color similar to the one in your image */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    display: block;
+    width: 50%; /* Adjust as necessary */
+    margin: 20px auto;
+}
+
+.btn-signup:hover {
+    background-color: #e04a3f; /* Slightly darker shade for hover */
+}
+
+.community-header {
+    color: #ff5447; /* Matching the button color */
+}
