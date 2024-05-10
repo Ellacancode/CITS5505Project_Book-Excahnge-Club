@@ -1,39 +1,54 @@
-<!-- templates/user.html -->
 {% extends "layout.html" %}
 
 {% block content %}
-    <h1>User: {{ user.username }}</h1>
-    {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
-    {% if user.last_seen %}<p>Last seen on: {{ user.last_seen.strftime('%Y-%m-%d %H:%M') }}</p>{% endif %}
-    <p>{{ user.followers_count() }} followers, {{ user.following_count() }} following.</p>
 
-    {% if user == current_user %}
-        <p><a href="{{ url_for('profile') }}">Edit your profile</a></p>
-    {% elif not current_user.is_following(user) %}
-        <form action="{{ url_for('follow', username=user.username) }}" method="post">
-            {{ follow_form.hidden_tag() }}
-            {{ follow_form.submit(class="btn btn-primary") }}
-        </form>
-    {% else %}
-        <form action="{{ url_for('unfollow', username=user.username) }}" method="post">
-            {{ unfollow_form.hidden_tag() }}
-            {{ unfollow_form.submit(class="btn btn-danger") }}
-        </form>
-    {% endif %}
+<div class="container">
+    
+    <div class="user-profile">
+        <h1>{{ user.username }}</h1>
+        <img class="main-author-image" src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="Author Image">
+        {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
+        {% if user.last_seen %}<p>Last seen on: {{ user.last_seen.strftime('%Y-%m-%d %H:%M') }}</p>{% endif %}
+        <p>{{ user.followers_count() }} followers, {{ user.following_count() }} following.</p>
 
-    <hr>
-    <h3>Posts by {{ user.username }}</h3>
-    {% if posts %}
-        {% for post in posts %}
-            <div>
-                <h4>{{ post.title }}</h4>
-                <p>{{ post.content }}</p>
-                <small>Posted on {{ post.date_posted.strftime('%Y-%m-%d %H:%M') }}</small>
-            </div>
-            <hr>
-        {% endfor %}
-    {% else %}
-        <p>No posts yet.</p>
-    {% endif %}
-{% endblock %}
+        {% if user == current_user %}
+            <a class="btn-edit-profile" href="{{ url_for('profile') }}">
+                <i class="fa-solid fa-user"></i> Edit profile
+            </a>
+        {% elif not current_user.is_following(user) %}
+            <form action="{{ url_for('follow', username=user.username) }}" method="post">
+                {{ follow_form.hidden_tag() }}
+                <button type="submit" class="btn-follow">
+                    <i class="fa-solid fa-user-plus"></i> Follow
+                </button>
+            </form>
+        {% else %}
+            <form action="{{ url_for('unfollow', username=user.username) }}" method="post">
+                {{ unfollow_form.hidden_tag() }}
+                <button type="submit" class="btn-unfollow">
+                    <i class="fa-solid fa-user-minus"></i> Unfollow
+                </button>
+            </form>
+        {% endif %}
+    </div>
 
+    
+    <div class="post-history">
+        <h3>Posts by {{ user.username }}</h3>
+        <div class="user-posts">
+            {% if posts %}
+                {% for post in posts %}
+                    <div class="post-item">
+                        <h4><a href="{{ url_for('post', post_id=post.id)}}">{{ post.title }}</a></h4>  
+                        <p><a href="{{ url_for('post', post_id=post.id)}}">{{ post.content }}</a></p>
+                        <small>Posted on {{ post.date_posted.strftime('%Y-%m-%d %H:%M') }}</small>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No posts yet.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    </div>
+    {% endblock %}

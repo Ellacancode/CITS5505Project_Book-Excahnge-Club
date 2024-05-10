@@ -1,0 +1,184 @@
+.content-section {
+    display: flex;
+    flex-direction: column; /* Stacks children vertically */
+    align-items: center; /* Aligns children in the center of the 'content-section' */
+    margin-bottom: -40px;
+}
+
+.article-title {
+    align-items: center;
+    margin-top: 30px;
+    font-size: 40px;
+    font-family: Roboto Bold, sans-serif;
+    margin-bottom: 30px;
+}
+
+.post-image {
+    width: 100%; /* Restricts width to 90% of their container */
+    margin-bottom: 20px; /* Adds space below images */
+    max-width: 500px; /* Maximum width the image can reach */    
+}
+
+/* Add responsiveness to the layout */
+@media (max-width: 768px) {
+    .article-img, .post-image, .comment-image {
+        width: 100%; /* Full width on smaller screens */
+    }
+}
+
+.article-img {
+    width: 70px; /* Adjust the size as needed */
+    /* border-radius: 50%;  */
+    object-fit: cover; /* Keeps the aspect ratio */
+}
+
+.media-body {
+    width: 100%; /* Ensures the comment box takes up the remainder of the column space */
+    min-height: 100px; /* Gives a minimum height to the comment box */
+    border: 1px solid #ccc; /* Adds a border for better visibility */
+    margin-bottom: 10px; /* Adds space between comments */
+    background-color: #f8f9fa; /* A light background color for the comment box */
+}
+
+.comment-image {
+    align-items: center;
+    width: 40%; /* Makes embedded images responsive within the comment box */
+    margin-top: -50px; /* Adds space above the image */
+    max-width: 400px; /* Maximum width the image can reach */
+
+}
+
+.post-info {
+    display: flex;
+    flex-direction: column; /* Aligns children vertically */
+    font-size: large;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+
+
+
+.profile-img {
+    width: 30%; /* smaller profile picture */
+    border-radius: 50%;
+    margin-right: 10px; /* Space between the image and the username */
+}
+
+.commentbox {
+    width: 100%;
+}
+
+.main-author-image {
+    width: 100%;
+    margin-bottom: 10px;
+    max-width: 120px;
+    /* border-radius: 50%; */
+
+}
+
+.comment-label {
+    align-items: left;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+.comment-header {
+    display: flex;
+    flex-direction: row; /* Align items horizontally */
+    align-items: center; /* Center-align items vertically */
+    width: 100%; /* Full width of its container */
+    justify-content: flex-start; /* Aligns content to the start of the container */
+}
+
+
+.author2-image {
+    width: 100px; /* Fixed width for the image */
+    border-radius: 50%; /* Circle shape */
+    margin-right: 20px; /* Space to the right of the image */
+    max-width: 70px;
+}
+
+.metadata {
+    display: flex;
+    flex-direction: column; /* Stack username and date vertically */
+    justify-content: center; /* Center content vertically */
+}
+
+.comment-author {
+    font-weight: bold; /* Bold font for emphasis */
+}
+
+.text-muted {
+    font-size: 0.8rem; /* Smaller font size for the date */
+}
+
+
+
+.article-content {
+    margin-top: 20px;
+    font-size: 25px;
+    font-family: Roboto Bold;
+    margin-bottom: 20px;
+}
+
+.comment-content {
+    margin-top: -20px;
+    font-size: 25px;
+    font-family: Roboto Bold;
+    margin-bottom: 40px;
+}
+
+.comment-image {
+    width: 60%; /* Adjust based on your needs */
+    margin: 10px auto 20px; 
+    margin-top: -40px;
+}
+
+/* Ensures the comment box takes up the remainder of the column space */
+.media-body {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    background-color: #f8f9fa;
+}
+
+
+
+@media (max-width: 768px) {
+    .comment-image {
+        width: 100%;
+    }
+}
+
+.new-comment-label {
+    margin-top: 30px;
+    
+}
+
+.form-group {
+    font-size: x-large;
+    margin-bottom: 30px;
+}
+
+.author {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers items horizontally in the container */
+    justify-content: center; /* Centers items vertically */
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.controls {
+    display: flex; /* Uses flexbox to layout children */
+    align-items: center; /* Centers the buttons vertically */
+    justify-content: space-between; /* Optional: Distributes extra space evenly */
+}
+
+.btn {
+    margin-right: 10px; /* Adds margin to the right of each button */
+}
+
+

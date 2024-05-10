@@ -1,0 +1,81 @@
+.acc-content-section{
+    float: left;
+    width: 60%;
+    background-color: #f7eff8;
+    padding: 30px;
+    border-radius: 30px;
+}
+.account-img{
+    border-radius: 30px;
+    width: 150px;
+    height: 150px;
+}
+.acc-media-body{
+    margin-left: 50px;
+}
+.acc-border-bottom{
+    letter-spacing: 1px;
+}
+.inputtit-update{
+    letter-spacing: 1px;
+    margin-bottom: 0px;
+}
+.form-control{
+    height: 50px;
+    border-radius: 30px;
+    font-size: 15px;
+}
+.btn-update{
+    letter-spacing: 1px;
+    width: 140px;
+    height: 40px;
+    background-color: white;
+    color: black;
+    border-radius: 30px;
+    font-size: 15px;
+    border: hidden;
+}
+.btn-update:hover{
+    border: 1px solid black;
+    font-weight: bold;
+}
+.update-rightdiv{
+    float: right;
+    width: 35%;
+    background-color: #f0e2f4;
+    height: 400px;
+    text-align: center;
+    border-radius: 30px;
+    font-size: 25px;
+    letter-spacing: 1px;
+    padding: 10px;
+    align-items: center;
+    justify-items: center;
+}
+.preview-image-block{
+    margin: 0 auto;
+    display: block;
+    width: 80%;
+    height: 70%;
+    background-color: rgba(161, 159, 159, 0.5);
+    border-radius: 25px;
+    margin-top: 30px;
+}
+.preview-image{
+    border-radius: 25px;
+}
+.btn-ok{
+    float: right;
+    margin-top: 30px;
+    width: 35%;
+    height: 45px;
+    border-radius: 20px;
+    color: white;
+    background-color: black;
+    font-size: 25px;
+    border: hidden;
+}
+.btn-ok:hover{
+    background-color: rgba(161, 159, 159, 0.5);
+    color: black;
+}

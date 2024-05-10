@@ -1,32 +1,39 @@
 {% extends "layout.html" %}
 
+{% block page_specific_css %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='search.css') }}">
+{% endblock %}
 {% block content %}
 
     <br/>
+    <div class="centered-text">
     <h2>You searched for: <em>{{ searched }}</em></h2>
+    </div>
     <br/>
 
-    {% if posts %}
-    {% for post in posts %}
-    
-    <section class="forum">
-        <div class="container">
-            <div class="post-card">
-                <div class="post-header">
-                    <img class="profile-pic" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="Profile Picture">
-                    <div class="post-title">
-                        <a class="username" href="#">{{ post.author.username }}</a>
-                        <span class="date-posted">{{ post.date_posted.strftime('%Y-%m-%d') }}</span>
-                    </div>
+    <div class="container">
+        {% for post in posts %}
+        <div class="post-card">
+            {% if post.image_file != 'default.jpg' %}
+            <img class="post-image" src="{{ url_for('static', filename='post_images/' + post.image_file) }}" alt="Post Image">
+            {% endif %}
+            <h2 class="title"><a href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h2>
+            <p class="content">{{ post.content }}</p>
+            <div class="post-header">
+                <img class="profile-pic" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="Profile Picture">
+                <div class="user-info">
+                    <a class="username" href="{{ url_for('user', username=post.author.username) }}">{{ post.author.username }}</a>
+                    <div class="date-posted">{{ post.date_posted.strftime('%Y-%m-%d') }}</div>
                 </div>
-                <h2 class="title"><a href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h2>
-                <p class="content">{{ post.content }}</p>
-            </div>    
-    {% endfor %}
+            </div>
+        </div>
 
-    {% else %}
-    Sorry, your search: <strong>{{ searched }}</strong> was not found.
-    {% endif %}
+            {% else %}
+            <div class="centered-text">
+            <p>Sorry, your search: <strong>{{ searched }}</strong> was not found.</p>
+            </div>
+            {% endfor %}
+    {% endblock content %}
 
-{% endblock %}
+
 

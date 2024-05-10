@@ -1,0 +1,95 @@
+/* General body and layout styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f4;
+}
+
+/* Parent container style if not defined - ensure it is set to display as grid */
+.container { /* Adjust the class according to your HTML structure */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Creates three columns */
+    grid-gap: 20px; /* Adjusts the gap between grid items */
+    padding: 20px; /* Padding around the grid */
+}
+
+.post-card {
+    background: white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    padding: 15px;
+    display: flex; /* Using flex to align items within the card nicely */
+    flex-direction: column; /* Stack items vertically */
+}
+
+.post-image {
+    width: 100%;
+    height: auto; /* Adjust height automatically */
+    object-fit: cover;
+}
+
+/* Continue with your existing styles for other elements */
+
+
+.title {
+    margin-top: 10px;
+    color: #333;
+    font-size: 24px;
+}
+
+.content {
+    color: #666;
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.username {
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.date-posted {
+    color: #999;
+    font-size: 14px;
+}
+
+/* Link styling */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Centering the text inside a specific container */
+.centered-text {
+    text-align: center; /* Centers the text horizontally */
+    width: 100%; /* Ensures the div takes full width to center properly */
+    margin-top: 20px; /* Adds some space above the text */
+}
+
+/* Alternatively, if you're applying this style to specific elements without a new class */
+h2, p {
+    text-align: center;
+}
