@@ -1,0 +1,93 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow-x: hidden; /* Prevents horizontal scrolling */
+}
+
+.registration-page {
+    display: flex;
+    align-items: center; /* Centers vertically */
+    justify-content: center; /* Centers horizontally */
+    background: url('register_pics/register_bg.jpg') no-repeat center center fixed;
+    background-size: cover; /* Ensures it covers the full area */
+    min-height: 100vh; /* This ensures the minimum height of the element is the full viewport height */
+    width: 100vw; /* This ensures the width is the full viewport width */
+}
+
+.content-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh; /* Adjust height as needed */
+    width: 40%; /* Maintain the width or adjust as needed */
+    margin: auto; /* Center the box horizontally */
+    background-color: rgba(255, 255, 255, 0.65); /* Semi-transparent white */
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 10px;
+}
+
+.section-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.form-group {
+    width: 80%; /* Adjust to fit your design */
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input, button {
+    width: 100%;
+    padding: 8px 15px;
+    box-sizing: border-box;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    width: 100%;
+}
+
+fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+legend {
+    text-align: center;
+    width: 100%;
+    padding: 10px;
+}
+
+.btn-signup {
+    background-color: #ff5447; /* Red color similar to the one in your image */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    display: block;
+    width: 50%; /* Adjust as necessary */
+    margin: 20px auto;
+}
+
+.btn-signup:hover {
+    background-color: #e04a3f; /* Slightly darker shade for hover */
+}
+
+.community-header {
+    color: #ff5447; /* Matching the button color */
+}

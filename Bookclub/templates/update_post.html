@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block page_specific_css %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='updatepost.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="update-page">
+    <div class="content-section">
+        <div class="media">
+            <div class="media-body">
+                <h2 class="account-heading"> Update Post</h2>
+                <form method="POST" action="" enctype="multipart/form-data">
+                    {{ form.hidden_tag() }}
+                    <div class="form-group">
+                        {{ form.title.label(class="form-control-label") }}
+                        {{ form.title(class="form-control form-control-lg") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.content.label(class="form-control-label") }}
+                        {{ form.content(class="form-control form-control-lg") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.picture.label() }}
+                        {{ form.picture(class="form-control-file") }}
+                    </div>
+                    <div class="form-group">
+                        {{ form.submit(class="btn btn-custom") }}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
