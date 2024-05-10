@@ -88,24 +88,31 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
-def upload_images(form_picture, storage_path):
+#     return picture_fn
+def upload_images(form_picture, storage_path, output_size=(125, 125)):
+    # Generate a unique file name
     random_hex = secrets.token_hex(8)
     _, f_ext = os.path.splitext(form_picture.filename)
     picture_fn = random_hex + f_ext
+
+    # Determine the path to save the image
     picture_path = os.path.join(app.root_path, storage_path, picture_fn)
-    output_size = (125, 125)
+
+    # Open the image and create a thumbnail
     i = Image.open(form_picture)
-    i.thumbnail(output_size)
+    i.thumbnail(output_size)  # Resize the image using the provided output_size
     i.save(picture_path)
 
     return picture_fn
 
+# Update last_seen before each request for authenticated users
 @app.before_request
 def before_request():
     if current_user.is_authenticated:
         current_user.last_seen = datetime.now(ZoneInfo("Australia/Perth"))
         db.session.commit()
 
+# Profile update route, requires login to access
 @app.route("/profile", methods=['GET', 'POST'])
 @login_required
 def profile():
@@ -128,6 +135,7 @@ def profile():
     image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
     return render_template('profile.html', title='Profile', image_file=image_file, form=form)
 
+# Route to create a new post, requires login to access
 @app.route("/post/new", methods=['GET', 'POST'])
 @login_required
 def new_post():
@@ -135,14 +143,15 @@ def new_post():
     if form.validate_on_submit():
         post = Post(title=form.title.data, content=form.content.data, author=current_user)
         if form.picture.data:
-            picture_file = upload_images(form.picture.data, 'static/post_images')
-            post.image_file = picture_file
+            print(form.picture.data)
+            picture_file = upload_images(form.picture.data, 'static/post_images',output_size=(500, 500))
+            post.image_file = picture_file  # Ensure your Post model has an image_file field
         db.session.add(post)
         db.session.commit()
         flash('Your post has been created!', 'success')
         return redirect(url_for('forum'))
-    return render_template('create_post.html', title='New Post', form=form, legend='New Post')
-
+    return render_template('create_post.html', title='New Post',
+                           form=form, legend='New Post')
 #comments     
 
 @app.route("/post/<int:post_id>", methods=['GET', 'POST'])
@@ -209,7 +218,6 @@ def update_post(post_id):
     image_file = url_for('static', filename='profile_pics/' + post.image_file)
     return render_template('update_post.html', title='Update Post', form=form, legend='Update Post', image_file=image_file)
 
-
 @app.route("/post/<int:post_id>/delete", methods=['POST'])
 @login_required
 def delete_post(post_id):
@@ -221,6 +229,7 @@ def delete_post(post_id):
     flash('Your post has been deleted!', 'success')
     return redirect(url_for('home'))
 
+#####  这是follower ！！！！  部分
 @app.route('/follow/<username>', methods=['POST'])
 @login_required
 def follow(username):
@@ -253,10 +262,13 @@ def unfollow(username):
     else:
         return redirect(url_for('forum'))
 
+
+#pass stuff to NavBar 
 @app.context_processor
 def layout():
     form = SearchForm()
     return dict(form=form)
+
 
 @app.route('/search', methods=["POST"])
 def search():
