@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<form action="{{ url_for('search_books') }}" method="post">
+    <input type="text" name="query" placeholder="Search for books...">
+    <select name="search_by">
+        <option value="book_title">Book Name</option>
+        <option value="genre">Genre</option>
+        <option value="author">Author</option>
+        <option value="publisher">Publisher</option>
+        <option value="id">Book ID</option>
+        <option value="status">Status</option>
+        <option value="isbn">ISBN</option>
+    </select>
+    <button type="submit">Search</button>
+</form>
+{% if results %}
+    <ul>
+    {% for book in results %}
+        <li>{{ book.name }} by {{ book.author }} - {{ book.genre }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}

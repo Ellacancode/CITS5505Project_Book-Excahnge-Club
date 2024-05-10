@@ -1,0 +1,124 @@
+{% extends "layout.html" %}
+
+{% block page_specific_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='post.css') }}">
+{% endblock %}
+
+{% block content %}
+<main class="container">
+    <div class="container">
+        <!-- Post Title, Image, and Author Details -->    
+            <article class="media content-section">
+                <h2 class="article-title">{{ post.title }}</h2>
+                {% if post.image_file != 'default.jpg' %} 
+                <img class="post-image img-fluid" src="{{ url_for('static', filename='post_images/' + post.image_file) }}" alt="Post Image">
+                <p class="article-content">{{ post.content }}</p>
+                {% endif %}
+                <div>
+                    <form action="{{ url_for('like_post', post_id=post.id) }}" method="post" style="display: flex; align-items: center;">
+                        {% if post.is_liked_by_user(current_user) %}
+                        <button type="submit" class="btn btn-danger btn-sm" style="margin-right: 10px;">
+                            <i class="fa-regular fa-thumbs-up"></i> Unlike
+                        </button>
+                        {% else %}
+                        <button type="submit" class="btn btn-primary btn-sm" style="margin-right: 10px;">
+                            <i class="fa-regular fa-thumbs-up"></i> Like
+                        </button>
+                        {% endif %}
+                        <small class="text-muted">{{ post.likes | length }} likes</small>
+                    </form>            
+                </div>
+                <div class="post">
+                    <div class= "author">
+                        <p>Author</p>
+                        <img class="main-author-image" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="Author Image">
+                    </div>                                                         
+                    <div class="post-info">
+                        <!-- this  is hyper Link  跳转 -->
+                        <a href="{{ url_for('user', username=post.author.username) }}">{{ post.author.username }}</a>
+                        <small class="date-posted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+                        <!-- Controls -->
+                        {% if post.author == current_user or current_user.email == 'admin@admin.com' %}
+                        <div class="controls">
+                            <a class="btn btn-secondary btn-sm" href="{{ url_for('update_post', post_id=post.id) }}">Update</a>
+                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                        </div>                        
+                        {% endif %}
+                    </div>
+                </div>
+            </article>
+        </div>
+        <!-- Right Column for Comments and New Comment Form -->
+        
+            <article>
+                <h4 class="comment-label">Comments:</h4>
+                {% for comment in comments %}
+                <div class="media-body">
+                    <div class="media content-section">
+                        <div class="comment-header">
+                            <img class="author2-image" src="{{ url_for('static', filename='profile_pics/' + comment.author.image_file) }}">
+                            <div class="metadata">
+                                <a class="comment-author" href="{{ url_for('user', username=comment.author.username) }}">{{ comment.author.username }}</a>
+                                <small class="text-muted">{{ comment.date_posted.strftime('%Y-%m-%d') }}</small>
+                            </div>
+                        </div>
+                        
+                        
+                        <!-- Show comment image at the top if it exists -->
+                        {% if comment.image_file and comment.image_file != 'default.jpg' %}
+                            <img class="comment-image img-fluid" src="{{ url_for('static', filename='comment_pics/' + comment.image_file) }}" alt="Comment Image">
+                        {% endif %}
+                        
+                        <!-- Show comment text content -->
+                        <p class="comment-content">{{ comment.content }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+            
+
+            
+                <!-- New Comment Form -->
+                <div class="commentbox">
+                    <form method="POST" action="" enctype="multipart/form-data">
+                        {{ form.hidden_tag() }}
+                        <fieldset>
+                            <h3 class="new-comment-label">{{ legend }}</h3>
+                            <div class="form-group">
+                                {{ form.content.label(class="form-control-label") }}
+                                {{ form.content(class="form-control form-control-lg", placeholder="Enter your comment here...") }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.picture.label() }}
+                                {{ form.picture(class="form-control-file") }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.submit(class="btn btn-primary") }}
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </article>
+        </div>
+    </div>
+</div>
+<!-- Modal for Delete Confirmation -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Delete Post?</h5>
+                <button type of="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">
+                    <input type="submit" class="btn btn-danger" value="Delete">
+                </form>
+            </div> 
+        </div> 
+    </div>
+</div>
+</main>
+{% endblock content %}

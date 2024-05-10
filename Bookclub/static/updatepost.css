@@ -1,0 +1,41 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow-x: hidden; /* Prevents horizontal scrolling */
+}
+
+.update-page {
+    display: flex;
+    align-items: center; /* Centers vertically */
+    justify-content: center; /* Centers horizontally */
+    background: url('update_images/update_post.jpg') no-repeat center center fixed;
+    background-size: cover; /* Ensures it covers the full area */
+    min-height: 84vh; /* This ensures the minimum height of the element is the full viewport height */
+    width: 100vw; /* This ensures the width is the full viewport width */
+}
+
+.content-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh; /* Adjust height as needed */
+    width: 30%; /* Maintain the width or adjust as needed */
+    margin: auto; /* Center the box horizontally */
+    background-color: #fbfbf6; 
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 10px;
+}
+
+.btn-custom {
+    background-color: #e04a3f; /* Sets the background color */
+    border-color: #e04a3f; /* Sets the border color to match the background */
+    color: #ffffff; /* Optional: changes the text color to white for better contrast */
+}
+
+.btn-custom:hover {
+    background-color: darken(#e04a3f, 10%); /* Optional: Darkens the button on hover for visual feedback */
+    border-color: darken(#e04a3f, 10%); /* Matches the border color with the background on hover */
+}
