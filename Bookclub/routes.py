@@ -143,26 +143,49 @@ def new_post():
         return redirect(url_for('forum'))
     return render_template('create_post.html', title='New Post', form=form, legend='New Post')
 
+#comments     
+
 @app.route("/post/<int:post_id>", methods=['GET', 'POST'])
 def post(post_id):
     post = Post.query.get_or_404(post_id)
-    comments = Comment.query.filter_by(to_post_id=post_id).all()
+    allComments = Comment.query.filter_by(to_post_id=post_id).all()
+    for i, comment_item in enumerate(allComments):
+        class Comment_return:
+            def __init__(self, content, to_post_id, author, image_file, date_posted):
+                self.content = content
+                self.to_post_id = to_post_id
+                self.author = author  # author is now a User object
+                self.image_file = image_file
+                self.date_posted = date_posted
+
+        user = User.query.filter_by(id=comment_item.user_id).first()
+        allComments[i] = Comment_return(
+            comment_item.content,
+            comment_item.to_post_id,
+            user,  # Pass the User object instead of just the username
+            comment_item.image_file,
+            comment_item.date_posted
+        )
 
     form = CommentForm()
     if form.validate_on_submit():
-        comment = Comment(to_post_id=post_id, content=form.content.data, user_id=current_user.id)
+        if form.picture.data:
+            picture_file = upload_images(form.picture.data, 'static/comment_pics',output_size=(500,500))
+        else:
+            picture_file = 'default.jpg'
+
+        comment = Comment(
+            to_post_id=post_id,
+            content=form.content.data,
+            user_id=current_user.id,
+            image_file=picture_file
+        )
         db.session.add(comment)
         db.session.commit()
         flash('Your comment has been created!', 'success')
         return redirect(url_for('post', post_id=post_id))
 
-    return render_template(
-        'post.html',
-        post=post,
-        form=form,
-        legend='New comment',
-        comments=comments
-    )
+    return render_template('post.html', postTitle=post.title, post=post, form=form, legend='New comment', comments=allComments)
 
 @app.route("/post/<int:post_id>/update", methods=['GET', 'POST'])
 @login_required
@@ -172,18 +195,20 @@ def update_post(post_id):
         abort(403)
     form = PostForm()
     if form.validate_on_submit():
-        post.title = form.title.data
-        post.content = form.content.data
         if form.picture.data:
             picture_file = upload_images(form.picture.data, 'static/post_images')
             post.image_file = picture_file
+        post.title = form.title.data
+        post.content = form.content.data
         db.session.commit()
         flash('Your post has been updated!', 'success')
         return redirect(url_for('post', post_id=post.id))
     elif request.method == 'GET':
         form.title.data = post.title
         form.content.data = post.content
-    return render_template('create_post.html', title='Update Post', form=form, legend='Update Post')
+    image_file = url_for('static', filename='profile_pics/' + post.image_file)
+    return render_template('update_post.html', title='Update Post', form=form, legend='Update Post', image_file=image_file)
+
 
 @app.route("/post/<int:post_id>/delete", methods=['POST'])
 @login_required
