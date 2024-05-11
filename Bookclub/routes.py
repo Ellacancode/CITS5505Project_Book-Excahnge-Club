@@ -37,20 +37,33 @@ def home():
 
 @app.route("/forum")
 def forum():
-    posts = Post.query.order_by(Post.date_posted.desc()).all()
+    # Add Pagination
+    page = request.args.get('page', 1, type=int)
+    posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=6)
     return render_template('forum.html', posts=posts)
 
+
+# Search books route: Allows searching books by title or genre
 @app.route("/search_books", methods=['GET', 'POST'])
 def search_books():
     results = []
     if request.method == 'POST':
         query = request.form.get('query')
         search_by = request.form.get('search_by')
-        if search_by == 'book_title':
+        
+        if search_by == 'id':
+            results = Book.query.filter(Book.id == query).all()
+        elif search_by == 'title':
             results = Book.query.filter(Book.title.ilike(f'%{query}%')).all()
+        elif search_by == 'author':
+            results = Book.query.filter(Book.author.ilike(f'%{query}%')).all()
+        elif search_by == 'isbn':
+            results = Book.query.filter(Book.isbn.ilike(f'%{query}%')).all()
         elif search_by == 'genre':
             results = Book.query.filter(Book.genre.ilike(f'%{query}%')).all()
-        
+        elif search_by == 'status':
+            results = Book.query.filter(Book.status.ilike(f'%{query}%')).all()
+
         return render_template('book_result.html', results=results)
     return render_template('search_books.html')
 
