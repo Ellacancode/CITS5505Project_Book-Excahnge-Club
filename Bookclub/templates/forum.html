@@ -1,46 +1,58 @@
 {% extends "layout.html" %}
 
 {% block page_specific_css %}
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='forum.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='forum.css') }}">
 {% endblock %}
 
 {% block content %}
 <main class="container">
-<section class="forum">
-    <div class="header-with-search">
-        <h2>Recent Blog Posts</h2>
-        <form method="POST" action="{{ url_for('search')}}" class="search-form">
-            {{ form.hidden_tag()}}
-            <input class="form-control me-2" type="search" placeholder="Search Forum" aria-label="Search" name="searched">
-            <button class="btn btn-outline-secondary" type="submit">Search</button>
-        </form>
-    </div>
-    <div class="container">
-        {% for post in posts %}
-        <div class="post-card">            
-            <!-- Start by displaying the image if it exists -->
-            {% if post.image_file != 'default.jpg' %}
-            <div>
-                <img class="post-image" src="{{ url_for('static', filename='post_images/' + post.image_file) }}" alt="Post Image">
-            </div>
-            {% endif %}
-            <!-- Post title and content -->
-            <h2 class="title"><a href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h2>
-            <p class="content">{{ post.content }}</p>
-            <!-- Post header with profile picture and username/date -->
-            <div class="post-header">
-                <img class="profile-pic" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="Profile Picture">
-                <div class="user-info">
-                    <a class="username" href="{{ url_for('user', username=post.author.username) }}">{{ post.author.username }}</a>
-                    <div class="date-posted">{{ post.date_posted.strftime('%Y-%m-%d') }}</div>
+    <section class="forum">
+        <div class="header-with-search">
+            <h2>Recent Blog Posts</h2>
+            <form method="POST" action="{{ url_for('search')}}" class="search-form">
+                {{ form.hidden_tag()}}
+                <input class="form-control me-2" type="search" placeholder="Search Forum" aria-label="Search" name="searched">
+                <button class="btn btn-outline-secondary" type="submit">Search</button>
+            </form>
+        </div>
+        <div class="container">
+            {% if posts.items %}
+            {% for post in posts.items %}
+            <div class="post-card">
+                <!-- Start by displaying the image if it exists -->
+                {% if post.image_file != 'default.jpg' %}
+                <div>
+                    <img class="post-image" src="{{ url_for('static', filename='post_images/' + post.image_file) }}" alt="Post Image">
+                </div>
+                {% endif %}
+                <!-- Post title and content -->
+                <h2 class="title"><a href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h2>
+                <p class="content">{{ post.content }}</p>
+                <!-- Post header with profile picture and username/date -->
+                <div class="post-header">
+                    <img class="profile-pic" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="Profile Picture">
+                    <div class="user-info">
+                        <a class="username" href="{{ url_for('user', username=post.author.username) }}">{{ post.author.username }}</a>
+                        <div class="date-posted">{{ post.date_posted.strftime('%Y-%m-%d') }}</div>
+                    </div>
                 </div>
             </div>
+            {% endfor %}
+            {% else %}
+            <p>No posts have been made yet.</p>
+            {% endif %}
         </div>
-        
-        {% else %}
-        <p>No posts have been made yet.</p>
-        {% endfor %}
-    </div>
-</section>
+        <!-- Pagination Links -->
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                {% if posts.has_prev %}
+                <li class="page-item"><a class="page-link" href="{{ url_for('forum', page=posts.prev_num) }}">Previous</a></li>
+                {% endif %}
+                {% if posts.has_next %}
+                <li class="page-item"><a class="page-link" href="{{ url_for('forum', page=posts.next_num) }}">Next</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </section>
 </main>
 {% endblock content %}

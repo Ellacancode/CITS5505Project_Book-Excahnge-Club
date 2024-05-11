@@ -26,7 +26,9 @@
                         </button>
                         {% endif %}
                         <small class="text-muted">{{ post.likes | length }} likes</small>
-                    </form>            
+                    </form>  
+                    <!-- Button to go to bookshelf -->
+                    <a href="{{ url_for('shelf') }}" class="btn btn-info" style="margin-top: 10px;">Visit Bookshelf</a>                      
                 </div>
                 <div class="post">
                     <div class= "author">
@@ -34,7 +36,7 @@
                         <img class="main-author-image" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="Author Image">
                     </div>                                                         
                     <div class="post-info">
-                        <!-- this  is hyper Link  跳转 -->
+                        <!-- this  is hyper Link -->
                         <a href="{{ url_for('user', username=post.author.username) }}">{{ post.author.username }}</a>
                         <small class="date-posted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
                         <!-- Controls -->
