@@ -8,21 +8,23 @@
 
 
 {% block content %}
-<main class="container">
+
 <!-- intro banner -->
-<div class="intro-banner">
-    <div class="banner-content">
-        <img src="{{ url_for('static', filename='home_pics/home_banner.jpg') }}" alt="Home Banner" class="banner-img">
-        <div class="welcome">
-            <h1>Building community through books</h1>
-            <p>Join in discussion, find a book, or exchange books with other book lovers</p>
+<div class="row">
+    <div class="intro-banner">
+        <div class="banner-content">
+            <img src="{{ url_for('static', filename='home_pics/home_banner.jpg') }}" alt="Home Banner" class="banner-img">
+            <div class="welcome">
+                <h1>Building community through books</h1>
+                <p>Join in discussion, find a book, or exchange books with other book lovers</p>
+                <button class="start-sharing-btn">Start Sharing</button>
+            </div>
         </div>
     </div>
-    <button class="start-sharing-btn">Start Sharing</button>
 </div>
-    
 
-<!--link to different pages-->
+    
+<div class="row">
 <div class ="container-for-sections">
     <div class = "join">
         <img src="{{ url_for('static', filename='home_pics/' +'discussion.jpg') }}">
@@ -33,7 +35,7 @@
     <div class = "find">
         <img src="{{ url_for('static', filename='home_pics/' +'findbook.jpg') }}">
         <button>Find a Book</button>
-        <p>Get inspriation and find new books</p>
+        <p>Get inspriation and find new books to read from recommendations</p>
     </div>
 
     <div class = "exchange">
@@ -41,14 +43,7 @@
         <button>Exchange Books </button>
         <p>manage your bookshelf and share with others</p>
     </div>
-
 </div>
-
-<!--Our discussion categories-->
-<div>
-
 </div>
-
-<!--Our recommended books for this month-->
 
 {% endblock content %}

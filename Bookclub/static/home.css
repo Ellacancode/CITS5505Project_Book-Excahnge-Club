@@ -1,89 +1,158 @@
-/* style for Intro Banner Section */
+/* Reset margins and padding for consistency */
 html, body {
-    padding: 0 ;
-    margin: 0 ;
-    /* background: linear-gradient(to right, #f9f9f9 0%, #faece9 99%, #f9dfd9 100%); */
-  }
-
-.container-for-sections {
-    max-width: 1000px; /* Set maximum width of the content area */
-    padding: 20px; /* Optional: if you want some space inside the container */
-    background-color: rgb(254, 248, 248); /* Keeping your background color */
+    padding: 0;
+    margin: 0;
 }
 
 .intro-banner {
-    margin-top: -17px;
-    width: 100%;
-    height: 500px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 0px;
-    text-align: center;
+    align-items: center;  /* Vertical centering */
+    justify-content: center;  /* Horizontal centering */
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(to right, #f9f9f9 0%, #faece9 50%, #f9dfd9 100%);
 }
 
 .banner-content {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
+    flex-direction: row;  /* Ensures items are in a row */
+    align-items: center;  /* Vertical centering within the content */
+    justify-content: center;  /* Horizontal centering */
+    width: 100%;  /* Takes full width of its container */
+    max-width: 1200px;  /* Max width to prevent overly wide spread on large screens */
+    margin: 0 auto;  /* Centers the content block within the banner */
 }
 
-.banner-content .welcome {
-    margin-left: 20px;
+.banner-img {
+    width: auto;  /* Natural width unless constrained by max-width */
+    max-width: 25%;  /* Limits image width to 25% of the content block */
+    flex: none;  /* Prevents flex-shrink and flex-grow */
 }
 
-.banner-content .banner-img {
-    width: 300px;
-    height: auto;
+.welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* Align text and button center in column */
+    justify-content: center;  /* Center items vertically in column */
+    flex: 1;  /* Takes remaining space */
+    padding: 0 20px;  /* Padding on sides for spacing */
+    text-align: center;
 }
 
 .start-sharing-btn {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
+    width: 200px;
+    padding: 10px 0;
+    font-size: 18px;
     color: white;
-    background-color: #f06292;
+    background-color: rgb(211, 55, 55);
     border: none;
-    border-radius: 40px;
+    border-radius: 50px;
     cursor: pointer;
-    align-items: center;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+}
+
+.start-sharing-btn:hover {
+    background-color: #e04a3f;
 }
 
 
-div.container-for-sections {
-    width: 100%;
+/* Tablet breakpoint (768px and above) */
+@media (min-width: 768px) {
+    .intro-banner {
+        flex-direction: row;
+        padding: 40px;
+    }
+
+    .banner-content {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .banner-img {
+        width: 50%; /* Larger image on tablets */
+    }
+
+    .welcome {
+        max-width: 50%;
+        text-align: left;
+        padding: 0 20px;
+    }
+
+    .start-sharing-btn {
+        width: auto; /* Auto width for better control */
+        padding: 12px 24px;
+        font-size: 18px; /* Slightly larger font on tablets */
+    }
+}
+
+/* Desktop breakpoint (1024px and above) */
+@media (min-width: 1024px) {
+    .intro-banner {
+        padding: 20px 80px; /* More padding for larger screens */
+    }
+
+    .banner-img {
+        max-width: 600px; /* Fixed max width for desktop */
+    }
+
+    .welcome {
+        text-align: left;
+        padding: 0 40px;
+    }
+
+    .start-sharing-btn {
+        padding: 15px 30px;
+        font-size: 20px; /* Larger font size for desktop */
+    }
+}
+
+
+/* Style for the section container below the banner */
+.container-for-sections {
     display: flex;
-    justify-content: space-between;
-    background-color: rgb(254, 248, 248); /* 设置背景颜色为白色 */
-    padding: 20px; 
+    justify-content: center; /* Center children horizontally */
+    align-items: center; /* Center children vertically */
+    flex-wrap: nowrap; /* Prevent wrapping to the next line */
+    background-color: rgb(254, 248, 248);
+    padding: 20px;
+    max-width: 1200px; /* Limit the maximum width */
+    margin: 0 auto; /* Center the container horizontally */
 }
 
-
+/* Flex items within the sections container */
 div.join, div.find, div.exchange {
-    flex-basis: calc(33.333% - 40px); 
-    text-align: center; 
-    margin: 20px; 
+    flex: 1 1 33%; /* Keep the existing flex setup */
+    text-align: center;
+    margin: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column; /* Organize internal items vertically */
+    justify-content: space-between; /* Distribute space evenly */
+    height: 100%; /* Ensure all boxes are of the same height */
 }
 
-
+/* Styling for images in each section */
 div.join img, div.find img, div.exchange img {
-    max-width: 100%; 
-    height: auto; 
+    max-width: 100%;
+    max-width: 350;    
+    border-radius: 5px; /* Optional: rounds the corners of the images */
 }
 
-
+/* Styling for buttons in each section */
 div.join button, div.find button, div.exchange button {
     color: white;
-    background-color: #f9a9c3;
+    background-color: rgb(252, 98, 98);
     border: none;
-    margin-top: 10px; 
-    width: 100%; 
-    border-radius: 40px;
+    margin-top: 10px;
+    width: 80%; /* Adjust the width of the button inside the container */
+    padding: 10px 0; /* Adds padding to increase the button size */
+    border-radius: 20px;
 }
 
+/* Styling for paragraphs in each section */
 div.join p, div.find p, div.exchange p {
-    margin-top: 10px; 
-    
+    margin-top: 10px;
 }
