@@ -2,13 +2,14 @@ html, body {
   height: auto; 
   padding: 0;
   margin: 0;
-  background: #f9f9f9; 
+  background: linear-gradient(to right, #f9f9f9 0%, #faece9 50%, #f9dfd9 100%);
   display: block; 
 }
 .header-with-search {
   display: flex;  
   align-items: center;  
   justify-content: space-between;  
+  margin-top: 30px;
 }
 
 .search-form {
@@ -116,4 +117,18 @@ html, body {
 
 .content {
   margin-top: 1em;
+}
+
+
+.btn-outline-secondary {
+  background-color: rgb(252, 98, 98);  /* Red background */
+  color: #ffffff;             /* White text */
+  border: none;       
+  padding: 10px 30px; 
+  font-size: 20px;            /* Increase font size for larger button */
+}
+
+.btn-outline-secondary:hover, .btn-outline-secondary:focus {
+  background-color: rgb(252, 98, 98);  /* Darker red on hover/focus */
+  color: #ffffff;             /* White text remains the same */
 }
