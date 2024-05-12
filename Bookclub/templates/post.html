@@ -26,27 +26,27 @@
                         </button>
                         {% endif %}
                         <small class="text-muted">{{ post.likes | length }} likes</small>
-                    </form>  
-                    <!-- Button to go to bookshelf -->
-                    <a href="{{ url_for('shelf') }}" class="btn btn-info" style="margin-top: 10px;">Visit Bookshelf</a>                      
+                    </form>            
                 </div>
+                <div class="author-section">
                 <div class="post">
                     <div class= "author">
                         <p>Author</p>
                         <img class="main-author-image" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="Author Image">
                     </div>                                                         
                     <div class="post-info">
-                        <!-- this  is hyper Link -->
+                        <!-- this  is hyper Link  跳转 -->
                         <a href="{{ url_for('user', username=post.author.username) }}">{{ post.author.username }}</a>
                         <small class="date-posted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
                         <!-- Controls -->
                         {% if post.author == current_user or current_user.email == 'admin@admin.com' %}
                         <div class="controls">
-                            <a class="btn btn-secondary btn-sm" href="{{ url_for('update_post', post_id=post.id) }}">Update</a>
+                            <a class="btn btn-secondary" href="{{ url_for('update_post', post_id=post.id) }}">Update</a>
                             <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal">Delete</button>
                         </div>                        
                         {% endif %}
                     </div>
+                </div>    
                 </div>
             </article>
         </div>
@@ -86,7 +86,6 @@
                         <fieldset>
                             <h3 class="new-comment-label">{{ legend }}</h3>
                             <div class="form-group">
-                                {{ form.content.label(class="form-control-label") }}
                                 {{ form.content(class="form-control form-control-lg", placeholder="Enter your comment here...") }}
                             </div>
                             <div class="form-group">
@@ -94,7 +93,7 @@
                                 {{ form.picture(class="form-control-file") }}
                             </div>
                             <div class="form-group">
-                                {{ form.submit(class="btn btn-primary") }}
+                                {{ form.submit(class="btn btn-post") }}
                             </div>
                         </fieldset>
                     </form>
@@ -116,7 +115,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">
-                    <input type="submit" class="btn btn-danger" value="Delete">
+                    <input type="submit" class="btn-post" value="Delete">
                 </form>
             </div> 
         </div> 
