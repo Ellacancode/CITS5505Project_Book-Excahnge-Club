@@ -1,0 +1,71 @@
+.shelf-tit{
+    height: 120px;
+    width: 150%;
+    margin-left: -25%;
+    background-color: white;
+    color: rgb(211, 55, 55);
+    border-radius: 30px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+.shelf-tit p{
+    line-height: 120px;
+    letter-spacing: 5px;
+    font-size: 40px;
+    font-weight: bold;
+}
+.shelf-container{
+    width: 100%;
+    height: 700px;
+    background-color: #f8edd8;
+    border-radius: 30px;
+    padding: 30px;
+    overflow-y: auto;
+}
+.col-cub{
+    height: 350px;
+    padding: 15px;
+    
+}
+.shelf-book{
+    display: inline-block;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+    text-align: center;
+    background-color:#f8edd8;
+    
+}
+.col-content{
+    font-size: 15px;
+    font-weight: bold;
+}
+.shelf-img:hover{
+    border: 3px solid transparent;
+    box-shadow: 0 0 5px 3px #f8edd8;
+    filter: blur(2px);
+}
+.modal-body{
+
+}
+.shelf-searchbox{
+    align-items: center;
+    justify-content: center;
+}
+.shelf-selector{
+    display: inline-block;
+    width: 200px;
+    margin-left: calc(50% - 320px);
+}
+.shelf-searcher{
+    display: inline-block;
+    width: 200px;
+    margin-left: 20px;
+}
+.shelf-btn{
+    display: inline-block;
+    width: 200px;
+    margin-left: 20px;
+}

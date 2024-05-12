@@ -282,21 +282,6 @@ def layout():
     form = SearchForm()
     return dict(form=form)
 
-
-@app.route('/search', methods=["POST"])
-def search():
-    form = SearchForm()
-    posts = Post.query
-    if form.validate_on_submit():
-        post_searched = form.searched.data
-        posts = posts.filter(Post.content.like(f'%{post_searched}%'))
-        posts = posts.order_by(Post.title).all()
-        return render_template(
-            "search.html",
-            form=form,
-            searched=post_searched,
-            posts=posts
-        )
 # Like route
 @app.route("/post/<int:post_id>/like", methods=['POST'])
 @login_required
@@ -313,5 +298,35 @@ def like_post(post_id):
         db.session.commit()
         flash('You liked the post!', 'success')
     return redirect(url_for('post', post_id=post_id))
+
+# Create search function 
+@app.route('/search', methods=["GET", "POST"])
+def search():
+    form = SearchForm()
+    posts = Post.query
+    if form.validate_on_submit():
+        search_term = form.searched.data
+        # Perform filtering using OR to search across multiple fields
+        posts = posts.filter(
+            (Post.title.ilike(f'%{search_term}%')) |
+            (Post.date_posted.ilike(f'%{search_term}%')) |
+            (Post.content.ilike(f'%{search_term}%')) |
+            (Post.user_id == int(search_term) if search_term.isdigit() else False)
+        ).order_by(Post.date_posted.desc()).all()
+
+        return render_template("search.html",
+                               form=form,
+                               searched=search_term,
+                               posts=posts)
+    return render_template("search.html",
+                           form=form,
+                           searched='',
+                           posts=[])
+
+# bookshelf
+@app.route("/shelf")
+def shelf():
+    books = Book.query.order_by(Book.id.asc()).all()
+    return render_template('shelf.html', title='BookShelf', books=books)
 
 
