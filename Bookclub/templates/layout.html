@@ -24,7 +24,6 @@
     {% endblock %}
 </head>
 <body>
-
     <div class="page-wrapper">
         <nav class="navbar navbar-expand-lg navbar-light">
             <a class="navbar-brand" href="/">&nbsp;<i class="fa-solid fa-landmark"></i>&nbsp;Book Exchange Club</a>
@@ -92,14 +91,40 @@
                 {% block content %}{% endblock %}
             </div>
         </div>
-
-        <footer class="footer">
-            <div class="text-center">
-                <span class="text-muted">© 2024 Book Exchange Club</span>
-            </div>
-        </footer>
     </div>
 
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-text">© 2024 Book Exchange Club</div>
+            <button onclick="topFunction()" id="myBtn" title="Go to top">
+                <i class="fas fa-arrow-up"></i> TO TOP
+            </button>
+        </div>
+    </footer>
+    
+
+    <script>
+        // Function to scroll to the top smoothly
+        function topFunction() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Optional: Activate smooth scroll for all internal links (if needed)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        </script>
+        
+        
+        
     <!-- Optional JavaScript -->
     <!-- jQuery and Bootstrap Bundle (includes Popper) -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
