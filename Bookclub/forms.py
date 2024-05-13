@@ -65,8 +65,9 @@ class PostForm(FlaskForm):
 # Form for creating a comment
 class CommentForm(FlaskForm):
     content = TextAreaField('Content', validators=[DataRequired()])
+    picture = FileField('Upload Comment Image', validators=[FileAllowed(['jpg', 'jpeg', 'png'])])
     submit = SubmitField('Post')
-
+    
 # Form for search functionality
 class SearchForm(FlaskForm):
 	searched = StringField("Searched", validators=[DataRequired()])
