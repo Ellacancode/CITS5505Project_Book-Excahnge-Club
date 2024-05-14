@@ -25,13 +25,7 @@ html, body {
     margin-bottom: 20px; /* Adds space below images */
     height: auto;
     max-width: 400px; /* Maximum width the image can reach */    
-}
-
-/* Add responsiveness to the layout */
-@media (max-width: 768px) {
-    .article-img, .post-image, .comment-image {
-        width: 100%; /* Full width on smaller screens */
-    }
+    align-items: center;
 }
 
 .article-img {
@@ -121,7 +115,6 @@ html, body {
 }
 
 
-
 .article-content {
     margin-top: 20px;
     font-size: 25px;
@@ -152,12 +145,6 @@ html, body {
 }
 
 
-
-@media (max-width: 768px) {
-    .comment-image {
-        width: 100%;
-    }
-}
 
 .new-comment-label {
     margin-top: 50px;
@@ -250,4 +237,62 @@ article-title
 .btn-post:hover {
     font-weight: bold;
     border: solid 1px black;
+}
+/* Universal Base Styles */
+img {
+    max-width: 100%;  /* Ensure all images are responsive */
+    height: auto;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .content-section {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .author2-image  {
+        max-width: 20%;  /* Smaller images on smaller screens */
+    }
+
+    .post-image, .main-author-image {
+        max-width: 90%;  /* Smaller images on smaller screens */
+    }
+
+    .article-title, .article-content {
+        font-size: 20px;  /* Smaller font size for smaller screens */
+    }
+
+    .comment-content {
+        margin-top: 10px;
+    }
+
+    .post-info, .comment-header, .author-section, .controls {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn {
+        width: 100%; /* Full width buttons are easier to tap */
+        padding: 12px; /* Larger touch targets */
+        margin-bottom: 10px; /* More space between buttons */
+    }
+
+    .commentbox, .media-body {
+        padding: 10px; /* More padding on smaller screens */
+    }
+
+    .form-group {
+        font-size: large; /* Larger form elements for easier interaction */
+    }
+}
+
+@media (max-width: 480px) {
+    .article-title {
+        font-size: 18px; /* Even smaller font size for very small screens */
+    }
+    
+    .btn {
+        font-size: 14px;  /* Smaller font size for buttons */
+    }
 }
