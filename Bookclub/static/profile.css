@@ -1,7 +1,7 @@
 .acc-content-section {
     margin: 0 auto; 
     align-items: center;
-    width: 35%;
+    width: 45%;
     background-color: rgba(255, 255, 255, 0.7); 
     padding: 30px;
     border-radius: 30px;
@@ -87,4 +87,57 @@
 #imagePreview {
     height: 100%; 
     width: 100%;
+}
+
+/* Base styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    font-family: Arial, sans-serif; /* Use a universal font that looks good on all devices */
+}
+
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 992px) {
+    .acc-content-section {
+        width: 60%; /* Wider in smaller screens to use more space */
+    }
+
+    .account-img, .acc-media-body {
+        width: 100%; /* Full width on smaller screens */
+        margin-top: 20px; /* Add some top margin for spacing */
+    }
+
+    .form-group-profile {
+        width: 100%; /* Make form elements use all available width */
+    }
+}
+
+@media (max-width: 768px) {
+    .acc-content-section {
+        width: 80%; /* Use more of the small screen */
+        padding: 20px; /* Less padding to fit small screens */
+    }
+
+    .btn-update {
+        width: 100%; /* Full width button for easier click on mobile */
+    }
+}
+
+@media (max-width: 576px) {
+    .acc-content-section {
+        width: 90%; /* Nearly full width on very small screens */
+    }
+
+    .update-rightdiv, .preview-image-block {
+        width: 100%; /* Make preview blocks full width */
+    }
 }
