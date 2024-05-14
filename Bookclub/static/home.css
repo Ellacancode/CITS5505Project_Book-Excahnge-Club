@@ -6,6 +6,7 @@ html, body {
 
 .intro-banner {
     display: flex;
+    flex-direction: column; /* Default to vertical layout on smaller screens */
     align-items: center;  /* Vertical centering */
     justify-content: center;  /* Horizontal centering */
     width: 100%;
@@ -15,18 +16,15 @@ html, body {
 
 .banner-content {
     display: flex;
-    flex-direction: row;  /* Ensures items are in a row */
-    align-items: center;  /* Vertical centering within the content */
-    justify-content: center;  /* Horizontal centering */
-    width: 100%;  /* Takes full width of its container */
-    max-width: 1200px;  /* Max width to prevent overly wide spread on large screens */
-    margin: 0 auto;  /* Centers the content block within the banner */
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
 }
 
 .banner-img {
-    width: auto;  /* Natural width unless constrained by max-width */
-    max-width: 25%;  /* Limits image width to 25% of the content block */
-    flex: none;  /* Prevents flex-shrink and flex-grow */
+    width: 80%; /* Use full width on smaller screens */
 }
 
 .welcome {
@@ -40,7 +38,7 @@ html, body {
 }
 
 .start-sharing-btn {
-    width: 200px;
+    width: 40%; /* Slightly smaller button on mobile */
     padding: 10px 0;
     font-size: 18px;
     color: white;
@@ -57,34 +55,36 @@ html, body {
 }
 
 
-/* Tablet breakpoint (768px and above) */
-@media (min-width: 768px) {
+/* Mobile devices (up to 767px) */
+@media (max-width: 767px) {
     .intro-banner {
-        flex-direction: row;
-        padding: 40px;
-    }
-
-    .banner-content {
-        flex-direction: row;
-        justify-content: space-between;
+        flex-direction: column; /* Stack elements vertically */
+        padding: 20px;
     }
 
     .banner-img {
-        width: 50%; /* Larger image on tablets */
+        max-width: 100%; /* Full width images on mobile */
     }
 
     .welcome {
-        max-width: 50%;
-        text-align: left;
-        padding: 0 20px;
+        text-align: center;
+        padding: 20px;
     }
 
-    .start-sharing-btn {
-        width: auto; /* Auto width for better control */
-        padding: 12px 24px;
-        font-size: 18px; /* Slightly larger font on tablets */
+    .container-for-sections {
+        flex-direction: column; /* Stack sections vertically */
+        padding: 10px;
+    }
+
+    div.join img, div.find img, div.exchange img {
+        max-width: 100%; /* Full width images in sections */
+    }
+
+    div.join button, div.find button, div.exchange button {
+        width: 100%; /* Full width buttons */
     }
 }
+
 
 /* Desktop breakpoint (1024px and above) */
 @media (min-width: 1024px) {
@@ -124,6 +124,7 @@ html, body {
 div.join, div.find, div.exchange {
     flex: 1 1 33%; /* Keep the existing flex setup */
     text-align: center;
+    align-items: center;
     margin: 10px;
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
