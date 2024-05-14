@@ -97,7 +97,7 @@ html, body {
 .page-wrapper {
   display: flex;
   flex-direction: column;  /* Stacks children vertically */
-  min-height: 95%;  
+  min-height: 100%;  
 }
 
 .content-wrapper {
