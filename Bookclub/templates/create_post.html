@@ -1,55 +1,62 @@
 {% extends "layout.html" %}
 {% block content %}
+<header>
+    <script src="{{ url_for('static', filename='shelf.js') }}"></script>
+</header>
 <div class="create-page">
     <div class="content-section">
         <form method="POST" action="{{ url_for('new_post') }}" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
-            <fieldset class="form-group">
+            <fieldset class="form-group-create">
                 <legend class="border-bottom mb-4">{{ legend }}</legend>
-                <div class="form-group">
+                <div class="form-group-create">
                     {{ form.title.label(class="form-control-label") }}
                     {% if form.title.errors %}
-                        {{ form.title(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.title.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
+                    {{ form.title(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.title.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
                     {% else %}
-                        {{ form.title(class="form-control form-control-lg") }}
+                    {{ form.title(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
-                <div class="form-group">
+                <div class="form-group-create">
                     {{ form.content.label(class="form-control-label") }}
                     {% if form.content.errors %}
-                        {{ form.content(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.content.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
+                    {{ form.content(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.content.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
                     {% else %}
-                        {{ form.content(class="form-control form-control-lg") }}
+                    {{ form.content(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
 
                 <!--  Upload picture -->
-                <div class="form-group">
+                <div class="form-group-create">
                     {{ form.picture.label() }}
-                    {{ form.picture(class="form-control-file") }}
+                    {{ form.picture(class="form-control-file", id="imageUpload") }}
                     {% if form.picture.errors %}
-                        {% for error in form.picture.errors %}
-                            <span class="text-danger">{{ error }}</span><br>
-                        {% endfor %}
+                    {% for error in form.picture.errors %}
+                    <span class="text-danger">{{ error }}</span><br>
+                    {% endfor %}
                     {% endif %}
+                    <div class="update-rightdiv" style="background-color: white;">
+                        <p>Preview</p>
+                        <div class="preview-image-block"><img class="preview-image" id="imagePreview" src="#" alt="preview"></div>
+                    </div>
                 </div>
 
             </fieldset>
-            <div class="form-group">
+            <div class="form-group-create">
                 {{ form.submit(class="btn btn-custom") }}
             </div>
         </form>
     </div>
 </div>
-{% endblock %}
 
+{% endblock %}
