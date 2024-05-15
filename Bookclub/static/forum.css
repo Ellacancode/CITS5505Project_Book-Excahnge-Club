@@ -2,13 +2,14 @@ html, body {
   height: auto; 
   padding: 0;
   margin: 0;
-  background: #f9f9f9; 
+  background: linear-gradient(to right, #f9f9f9 0%, #faece9 50%, #f9dfd9 100%);
   display: block; 
 }
 .header-with-search {
   display: flex;  
   align-items: center;  
   justify-content: space-between;  
+  margin-top: 30px;
 }
 
 .search-form {
@@ -31,7 +32,8 @@ html, body {
 
 
 .post-card {
-  flex: 0 0 calc(33.33% - 20px); 
+  flex: 0 0 calc(33.33% - 20px);  /* Ensure this calculation allows for any padding/margins */
+  max-width: calc(33.33% - 20px); /* This line can help enforce sizing if flexbox settings aren't enough */
   display: flex;
   flex-direction: column;
   align-items: center; 
@@ -65,6 +67,7 @@ html, body {
   min-height: 200px; 
   object-fit: cover; 
   margin-bottom: 15px; 
+  max-width: 100%; /* ensures image does not exceed its container's width */
 }
 
 
@@ -85,12 +88,6 @@ html, body {
     align-items: flex-start; 
 }
 
-
-@media (max-width: 768px) {
-  .post-card {
-      flex: 1 1 100%; 
-  }
-}
 
 .post-header {
   display: flex;
@@ -117,3 +114,68 @@ html, body {
 .content {
   margin-top: 1em;
 }
+
+
+.btn-outline-secondary {
+  background-color: rgb(252, 98, 98);  /* Red background */
+  color: #ffffff;             /* White text */
+  border: none;       
+  padding: 10px 30px; 
+  font-size: 20px;            /* Increase font size for larger button */
+}
+
+.btn-outline-secondary:hover, .btn-outline-secondary:focus {
+  background-color: rgb(252, 98, 98);  /* Darker red on hover/focus */
+  color: #ffffff;             /* White text remains the same */
+}
+
+@media (max-width: 768px) {
+  .container {
+      padding: 10px;
+  }
+
+  .post-card {
+      flex: 1 1 100%; /* Take full width */
+      max-width: 100%; /* Take full width */
+      padding: 10px; /* Smaller padding for a compact look */
+      margin-bottom: 10px; /* Reduce margin between cards */
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Optional: adjust shadow for depth */
+  }
+
+  .form-control, .btn-outline-secondary {
+      font-size: 16px; /* Adjust font size */
+      padding: 8px 16px; /* Adjust padding */
+  }
+
+  .post-image {
+      max-height: 250px; /* Adjust image max height */
+  }
+
+  .profile-pic {
+      width: 40px;
+      height: 40px;
+  }
+
+  .title, .content {
+      font-size: small; /* Adjust font size */
+  }
+
+  .search-form {
+      flex-direction: column;
+      align-items: stretch;
+  }
+
+  .btn-outline-secondary {
+      width: 100%; /* Full width button */
+  }
+
+  .user-info, .post-header {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .username {
+      margin-top: 5px;
+  }
+}
+

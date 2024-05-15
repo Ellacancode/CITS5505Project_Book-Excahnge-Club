@@ -11,7 +11,7 @@ html, body {
     justify-content: center; /* Centers horizontally */
     background: url('creatpostbg_images/bg3.jpg') no-repeat center center fixed;
     background-size: cover; /* Ensures it covers the full area */
-    min-height: 84vh; /* This ensures the minimum height of the element is the full viewport height */
+    min-height: 100vh; /* This ensures the minimum height of the element is the full viewport height */
     width: 100vw; /* This ensures the width is the full viewport width */
 }
 
@@ -31,7 +31,7 @@ html, body {
 }
 
 .btn-custom {
-    background-color: #86eae3; /* Sets the background color */
+    background-color: #cd4024; /* Sets the background color */
     border-color: #d4d4d4; /* Sets the border color to match the background */
     color: #ffffff; /* Optional: changes the text color to white for better contrast */
     padding: 20px 40px;
@@ -43,6 +43,31 @@ html, body {
 }
 
 .btn-custom:hover {
-    background-color: darken(#86eae3, 10%); /* Optional: Darkens the button on hover for visual feedback */
+    background-color: darken(#fb2c2c, 10%); /* Optional: Darkens the button on hover for visual feedback */
     border-color: darken(#d4d4d4, 10%); /* Matches the border color with the background on hover */
+}
+
+
+@media (max-width: 992px) {
+    .content-section {
+        width: 50%; /* Wider on smaller desktops and tablets */
+    }
+}
+
+@media (max-width: 768px) {
+    .content-section {
+        width: 70%; /* Takes more space on small tablets */
+    }
+}
+
+@media (max-width: 576px) {
+    .content-section {
+        width: 85%; /* Full width on mobile devices */
+        padding: 10px; /* Less padding on smaller screens */
+    }
+
+    .btn-custom {
+        padding: 10px 20px; /* Smaller button on mobile */
+        font-size: 18px; /* Smaller font size on mobile */
+    }
 }

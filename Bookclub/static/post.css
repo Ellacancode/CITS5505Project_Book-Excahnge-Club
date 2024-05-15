@@ -1,3 +1,7 @@
+html, body {
+    background: linear-gradient(to right, #f9f9f9 0%, #faece9 70%, #f9dfd9 100%);
+}
+
 .content-section {
     display: flex;
     flex-direction: column; /* Stacks children vertically */
@@ -7,23 +11,21 @@
 
 .article-title {
     align-items: center;
-    margin-top: 30px;
+    margin-top: 50px;
     font-size: 40px;
-    font-family: Roboto Bold, sans-serif;
+    letter-spacing: 0;
+    font-family: Arial, sans-serif; /* Use Arial font family */
+    font-weight: 700; /* Explicitly set font weight */
     margin-bottom: 30px;
 }
+
 
 .post-image {
     width: 100%; /* Restricts width to 90% of their container */
     margin-bottom: 20px; /* Adds space below images */
-    max-width: 500px; /* Maximum width the image can reach */    
-}
-
-/* Add responsiveness to the layout */
-@media (max-width: 768px) {
-    .article-img, .post-image, .comment-image {
-        width: 100%; /* Full width on smaller screens */
-    }
+    height: auto;
+    max-width: 400px; /* Maximum width the image can reach */    
+    align-items: center;
 }
 
 .article-img {
@@ -79,9 +81,9 @@
 
 .comment-label {
     align-items: left;
-    margin-top: 30px;
-    margin-bottom: 15px;
+    margin-top: 60px;
 }
+
 .comment-header {
     display: flex;
     flex-direction: row; /* Align items horizontally */
@@ -92,10 +94,10 @@
 
 
 .author2-image {
-    width: 100px; /* Fixed width for the image */
+    width: 100%; /* Fixed width for the image */
     border-radius: 50%; /* Circle shape */
     margin-right: 20px; /* Space to the right of the image */
-    max-width: 70px;
+    max-width: 90px;
 }
 
 .metadata {
@@ -111,7 +113,6 @@
 .text-muted {
     font-size: 0.8rem; /* Smaller font size for the date */
 }
-
 
 
 .article-content {
@@ -140,19 +141,13 @@
     padding: 10px;
     border: 1px solid #ccc;
     margin-bottom: 10px;
-    background-color: #f8f9fa;
+    background-color: #ffffff;
 }
 
 
-
-@media (max-width: 768px) {
-    .comment-image {
-        width: 100%;
-    }
-}
 
 .new-comment-label {
-    margin-top: 30px;
+    margin-top: 50px;
     
 }
 
@@ -166,7 +161,6 @@
     flex-direction: column;
     align-items: center; /* Centers items horizontally in the container */
     justify-content: center; /* Centers items vertically */
-    margin-top: 20px;
     font-weight: bold;
     font-size: 20px;
 }
@@ -176,9 +170,129 @@
     align-items: center; /* Centers the buttons vertically */
     justify-content: space-between; /* Optional: Distributes extra space evenly */
 }
-
+article-title
 .btn {
     margin-right: 10px; /* Adds margin to the right of each button */
 }
 
 
+.author-section {
+    border: 1px solid #ccc; /* Light grey border */
+    padding: 10px;          /* Padding inside the border */
+    margin: 10px;           /* Space around the section */
+    border-radius: 10px;     /* Optional: rounded corners */
+    margin-top: 20px;
+    background-color: #ffffff;
+}
+
+.btn-primary {
+    width: 150px;
+    padding: 10px;
+    font-size: 18px;
+    color: white;
+    background-color: rgb(28, 112, 230);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+
+.btn-primary:hover {
+    background-color: #60d0f9;
+}
+
+.btn-secondary {
+    width: 150px;
+    padding: 10px 0; /* Adjust padding to be only vertical */
+    font-size: 16px; /* Adjust the font size to match the button in the image */
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #cccccc;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Optional: add a subtle shadow */
+    text-align: center; /* Center text in the button */
+    font-family: Arial, sans-serif; /* Optional: specify font, assuming Arial */
+}
+
+.btn-secondary:hover {
+    font-weight: bold;
+    border: solid 1px black;
+}
+
+.btn-post {
+    width: 150px;
+    padding: 10px 0; /* Adjust padding to be only vertical */
+    font-size: 16px; /* Adjust the font size to match the button in the image */
+    color: rgb(255, 255, 255);
+    background-color: rgb(211, 55, 55);
+    border: 1px solid #cccccc;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Optional: add a subtle shadow */
+    text-align: center; /* Center text in the button */
+    font-family: Arial, sans-serif; /* Optional: specify font, assuming Arial */
+}
+
+.btn-post:hover {
+    font-weight: bold;
+    border: solid 1px black;
+}
+/* Universal Base Styles */
+img {
+    max-width: 100%;  /* Ensure all images are responsive */
+    height: auto;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .content-section {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .author2-image  {
+        max-width: 20%;  /* Smaller images on smaller screens */
+    }
+
+    .post-image, .main-author-image {
+        max-width: 90%;  /* Smaller images on smaller screens */
+    }
+
+    .article-title, .article-content {
+        font-size: 20px;  /* Smaller font size for smaller screens */
+    }
+
+    .comment-content {
+        margin-top: 10px;
+    }
+
+    .post-info, .comment-header, .author-section, .controls {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn {
+        width: 100%; /* Full width buttons are easier to tap */
+        padding: 12px; /* Larger touch targets */
+        margin-bottom: 10px; /* More space between buttons */
+    }
+
+    .commentbox, .media-body {
+        padding: 10px; /* More padding on smaller screens */
+    }
+
+    .form-group {
+        font-size: large; /* Larger form elements for easier interaction */
+    }
+}
+
+@media (max-width: 480px) {
+    .article-title {
+        font-size: 18px; /* Even smaller font size for very small screens */
+    }
+    
+    .btn {
+        font-size: 14px;  /* Smaller font size for buttons */
+    }
+}

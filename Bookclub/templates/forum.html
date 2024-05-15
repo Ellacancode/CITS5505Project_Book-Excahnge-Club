@@ -8,7 +8,7 @@
 <main class="container">
 <section class="forum">
     <div class="header-with-search">
-        <h2>Recent Blog Posts</h2>
+        <h2 class="forum-header">Recent Blog Posts</h2>
         <form method="POST" action="{{ url_for('search')}}" class="search-form">
             {{ form.hidden_tag()}}
             <input class="form-control me-2" type="search" placeholder="Search Forum" aria-label="Search" name="searched">

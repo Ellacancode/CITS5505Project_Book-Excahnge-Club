@@ -1,25 +1,36 @@
 .container {
     width: 100%;
     margin: 0 auto;
-    padding-top: 0px;
-    height: 800px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    text-align: center;
-    justify-content: center;
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center aligns all child elements */
+}
+
+
+.user-profile {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    background-color: #ffffff;
+    padding: 5px 20px;
+    border-radius: 30px;
+    width: 100%;
+    margin-top: -10px;
+    width: 80%;
     align-items: center;
 }
 
-
-.user-profile{
-    width: 100%;
-    background-color: #f7eff8;
-    padding: 30px;
-    border-radius: 30px;
+.profile-left, .profile-right {
+    flex: 1; /* Allows both sections to take equal space */
+    padding: 10px;
 }
+
+
+
 .user-profile h1 {
     font-size: 2em;
-    margin: 0;
+    text-align: left;
 }
 
 .user-profile p {
@@ -28,49 +39,53 @@
     color: #7d7d7d;
 }
 
-.user-profile p + p {
-    margin-top: 10px;
-}
-
-.user-profile .btn-edit-profile {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    border: none;
-    background-color: #f0b3ff;
-    border-radius: 20px;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.user-profile .btn-edit-profile:hover {
-    background-color: #e08eff;
-}
 
 .user-profile .btn-follow,
-.user-profile .btn-unfollow {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 20px;
-    border: none;
-    background-color: #cc66ff;
-    border-radius: 20px;
-    color: white;
-    font-weight: bold;
+.user-profile .btn-unfollow  {
+    width: 250px;
+    padding: 10px 0; /* Adjust padding to be only vertical */
+    font-size: 16px; /* Adjust the font size to match the button in the image */
+    color: rgb(255, 255, 255);
+    background-color: rgb(211, 55, 55);
+    border: 1px solid #cccccc;
+    border-radius: 50px;
     cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Optional: add a subtle shadow */
+    text-align: center; /* Center text in the button */
+    font-family: Arial, sans-serif; /* Optional: specify font, assuming Arial */
 }
 
 .user-profile .btn-follow:hover,
 .user-profile .btn-unfollow:hover {
-    background-color: #b34dff;
+    font-weight: bold;
+    border: solid 1px black;
+}
+
+.user-profile .btn-edit-profile {
+    color: rgb(255, 255, 255);
+    background-color: rgb(211, 55, 55);
+    border: none; /* No border */
+    border-radius: 50px;
+    padding: 15px 30px; /* Increased padding for bigger size */
+    font-family: Arial, sans-serif; /* Font style and family */
+    font-size: 16px; /* Similar font size */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.user-profile .btn-edit-profile:hover {
+    font-weight: bold;
+    border: solid 1px black;
+}
+
+.user-profile .profile-right2 {
+    padding-top: 40px; /* Adds space above the content inside */
 }
 
 .post-history {
     width: 100%;
     text-align: left;
+    padding-top: 20px; /* Adds some space above the posts section */
     align-items: center;
 }
 
@@ -80,32 +95,66 @@
     color: #333;
 }
 
+
+.post-item small {
+    color: #cccccc;
+}
+
+.main-author-image {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 250px;
+}
+
+#about-me {
+    margin-bottom: 20px;
+}
+
+.header {
+    text-align: center; /* Center aligns the text horizontally */
+    font-weight: bold; /* Keeps the font bold */
+    width: 100%; /* Ensures the header takes full width if not already set */
+}
+
+
 .user-posts {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
-    align-items: center;
-    justify-content: center;
+    gap: 20px; 
+    align-items: flex-start; 
+    padding: 0; 
+    margin: 0 auto; 
+    max-width: 1200px; 
+    width: 100%;
 }
 
 .post-item {
+    display: flex;
+    flex-direction: column;
     background-color: white;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 350px;
+    max-width: none;
+    flex: 0 0 calc(33.33% - 20px);  /* Ensure this calculation allows for any padding/margins */
+
+} 
+
+.post-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Aligns children at the start of the cross axis */
+    width: 100%; /* Adjust width as needed */
+    padding: 20px; /* Optional padding to give some spacing inside the wrapper */
 }
 
-.post-item h4 {
-    margin-top: 0;
-    color: #cc66ff;
+.posts-wrapper {
+    margin-bottom: 20px;
 }
 
-.post-item p {
-    color: #7d7d7d;
-}
-
-.post-item small {
-    color: #cccccc;
+/* .posts-wrapper .user-posts .post-item h4 a, */
+.posts-wrapper .user-posts .post-item p a {
+    color: black; /* Set text color to black */
+    text-decoration: none; /* Optional: removes underline from links */
 }

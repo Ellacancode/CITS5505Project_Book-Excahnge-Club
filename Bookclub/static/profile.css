@@ -1,22 +1,27 @@
-.acc-content-section{
-    float: left;
-    width: 60%;
-    background-color: #f7eff8;
+.acc-content-section {
+    margin: 0 auto; 
+    align-items: center;
+    width: 45%;
+    background-color: rgba(255, 255, 255, 0.7); 
     padding: 30px;
     border-radius: 30px;
+    margin-top: 40px;
+    margin-bottom: 20px;
 }
+
 .account-img{
     border-radius: 30px;
-    width: 150px;
-    height: 150px;
+    width: 35%;
+    max-width: 350px;
 }
 .acc-media-body{
-    margin-left: 50px;
+    margin-left: 60px;
 }
 .acc-border-bottom{
     letter-spacing: 1px;
 }
 .inputtit-update{
+    margin-top: -20px;
     letter-spacing: 1px;
     margin-bottom: 0px;
 }
@@ -26,24 +31,25 @@
     font-size: 15px;
 }
 .btn-update{
-    letter-spacing: 1px;
-    width: 140px;
-    height: 40px;
-    background-color: white;
-    color: black;
-    border-radius: 30px;
-    font-size: 15px;
-    border: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    color: white;
+    background-color: rgb(211, 55, 55);
+    width: 160px;
+    height: 50px;
+    border-radius: 20px;
+    outline: none;
 }
 .btn-update:hover{
-    border: 1px solid black;
-    font-weight: bold;
+    background-color: rgb(107, 31, 31);
+    color: white;
+    text-decoration: none;
 }
 .update-rightdiv{
-    float: right;
-    width: 35%;
-    background-color: #f0e2f4;
-    height: 400px;
+    width: 80%;
+    background-color: #f9f0ed;
+    height: 300px;
     text-align: center;
     border-radius: 30px;
     font-size: 25px;
@@ -51,31 +57,87 @@
     padding: 10px;
     align-items: center;
     justify-items: center;
+    margin-top: 20px;
 }
 .preview-image-block{
     margin: 0 auto;
-    display: block;
     width: 80%;
     height: 70%;
     background-color: rgba(161, 159, 159, 0.5);
     border-radius: 25px;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 .preview-image{
     border-radius: 25px;
 }
-.btn-ok{
-    float: right;
-    margin-top: 30px;
-    width: 35%;
-    height: 45px;
-    border-radius: 20px;
-    color: white;
-    background-color: black;
-    font-size: 25px;
-    border: hidden;
+
+.profile-title {
+    font-weight: 500;
+    margin-bottom: -20px;
 }
-.btn-ok:hover{
-    background-color: rgba(161, 159, 159, 0.5);
-    color: black;
+
+.form-group-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Align items to the start of the flex container */
+    margin-bottom: 30px; /* Adjust as necessary */
+    width: 70%;
+}
+
+#imagePreview {
+    height: 100%; 
+    width: 100%;
+}
+
+/* Base styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    font-family: Arial, sans-serif; /* Use a universal font that looks good on all devices */
+}
+
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 992px) {
+    .acc-content-section {
+        width: 60%; /* Wider in smaller screens to use more space */
+    }
+
+    .account-img, .acc-media-body {
+        width: 100%; /* Full width on smaller screens */
+        margin-top: 20px; /* Add some top margin for spacing */
+    }
+
+    .form-group-profile {
+        width: 100%; /* Make form elements use all available width */
+    }
+}
+
+@media (max-width: 768px) {
+    .acc-content-section {
+        width: 80%; /* Use more of the small screen */
+        padding: 20px; /* Less padding to fit small screens */
+    }
+
+    .btn-update {
+        width: 100%; /* Full width button for easier click on mobile */
+    }
+}
+
+@media (max-width: 576px) {
+    .acc-content-section {
+        width: 90%; /* Nearly full width on very small screens */
+    }
+
+    .update-rightdiv, .preview-image-block {
+        width: 100%; /* Make preview blocks full width */
+    }
 }

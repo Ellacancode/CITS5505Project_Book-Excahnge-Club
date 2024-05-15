@@ -24,6 +24,8 @@
   height: 40px;
   border-radius: 20px;
   font-weight: 500;
+  border: solid 1px black;
+
 }
 .btn:hover{
   font-weight: bold;
@@ -47,17 +49,104 @@
   font-weight: bold;
 }
 
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* Ensure the body fills the viewport */
+
+/* Dropdown menu styling */
+.dropdown-menu {
+  padding: 20px;
+  background-color: rgb(253, 253, 253);
+  width: 400px;
 }
 
-.footer {
-  margin-top: auto; /* Push the footer to the bottom */
-  width: 100%;
-  background-color: #f8f9fa; /* Background color for the footer */
-  padding: 20px 0; /* Add padding for better appearance */
-  text-align: center;
-  letter-spacing: 1px;
+/* Style for dropdown separator */
+.dropdown-menu::before {
+  content: '';
+  display: block;
+  width: 400px;
+  height: 3px;
+  background-color: white; /* Makes the divider visible, change as needed */
+  margin-bottom: 5px;
 }
+
+/* Style for the entire page container */
+.page-container {
+  width: 100%;
+}
+
+/* Button color modifications for login and registration */
+.btn_red {
+  background-color: rgb(211, 55, 55); /* Example color, adjust as needed */
+  color: white;
+}
+
+/* Caret color modification */
+.fas.fa-caret-down {
+  color: rgb(211, 55, 55);
+}
+
+.flash-message {
+  width: 100%;
+}
+
+html, body {
+  height: 100%;   /* Ensure the full-height of the page is 100% of the viewport height */
+  margin: 0;      /* Remove default margin */
+  padding: 0;     /* Remove default padding */
+  scroll-behavior: smooth;
+}
+
+.page-wrapper {
+  display: flex;
+  flex-direction: column;  /* Stacks children vertically */
+  min-height: 100%;  
+}
+
+.content-wrapper {
+  flex: 1;  
+} 
+
+.footer {
+  display: flex;
+  justify-content: center; /* Center align the footer content */
+  align-items: center; /* Vertically align items in the footer */
+  width: 100%;
+  padding: 10px 30px;
+  background-color: #ffffff;
+  box-shadow: 0 -1px 6px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;  
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between; /* Distribute space between elements */
+  align-items: center;
+  width: 100%;
+}
+
+.footer-text {
+  flex-grow: 1; /* Allows the text block to grow and take available space */
+  text-align: center; /* Center the text within its flexible space */
+}
+
+#myBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  color: white;
+  background-color: rgb(211, 55, 55);
+  width: 120px;
+  height: 40px;
+  border-radius: 20px;
+  margin-right: 15px;
+  outline: none;
+}
+
+#myBtn:hover {
+  background-color: rgb(107, 31, 31);
+  color: white;
+  text-decoration: none;
+}
+
+
+
+
+
