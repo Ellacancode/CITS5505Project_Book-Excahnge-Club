@@ -1,24 +1,23 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div class="search-results-page">
+<div class="search-results-page" style="height: auto;">
     <h1>Search Results</h1>
     {% if results %}
-        <div class="card-container">
-            {% for book in results %}
-                <div class="book-card">
-                    <div class="book-info">
-                        <h2>{{ book.title }}</h2>
-                        <p><strong>Author:</strong> {{ book.author }}</p>
-                        <p><strong>Genre:</strong> {{ book.genre }}</p>
-                        <p><strong>Status:</strong> {{ book.status }}</p>
-                    </div>
-                </div>
-            {% endfor %}
+    <div class="card-container">
+        {% for book in results %}
+        <div class="book-card" style="margin-bottom: 20px;">
+            <div class="book-info">
+                <h2>{{ book.title }}</h2>
+                <p><strong>Author:</strong> {{ book.author }}</p>
+                <p><strong>Genre:</strong> {{ book.genre }}</p>
+                <p><strong>Status:</strong> {{ book.status }}</p>
+            </div>
         </div>
+        {% endfor %}
+    </div>
     {% else %}
-        <p>No results found.</p>
+    <p>No results found.</p>
     {% endif %}
 </div>
 {% endblock %}
-
