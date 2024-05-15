@@ -3,62 +3,62 @@
 {% block content %}
 
 <div class="container">
-    <h2 class="header" >User Profile</h2>
+    <h2 class="header">User Profile</h2>
     <div class="user-profile">
         <div class="profile-left">
-        <h1>{{ user.username }}</h1>
-        <img class="main-author-image" src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="Author Image">
-    </div>
-    <div class="profile-right">
-        <h4>About Me</h4>
-
-        {% if user.about_me %}
-
-        <section id="about-me">
-            <p>{{ user.about_me }}</p>
-            {% endif %}
-        </section>            
-        {% if user.last_seen %}<p>Last seen on: {{ user.last_seen.strftime('%Y-%m-%d %H:%M') }}</p>{% endif %}
-        <p>{{ user.followers_count() }} followers, {{ user.following_count() }} following.</p>
-
-        <div class="profile-right2">
-        {% if user == current_user %}
-            <a class="btn-edit-profile" href="{{ url_for('profile') }}">
-                <i class="fa-solid fa-user"></i> Edit profile
-            </a>
-
-        {% elif not current_user.is_following(user) %}
-            <form action="{{ url_for('follow', username=user.username) }}" method="post">
-                {{ follow_form.hidden_tag() }}
-                <button type="submit" class="btn-follow">
-                    <i class="fa-solid fa-user-plus"></i> Follow
-                </button>
-            </form>
-        {% else %}
-            <form action="{{ url_for('unfollow', username=user.username) }}" method="post">
-                {{ unfollow_form.hidden_tag() }}
-                <button type="submit" class="btn-unfollow">
-                    <i class="fa-solid fa-user-minus"></i> Unfollow
-                </button>
-            </form>
-        {% endif %}
+            <h1>{{ user.username }}</h1>
+            <img class="main-author-image" src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}"
+                alt="Author Image">
         </div>
-    </div>  
-    </div>  
+        <div class="profile-right">
+            {% if user.about_me %}
+            <section id="about-me">
+                <h4>About Me Details</h4> <!-- Adjusted heading level for internal section -->
+                <p>{{ user.about_me }}</p>
+            </section>
+            {% endif %}
+            
+            {% if user.last_seen %}<p>Last seen on: {{ user.last_seen.strftime('%Y-%m-%d %H:%M') }}</p>{% endif %}
+            <p>{{ user.followers_count() }} followers, {{ user.following_count() }} following.</p>
+
+            <div class="profile-right2">
+                {% if user == current_user %}
+                <a class="btn-edit-profile" href="{{ url_for('profile') }}">
+                    <i class="fa-solid fa-user"></i> Edit profile
+                </a>
+
+                {% elif not current_user.is_following(user) %}
+                <form action="{{ url_for('follow', username=user.username) }}" method="post">
+                    {{ follow_form.hidden_tag() }}
+                    <button type="submit" class="btn-follow">
+                        <i class="fa-solid fa-user-plus"></i> Follow
+                    </button>
+                </form>
+                {% else %}
+                <form action="{{ url_for('unfollow', username=user.username) }}" method="post">
+                    {{ unfollow_form.hidden_tag() }}
+                    <button type="submit" class="btn-unfollow">
+                        <i class="fa-solid fa-user-minus"></i> Unfollow
+                    </button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 </div>
 <div class="posts-wrapper">
-    <h3 class="post-header">Posts by {{ user.username }}</h3>
+    <h2 class="post-header">Posts by {{ user.username }}</h2> <!-- Ensure this is h2 for consistency -->
     <div class="user-posts">
         {% if posts %}
-            {% for post in posts %}
-                <div class="post-item">
-                    <h4><a href="{{ url_for('post', post_id=post.id)}}">{{ post.title }}</a></h4>
-                    <p><a href="{{ url_for('post', post_id=post.id)}}">{{ post.content }}</a></p>
-                    <small>Posted on {{ post.date_posted.strftime('%Y-%m-%d %H:%M') }}</small>
-                </div>
-            {% endfor %}
+        {% for post in posts %}
+        <div class="post-item">
+            <h4><a href="{{ url_for('post', post_id=post.id)}}">{{ post.title }}</a></h4>
+            <p><a href="{{ url_for('post', post_id=post.id)}}">{{ post.content }}</a></p>
+            <small>Posted on {{ post.date_posted.strftime('%Y-%m-%d %H:%M') }}</small>
+        </div>
+        {% endfor %}
         {% else %}
-            <p>No posts yet.</p>
+        <p>No posts yet.</p>
         {% endif %}
     </div>
 </div>

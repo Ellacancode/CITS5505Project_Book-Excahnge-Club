@@ -1,91 +1,94 @@
 {% extends "layout.html" %}
 
 {% block extra_css %}
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='profile.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='profile.css') }}">
 {% endblock %}
 
 {% block content %}
-    <div class="acc-content-section">
-      <div class="media">
-        <img class="account-img" src="{{ image_file }}">
+<header>
+    <script src="{{ url_for('static', filename='profile.js') }}"></script>
+</header>
+<div class="acc-content-section">
+    <div class="media">
+        <img class="account-img" src="{{ image_file }}" alt="accountimg">
         <div class="acc-media-body">
-          <h2 class="account-heading">{{ current_user.username }}</h2>
-          <p class="text-secondary">{{ current_user.email }}</p>
+            <h2 class="account-heading">{{ current_user.username }}</h2>
+            <p class="text-secondary">{{ current_user.email }}</p>
 
-          {% if current_user.about_me %}
-                    <p>{{ current_user.about_me }}</p>
-          {% endif %}
+            {% if current_user.about_me %}
+            <p>{{ current_user.about_me }}</p>
+            {% endif %}
 
-          {% if current_user.last_seen %}
-                    <p>Last seen on: {{ current_user.last_seen.strftime('%Y-%m-%d %H:%M') }}</p>
-          {% endif %}
+            {% if current_user.last_seen %}
+            <p>Last seen on: {{ current_user.last_seen.strftime('%Y-%m-%d %H:%M') }}</p>
+            {% endif %}
 
         </div>
-      </div>
-      <br/>
-        <form method="POST" action="" enctype="multipart/form-data">
-            {{ form.hidden_tag() }}
-            <fieldset class="form-group">
-                <legend class="profile-title">Profile Information</legend>
-                <br/>
-                <div class="form-group-profile">
-                    <p class="inputtit-update">{{ form.username.label(class="form-control-label") }}</p>
-                    {% if form.username.errors %}
-                        {{ form.username(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.username.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.username(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-                <div class="form-group-profile">
-                    <p class="inputtit-update">{{ form.email.label(class="form-control-label") }}</p>
-                    {% if form.email.errors %}
-                        {{ form.email(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.email.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.email(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-                <div class="form-group-profile">
-                    <p class="inputtit-update">{{ form.about_me.label(class="form-control-label") }}</p>
-                    {% if form.about_me.errors %}
-                        {{ form.about_me(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.about_me.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.about_me(class="form-control form-control-lg") }}
-                    {% endif %}
-                </div>
-                <br/>
-                <div class="form-group-profile">
-                    <p class="inputtit-update">{{ form.picture.label() }}</p>
-                    {{ form.picture(class="form-control-file", id="imageUpload") }}
-                    {% if form.picture.errors %}
-                        {% for error in form.picture.errors %}
-                            <span class="text-danger">{{ error }}</span></br>
-                        {% endfor %}
-                    {% endif %}
-                    <div class="update-rightdiv">
-                        <p>Preview</p>
-                        <div class="preview-image-block"><img class="preview-image" id="imagePreview" src="#"></div>
-                    </div>
-                </div>
-            </fieldset>
-            <div class="form-group-profile">
-                {{ form.submit(class="btn-update") }}
-            </div>
-        </form>
     </div>
+    
+    <form method="POST" action="#" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="profile-title">Profile Information</legend>
+            
+            <div class="form-group-profile">
+                <p class="inputtit-update">{{ form.username.label(class="form-control-label") }}</p>
+                {% if form.username.errors %}
+                {{ form.username(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.username.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.username(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group-profile">
+                <p class="inputtit-update">{{ form.email.label(class="form-control-label") }}</p>
+                {% if form.email.errors %}
+                {{ form.email(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.email.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.email(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            <div class="form-group-profile">
+                <p class="inputtit-update">{{ form.about_me.label(class="form-control-label") }}</p>
+                {% if form.about_me.errors %}
+                {{ form.about_me(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.about_me.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ form.about_me(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+            
+            <div class="form-group-profile">
+                <p class="inputtit-update">{{ form.picture.label() }}</p>
+                {{ form.picture(class="form-control-file", id="imageUpload") }}
+                {% if form.picture.errors %}
+                {% for error in form.picture.errors %}
+                <span class="text-danger">{{ error }}</span>
+                {% endfor %}
+                {% endif %}
+                <div class="update-rightdiv">
+                    <p>Preview</p>
+                    <div class="preview-image-block"><img class="preview-image" id="imagePreview" src="#" alt="previewimage"></div>
+                </div>
+            </div>
+        </fieldset>
+        <div class="form-group-profile">
+            {{ form.submit(class="btn-update") }}
+        </div>
+    </form>
+</div>
 
 {% endblock content %}
