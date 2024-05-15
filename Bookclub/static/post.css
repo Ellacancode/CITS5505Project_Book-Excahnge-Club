@@ -80,9 +80,10 @@ html, body {
 }
 
 .comment-label {
-    align-items: left;
+    text-align: left;
     margin-top: 60px;
 }
+
 
 .comment-header {
     display: flex;
@@ -123,7 +124,7 @@ html, body {
 }
 
 .comment-content {
-    margin-top: -20px;
+    margin-top: -8px;
     font-size: 25px;
     font-family: Roboto Bold;
     margin-bottom: 40px;
