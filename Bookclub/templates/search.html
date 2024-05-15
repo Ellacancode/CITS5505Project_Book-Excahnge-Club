@@ -5,7 +5,7 @@
 {% endblock %}
 {% block content %}
 
-<div class="centered-text" style="margin-top: 30px; margin-bottom: 30px;">
+<div class="centered-text">
     <h2>You searched for: <em>{{ searched }}</em></h2>
 </div>
 
@@ -28,11 +28,11 @@
             </div>
         </div>
     </div>
-</div>
 
-{% else %}
-<div class="centered-text">
-    <p>Sorry, your search: <strong>{{ searched }}</strong> was not found.</p>
+    {% else %}
+    <div class="centered-text">
+        <p>Sorry, your search: <strong>{{ searched }}</strong> was not found.</p>
+    </div>
 </div>
 {% endfor %}
 {% endblock content %}
