@@ -158,3 +158,47 @@
     color: black; /* Set text color to black */
     text-decoration: none; /* Optional: removes underline from links */
 }
+
+@media (max-width: 768px) { /* Adjusts layout for screens narrower than 768px */
+    .user-profile {
+        flex-direction: column; /* Stacks the profile sections vertically */
+    }
+
+    .profile-left, .profile-right {
+        width: 100%; /* Each section takes full width */
+    }
+
+    .main-author-image {
+        width: 80%; /* Reduces image size */
+        margin: 0 auto; /* Centers image */
+    }
+}
+
+@media (max-width: 1024px) {
+    .post-item {
+        flex: 0 0 calc(50% - 20px); /* Shows 2 posts per row */
+    }
+}
+
+@media (max-width: 768px) {
+    .post-item {
+        flex: 0 0 100%; /* Stacks posts vertically */
+    }
+}
+
+@media (max-width: 768px) {
+    .user-profile .btn-follow, .user-profile .btn-unfollow, .user-profile .btn-edit-profile {
+        width: 100%; /* Full width buttons for better mobile interaction */
+        padding: 12px 0; /* Adjust padding */
+    }
+}
+
+@media (max-width: 768px) {
+    .user-profile h1 {
+        font-size: 1.5em; /* Smaller font size for the username */
+    }
+
+    .user-profile p, .user-profile h4 {
+        text-align: center; /* Centers text for a better visual hierarchy */
+    }
+}
