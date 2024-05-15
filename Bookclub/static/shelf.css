@@ -16,16 +16,17 @@
     font-weight: bold;
 }
 .shelf-container{
-    width: 100%;
-    height: 700px;
-    background-color: #f8edd8;
+    margin-left: 15%;
+    width: 70%;
+    height: auto;
     border-radius: 30px;
     padding: 30px;
-    overflow-y: auto;
+    /* overflow-y: auto; */
 }
 .col-cub{
     height: 350px;
     padding: 15px;
+    margin-bottom: 100px;
     
 }
 .shelf-book{
@@ -35,12 +36,17 @@
     height: 100%;
     border-radius: 25px;
     text-align: center;
-    background-color:#f8edd8;
-    
+    background-color:white;
 }
 .col-content{
     font-size: 15px;
     font-weight: bold;
+}
+.shelf-img{
+    width: 100%; 
+    height: 90%; 
+    border-radius: 25px; 
+    z-index: 1;
 }
 .shelf-img:hover{
     border: 3px solid transparent;
@@ -53,19 +59,72 @@
 .shelf-searchbox{
     align-items: center;
     justify-content: center;
+    width: 70%;
+    margin-left: 30%;
+    margin-top: 20px;
 }
 .shelf-selector{
     display: inline-block;
-    width: 200px;
+    width: 20%;
     margin-left: calc(50% - 320px);
+    border-radius: 20px;
+    padding: 5px;
 }
 .shelf-searcher{
     display: inline-block;
-    width: 200px;
+    width: 20%;
     margin-left: 20px;
+    border-radius: 20px;
 }
 .shelf-btn{
     display: inline-block;
-    width: 200px;
+    width: 20%;
     margin-left: 20px;
+    background-color: rgb(211, 55, 55);
+    border-radius: 20px;
+    color: white;
+    border: hidden;
+    letter-spacing: 2px;
+    font-size: 18px;
+}
+.shelf-btn:hover{
+    background-color: rgb(107, 31, 31);
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn-borrow{
+    width: 60%;
+    height: 50px;
+    padding: 10px;
+    border-radius: 20px;
+    border: hidden;
+    background-color: green;
+    color: white;
+}
+.btn-borrow:hover{
+    background-color: rgb(1, 75, 1);
+    font-weight: bold;
+}
+.txt-unava{
+    line-height: 50px;
+    margin-left: 20%;
+    width: 60%;
+    height: 50px;
+    border-radius: 20px;
+    border: hidden;
+    background-color: gray;
+    color: white;
+}
+.book-name{
+    display: inline-block; 
+    width: 10%; 
+    font-weight: bold;
+}
+.btn-book{
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(255, 255, 255, 0); 
+    border: hidden;
 }
