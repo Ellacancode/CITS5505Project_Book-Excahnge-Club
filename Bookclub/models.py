@@ -1,8 +1,10 @@
-from datetime import datetime
+# User model and database setup for Flask applications
+from datetime import datetime, timezone
 from zoneinfo import ZoneInfo
 from Bookclub import db, login_manager
 from flask_login import UserMixin
 from sqlalchemy.orm import relationship
+
 
 # Follow table to manage followers
 followers = db.Table(
@@ -11,11 +13,29 @@ followers = db.Table(
     db.Column('followed_id', db.Integer, db.ForeignKey('user.id', name='fk_followers_followed_id'))
 )
 
-# Load user with flask-login
+# Function to load a user given their user ID
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 
+# Book model to represent books in the database
+class Book(db.Model):
+    __tablename__ = 'books'
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(255), nullable=False)
+    genre = db.Column(db.String(120), nullable=True)
+    author = db.Column(db.String(120), nullable=True)
+    status = db.Column(db.String(50), nullable=True)
+    isbn = db.Column(db.String(20), nullable=True)
+    description = db.Column(db.String(255))
+
+
+
+# Define a function for the default last_seen value
+def perth_time_now():
+    return datetime.now(ZoneInfo("Australia/Perth"))
+
+# User model with fields and methods necessary for authentication
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
@@ -78,6 +98,8 @@ class User(db.Model, UserMixin):
     def has_liked_post(self, post):
         return Like.query.filter_by(user_id=self.id, post_id=post.id).first() is not None
 
+
+#Post model to represent blog posts
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
@@ -99,7 +121,9 @@ class Post(db.Model):
         if not user.is_authenticated:
             return False
         return Like.query.filter_by(user_id=user.id, post_id=self.id).first() is not None
+   
 
+#Comment model to represent comments on blog posts
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     to_post_id = db.Column(
@@ -118,7 +142,8 @@ class Comment(db.Model):
 
     def __repr__(self):
         return f"Comment('{self.content}', '{self.date_posted}', '{self.image_file}')"
-
+    
+# Like model to represtent likes for the post
 class Like(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     post_id = db.Column(
@@ -135,13 +160,3 @@ class Like(db.Model):
 
     def __repr__(self):
         return f"Like('User ID: {self.user_id}', 'Post ID: {self.post_id}', '{self.date_posted}')"
-
-class Book(db.Model):
-    __tablename__ = 'books'
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(255), nullable=False)
-    genre = db.Column(db.String(120), nullable=True)
-    author = db.Column(db.String(120), nullable=True)
-    status = db.Column(db.String(50), nullable=True)
-    isbn = db.Column(db.String(20), nullable=True)
-    description = db.Column(db.String(255), nullable=True)
