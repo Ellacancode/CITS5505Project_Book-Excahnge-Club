@@ -11,7 +11,7 @@ html, body {
     justify-content: center; /* Centers horizontally */
     background: url('update_images/update_post.jpg') no-repeat center center fixed;
     background-size: cover; /* Ensures it covers the full area */
-    min-height: 84vh; /* This ensures the minimum height of the element is the full viewport height */
+    min-height: 100vh; /* This ensures the minimum height of the element is the full viewport height */
     width: 100vw; /* This ensures the width is the full viewport width */
 }
 
@@ -23,8 +23,8 @@ html, body {
     min-height: 60vh; /* Adjust height as needed */
     width: 30%; /* Maintain the width or adjust as needed */
     margin: auto; /* Center the box horizontally */
-    background-color: #fbfbf6; 
     padding: 20px;
+    background-color: rgba(251, 251, 246, 0.9); 
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     border-radius: 10px;
 }
@@ -36,6 +36,36 @@ html, body {
 }
 
 .btn-custom:hover {
-    background-color: darken(#e04a3f, 10%); /* Optional: Darkens the button on hover for visual feedback */
-    border-color: darken(#e04a3f, 10%); /* Matches the border color with the background on hover */
+    background-color: #c93a36; /* Manually darkened color */
+    border-color: #c93a36; /* Same color for the border */
 }
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .content-section {
+        width: 95%; /* Takes up most of the screen on small devices */
+        padding: 15px;
+    }
+
+    .btn-custom {
+        padding: 10px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .content-section {
+        width: 100%; /* Full width for very small screens */
+        padding: 10px;
+        border-radius: 0; /* Optional: removes border radius for a full-width effect */
+    }
+
+    h2.account-heading {
+        font-size: 20px; /* Smaller font size for headings */
+    }
+
+    input, textarea, button {
+        font-size: 14px; /* Adjust font size for better usability */
+    }
+}
+
