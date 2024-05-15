@@ -3,15 +3,32 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: #f4f4f4;
+    background: linear-gradient(to right, #f9f9f9 0%, #faece9 70%, #f9dfd9 100%);
 }
 
-/* Parent container style if not defined - ensure it is set to display as grid */
-.container { /* Adjust the class according to your HTML structure */
+/* Parent container style - set to display as grid */
+.container {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* Creates three columns */
     grid-gap: 20px; /* Adjusts the gap between grid items */
     padding: 20px; /* Padding around the grid */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 900px) {
+    .container {
+        grid-template-columns: repeat(2, 1fr); /* Changes to two columns */
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        grid-template-columns: 1fr; /* Changes to one column */
+    }
+
+    .post-card {
+        padding: 10px;
+    }
 }
 
 .post-card {
@@ -27,9 +44,6 @@ body {
     height: auto; /* Adjust height automatically */
     object-fit: cover;
 }
-
-/* Continue with your existing styles for other elements */
-
 
 .title {
     margin-top: 10px;
@@ -70,6 +84,22 @@ body {
 .date-posted {
     color: #999;
     font-size: 14px;
+}
+
+/* Responsive text sizes */
+@media (max-width: 600px) {
+    .title {
+        font-size: 20px;
+    }
+
+    .content {
+        font-size: 14px;
+    }
+
+    .username, .date-posted {
+        font-size: 16px;
+        font-size: 12px;
+    }
 }
 
 /* Link styling */

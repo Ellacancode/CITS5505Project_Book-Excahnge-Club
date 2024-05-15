@@ -1,39 +1,38 @@
 {% extends "layout.html" %}
 
 {% block page_specific_css %}
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='search.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='search.css') }}">
 {% endblock %}
 {% block content %}
 
-    <br/>
-    <div class="centered-text">
+<div class="centered-text" style="margin-top: 30px; margin-bottom: 30px;">
     <h2>You searched for: <em>{{ searched }}</em></h2>
-    </div>
-    <br/>
+</div>
 
-    <div class="container">
-        {% for post in posts %}
-        <div class="post-card">
-            {% if post.image_file != 'default.jpg' %}
-            <img class="post-image" src="{{ url_for('static', filename='post_images/' + post.image_file) }}" alt="Post Image">
-            {% endif %}
-            <h2 class="title"><a href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h2>
-            <p class="content">{{ post.content }}</p>
-            <div class="post-header">
-                <img class="profile-pic" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="Profile Picture">
-                <div class="user-info">
-                    <a class="username" href="{{ url_for('user', username=post.author.username) }}">{{ post.author.username }}</a>
-                    <div class="date-posted">{{ post.date_posted.strftime('%Y-%m-%d') }}</div>
-                </div>
+<div class="container">
+    {% for post in posts %}
+    <div class="post-card">
+        {% if post.image_file != 'default.jpg' %}
+        <img class="post-image" src="{{ url_for('static', filename='post_images/' + post.image_file) }}"
+            alt="Post Image">
+        {% endif %}
+        <h2 class="title"><a href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h2>
+        <p class="content">{{ post.content }}</p>
+        <div class="post-header">
+            <img class="profile-pic" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}"
+                alt="Profile Picture">
+            <div class="user-info">
+                <a class="username" href="{{ url_for('user', username=post.author.username) }}">{{ post.author.username
+                    }}</a>
+                <div class="date-posted">{{ post.date_posted.strftime('%Y-%m-%d') }}</div>
             </div>
         </div>
+    </div>
+</div>
 
-            {% else %}
-            <div class="centered-text">
-            <p>Sorry, your search: <strong>{{ searched }}</strong> was not found.</p>
-            </div>
-            {% endfor %}
-    {% endblock content %}
-
-
-
+{% else %}
+<div class="centered-text">
+    <p>Sorry, your search: <strong>{{ searched }}</strong> was not found.</p>
+</div>
+{% endfor %}
+{% endblock content %}

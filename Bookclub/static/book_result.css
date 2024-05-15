@@ -1,5 +1,6 @@
 /* 搜索结果页面样式 */
 .search-results-page {
+    height: 800px;
     max-width: 80%; /* 限制页面最大宽度 */
     margin: 40px auto; /* 设置页面居中和顶部间距 */
     padding: 20px;
@@ -20,6 +21,7 @@
     justify-content: center;
     gap: 20px;
     margin-top: 20px;
+    overflow-y: auto;
 }
 
 .book-card {
