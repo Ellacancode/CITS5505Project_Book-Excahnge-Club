@@ -1,33 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Exchange Club</title>
+    <title>UWA Book Club</title>
     <!-- Link to FontAwesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
-    
+
     {% block page_specific_css %}
-        <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='forum.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='post.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='user.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='creat_post.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='shelf.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='book_result.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='search_book.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='forum.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='post.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='user.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='creat_post.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='shelf.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='book_result.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='search_book.css') }}">
     {% endblock %}
 </head>
+
 <body>
     <div class="page-wrapper">
         <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="/">&nbsp;<i class="fa-solid fa-landmark" id="top"></i>&nbsp;Book Exchange Club</a>            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" href="/">&nbsp;<i class="fa-solid fa-landmark" id="top"></i>&nbsp;UWA Book Club</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -36,14 +40,15 @@
                         <a class="nav-link" href="{{ url_for('forum') }}">Forum</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                           Explore
+                        <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Explore
                             <i class="fas fa-caret-down"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="{{ url_for('search_books') }}">Book Search</a>
                             <a class="dropdown-item" href="{{ url_for('forum') }}">Forum Search</a>
-                        
+
                         </div>
                     </li>
                     <li class="nav-item">
@@ -61,11 +66,11 @@
                     <li class="nav-item">
                         <a class="btn_red" href="{{ url_for('logout') }}">Logout</a>
                     </li>
-                    {% if current_user.email == 'admin@admin.com'%}   
+                    {% if current_user.email == 'admin@admin.com'%}
                     <li class="nav-item">
                         <a class="btn" href="http://127.0.0.1:5000/admin">Admin</a>
                     </li>
-                    {% endif%}       
+                    {% endif%}
 
                     {% else %}
                     <li class="nav-item">
@@ -82,11 +87,11 @@
         <div class="content-wrapper">
             <div class="flash-message">
                 {% with messages = get_flashed_messages(with_categories=true) %}
-                    {% if messages %}
-                        {% for category, message in messages %}
-                            <div class="alert alert-{{ category }}">{{ message }}</div>
-                        {% endfor %}
-                    {% endif %}
+                {% if messages %}
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+                {% endif %}
                 {% endwith %}
                 {% block content %}{% endblock %}
             </div>
@@ -101,13 +106,16 @@
                 <i class="fas fa-arrow-up"></i> TO TOP
             </a>
         </div>
-    </footer> 
-    
-<!-- jQuery and Bootstrap Bundle (includes Popper) -->
+    </footer>
+
+    <!-- jQuery and Bootstrap Bundle (includes Popper) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="{{ url_for('static', filename='shelf.js') }}"></script>
     <script src="{{ url_for('static', filename='layout.js') }}"></script>
     <script src="{{ url_for('static', filename='profile.js') }}"></script>
+    <script src="{{ url_for('static', filename='create_post.js') }}"></script>
+    <script src="{{ url_for('static', filename='home.js') }}"></script>
 </body>
+
 </html>
