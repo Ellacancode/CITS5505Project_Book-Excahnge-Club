@@ -1,53 +1,65 @@
-import os
 from flask import Flask
+import os
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
-from flask_login import LoginManager 
+from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_admin import Admin, AdminIndexView
 from flask_admin.contrib.sqla import ModelView
 
-# Create a Flask instance
-app = Flask(__name__)
+# Add test class configuration
+class TestConfig:
+    SECRET_KEY = '5791628bb0b13ce0c676dfde280ba244'  # Use a different secret key for testing
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///test.db'  # Test database
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    WTF_CSRF_ENABLED = False
 
-# Set the secret key for session management
-app.config['SECRET_KEY'] = os.urandom(24)
+# Initialize extensions
+db = SQLAlchemy()
+bcrypt = Bcrypt()
+login_manager = LoginManager()
+migrate = Migrate()
 
-# Configure the SQLAlchemy database URI
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///project.db'
+# Set up configuration
+def create_app(config_name=None):
+    app = Flask(__name__)
 
-#Debug
-app.debug = True
+    if config_name == 'testing':
+        app.config.from_object(TestConfig)
+    else:
+        app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
+        app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL') or 'sqlite:///project.db'
+        app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# Create the SQLAlchemy db instance
-db = SQLAlchemy(app)
+    # Debug
+    app.debug = True
 
-# Initialize Flask-Bcrypt for password hashing
-bcrypt = Bcrypt(app)
+    # Initialize extensions
+    db.init_app(app)
+    bcrypt.init_app(app)
+    login_manager.init_app(app)
+    login_manager.login_view = 'login'  # Specifies the login view function
+    login_manager.login_message_category = 'info'  # Set the category for the flash message for non-logged-in user
+    migrate.init_app(app, db)
 
-# Initialize Flask-Login for managing user sessions
-login_manager = LoginManager(app)
-login_manager.login_view = 'login' # Specifies the login view function
-login_manager.login_message_category = 'info' # Set the category for the flash message for non-logged-in users
+    # Setup Flask-Admin
+    admin = Admin(app, template_mode='bootstrap3')
 
-# Setup Flask-Admin
-admin = Admin(app, template_mode='bootstrap3')
+    # Import the User model here, before using it in ModelView
+    from .models import User, Post, Comment, Book, Like
 
-# Import the User model here, before using it in ModelView
-from .models import User
-from .models import Post
-from .models import Comment
-from .models import Book
-from .models import Like
+    admin.add_view(ModelView(User, db.session))
+    admin.add_view(ModelView(Post, db.session))
+    admin.add_view(ModelView(Comment, db.session))
+    admin.add_view(ModelView(Book, db.session))
+    admin.add_view(ModelView(Like, db.session))
 
-admin.add_view(ModelView(User, db.session))
-admin.add_view(ModelView(Post, db.session)) 
-admin.add_view(ModelView(Comment, db.session)) 
-admin.add_view(ModelView(Book, db.session)) 
-admin.add_view(ModelView(Like, db.session)) 
+    # Register Blueprint
+    from Bookclub.routes import main as main_blueprint
+    app.register_blueprint(main_blueprint)
 
-# Initialize Flask-Migrate for handling database migrations
-migrate = Migrate(app, db)
+    # Import the routes
+    from Bookclub import routes
 
-# Import the routes
-from Bookclub import routes
+    return app
