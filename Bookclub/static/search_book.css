@@ -1,10 +1,11 @@
-.searchb-input{
+.searchb-input {
     display: inline-block;
     width: 15%;
     margin-left: 2%;
     border-radius: 20px;
 }
-.searchb-submit{
+
+.searchb-submit {
     display: inline-block;
     width: 15%;
     margin-left: 3%;
@@ -15,10 +16,21 @@
     letter-spacing: 2px;
     font-size: 18px;
 }
-.searchb-submit:hover{
+
+.searchb-submit:hover {
     background-color: rgb(107, 12, 12);
     font-weight: bold;
 }
+
+.search-select {
+    display: inline-block;
+    width: 15%;
+    margin-left: 2%;
+    border-radius: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
 .container {
     background-color: rgba(255, 255, 255, 0.5);
     width: 65%;
@@ -27,17 +39,20 @@
     padding: 10px;
     box-sizing: border-box;
 }
+
 .title {
     text-align: center;
     font-size: 35px;
     font-weight: bold;
     letter-spacing: 2px;
 }
+
 .flex-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
 }
+
 .flex-item {
     background-color: white;
     width: 20%;
@@ -48,9 +63,11 @@
     word-wrap: break-word;
     border-radius: 5px;
 }
+
 .flex-item p {
     text-align: center;
 }
+
 .flex-item button {
     width: 70%;
     height: 40px;
@@ -61,24 +78,28 @@
     display: block;
     margin: 20px auto 0;
 }
+
 @media (max-width: 1200px) {
     .flex-item {
         width: 45%; /* 2 items per row */
     }
 }
+
 @media (max-width: 600px) {
     .flex-item {
         width: 98%; /* 1 item per row */
     }
 }
-.home-img{
+
+.home-img {
     cursor: pointer;
     width: 80%;
     height: 200px;
     margin-left: 10%;
     border-radius: 15px;
 }
-.forum-img{
+
+.forum-img {
     float: right;
     width: 100px;
     height: 100px;
