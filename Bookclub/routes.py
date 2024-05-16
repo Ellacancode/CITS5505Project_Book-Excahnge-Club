@@ -40,21 +40,29 @@ def user(username):
 # Forum page route: Displays all posts on the forum page
 @app.route("/forum")
 def forum():
-    # Retrieve posts ordered by 'date_posted' descending
-    posts = Post.query.order_by(Post.date_posted.desc()).all()
+    # Add Pagination
+    page = request.args.get('page', 1, type=int)
+    posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=6)
     return render_template('forum.html', posts=posts)
 
-# Search books route: Allows searching books by title or genre
+# Search books route: Allows searching books by title, genre, author, status, or ISBN
 @app.route("/search_books", methods=['GET', 'POST'])
 def search_books():
     results = []
     if request.method == 'POST':
         query = request.form.get('query')
         search_by = request.form.get('search_by')
+        
         if search_by == 'book_title':
             results = Book.query.filter(Book.title.ilike(f'%{query}%')).all()
         elif search_by == 'genre':
             results = Book.query.filter(Book.genre.ilike(f'%{query}%')).all()
+        elif search_by == 'author':
+            results = Book.query.filter(Book.author.ilike(f'%{query}%')).all()
+        elif search_by == 'status':
+            results = Book.query.filter(Book.status.ilike(f'%{query}%')).all()
+        elif search_by == 'isbn':
+            results = Book.query.filter(Book.isbn.ilike(f'%{query}%')).all()
         
         return render_template('book_result.html', results=results)
     return render_template('search_books.html')
@@ -96,19 +104,6 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
-
-# def upload_images(form_picture, storage_path, output_size=(125, 125)):
-#     random_hex = secrets.token_hex(8)
-#     _, f_ext = os.path.splitext(form_picture.filename)
-#     picture_fn = random_hex + f_ext
-
-#     picture_path = os.path.join(app.root_path, storage_path, picture_fn)
-
-#     i = Image.open(form_picture)
-#     i.thumbnail(output_size)  
-#     i.save(picture_path)
-
-#     return picture_fn
 
 def upload_images(form_picture, storage_path, output_size=(125, 125)):
     random_hex = secrets.token_hex(8)
