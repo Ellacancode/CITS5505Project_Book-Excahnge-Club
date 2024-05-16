@@ -102,10 +102,16 @@
     <footer class="footer">
         <div class="footer-content">
             <div id="weather-info"></div>
-            <div class="footer-text">© 2024 Book Exchange Club</div>
+            <div class="footer-text">
+                <img src="{{ url_for('static', filename='logo/logo.png') }}" alt="Logo" class="logo-icon">
+                2024 UWA Book Club
+                
+            </div>
+
             <a id="myBtn" title="Go to top" href="#top">
                 <i class="fas fa-arrow-up"></i> TO TOP
             </a>
+            
         </div>
     </footer>
 
