@@ -1,4 +1,4 @@
-.shelf-tit{
+.shelf-tit {
     height: 120px;
     width: 150%;
     margin-left: -25%;
@@ -9,13 +9,15 @@
     justify-content: center;
     align-items: center;
 }
-.shelf-tit p{
+
+.shelf-tit p {
     line-height: 120px;
     letter-spacing: 5px;
     font-size: 40px;
     font-weight: bold;
 }
-.shelf-container{
+
+.shelf-container {
     margin-left: 15%;
     width: 70%;
     height: auto;
@@ -23,63 +25,81 @@
     padding: 30px;
     /* overflow-y: auto; */
 }
-.col-cub{
+
+.col-cub {
     height: 350px;
     padding: 15px;
     margin-bottom: 100px;
-    
 }
-.shelf-book{
+
+.shelf-book {
     display: inline-block;
     cursor: pointer;
     width: 100%;
     height: 100%;
     border-radius: 25px;
     text-align: center;
-    background-color:white;
+    background-color: white;
 }
-.col-content{
+
+.col-content {
     font-size: 15px;
     font-weight: bold;
 }
-.shelf-img{
-    width: 100%; 
-    height: 90%; 
-    border-radius: 25px; 
+
+.shelf-img {
+    width: 100%;
+    height: 90%;
+    border-radius: 25px;
     z-index: 1;
 }
-.shelf-img:hover{
+
+.shelf-img:hover {
     border: 3px solid transparent;
     box-shadow: 0 0 5px 3px #f8edd8;
     filter: blur(2px);
 }
-.modal-body{
+
+
+.bigsearchbox {
+    align-items: center !important;
+    justify-content: center !important;
 
 }
-.shelf-searchbox{
-    align-items: center;
-    justify-content: center;
+.shelf-searchbox {
+    align-items: center !important;
+    justify-content: center !important;
+    margin: auto;
+    margin-top: 30px;
     width: 70%;
-    margin-left: 30%;
-    margin-top: 20px;
-}
-.shelf-selector{
-    display: inline-block;
-    width: 20%;
-    margin-left: calc(50% - 320px);
+    background-color: white;
+    height: 150px;
     border-radius: 20px;
-    padding: 5px;
+    padding-top: 55px;
+
+
 }
-.shelf-searcher{
+
+.shelf-selector {
     display: inline-block;
     width: 20%;
-    margin-left: 20px;
+    margin-left: 2%;
+    border-radius: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+.shelf-searcher {
+    display: inline-block;
+    width: 20%;
+    margin-left: 2%;
     border-radius: 20px;
 }
-.shelf-btn{
+
+.shelf-btn {
     display: inline-block;
     width: 20%;
-    margin-left: 20px;
+    margin-left: 2%;
     background-color: rgb(211, 55, 55);
     border-radius: 20px;
     color: white;
@@ -87,14 +107,15 @@
     letter-spacing: 2px;
     font-size: 18px;
 }
-.shelf-btn:hover{
+
+.shelf-btn:hover {
     background-color: rgb(107, 31, 31);
     color: white;
     text-decoration: none;
     font-weight: bold;
 }
 
-.btn-borrow{
+.btn-borrow {
     width: 60%;
     height: 50px;
     padding: 10px;
@@ -103,11 +124,13 @@
     background-color: green;
     color: white;
 }
-.btn-borrow:hover{
+
+.btn-borrow:hover {
     background-color: rgb(1, 75, 1);
     font-weight: bold;
 }
-.txt-unava{
+
+.txt-unava {
     line-height: 50px;
     margin-left: 20%;
     width: 60%;
@@ -117,14 +140,16 @@
     background-color: gray;
     color: white;
 }
-.book-name{
-    display: inline-block; 
-    width: 10%; 
+
+.book-name {
+    display: inline-block;
+    width: 10%;
     font-weight: bold;
 }
-.btn-book{
-    width: 100%; 
-    height: 100%; 
-    background-color: rgba(255, 255, 255, 0); 
+
+.btn-book {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0);
     border: hidden;
 }

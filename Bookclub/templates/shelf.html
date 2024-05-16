@@ -5,7 +5,6 @@
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='shelf.css') }}">
 {% endblock %}
 
-
 {% block content %}
 <header>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
@@ -14,17 +13,25 @@
 <div class="shelf-tit">
     <p>BOOK SHELF</p>
 </div>
-
-<form action="{{ url_for('search_books') }}" method="post" class="shelf-searchbox">
-    <p class="book-name">Book Name</p>
-    <input type="hidden" name="search_by" value="book_title" style="display: inline-block;">
+<div class="bigsearchbox">
+<form action="{{ url_for('search_books') }}" method="post" class="shelf-searchbox text-center">
+    <label for="search_by" class="book-name">Search by</label>
+    <select name="search_by" id="search_by" class="shelf-selector">
+        <option value="book_title">Book Title</option>
+        <option value="genre">Genre</option>
+        <option value="author">Author</option>
+        <option value="status">Status</option>
+        <option value="isbn">ISBN</option>
+    </select>
     <input type="text" name="query" placeholder="Search for books..." class="shelf-searcher">
     <button type="submit" class="shelf-btn">Search</button>
 </form>
+</div>
+
 {% if results %}
 <ul>
     {% for book in results %}
-    <li>{{ book.name }} by {{ book.author }} - {{ book.genre }}</li>
+    <li>{{ book.title }} by {{ book.author }} - {{ book.genre }}</li>
     {% endfor %}
 </ul>
 {% endif %}
@@ -77,5 +84,4 @@
     </div>
 </div>
 
-
-{% endblock content %}
+{% endblock %}
