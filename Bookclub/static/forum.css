@@ -5,6 +5,7 @@ html, body {
   background: linear-gradient(to right, #f9f9f9 0%, #faece9 50%, #f9dfd9 100%);
   display: block; 
 }
+
 .header-with-search {
   display: flex;  
   align-items: center;  
@@ -20,6 +21,7 @@ html, body {
 .form-control {
   margin-right: 10px;  
 }
+
 .container {
   display: flex;
   flex-wrap: wrap;
@@ -30,7 +32,6 @@ html, body {
   max-width: 1200px; 
 }
 
-
 .post-card {
   flex: 0 0 calc(33.33% - 20px);  /* Ensure this calculation allows for any padding/margins */
   max-width: calc(33.33% - 20px); /* This line can help enforce sizing if flexbox settings aren't enough */
@@ -39,7 +40,6 @@ html, body {
   align-items: center; 
   text-align: center; 
   justify-content: space-between; 
-
   padding: 20px;
   background: #fff;
   border: 1px solid #ddd;
@@ -70,7 +70,6 @@ html, body {
   max-width: 100%; /* ensures image does not exceed its container's width */
 }
 
-
 .post-title, .content {
   width: 100%; 
 }
@@ -83,18 +82,16 @@ html, body {
 }
 
 .user-info {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; 
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
 }
-
 
 .post-header {
   display: flex;
   align-items: center; 
   width: 100%;
 }
-
 
 .username {
   font-weight: bold;
@@ -115,7 +112,6 @@ html, body {
   margin-top: 1em;
 }
 
-
 .btn-outline-secondary {
   background-color: rgb(252, 98, 98);  /* Red background */
   color: #ffffff;             /* White text */
@@ -129,53 +125,96 @@ html, body {
   color: #ffffff;             /* White text remains the same */
 }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.page-link {
+  margin: 0 5px;
+  padding: 10px 15px;
+  background-color: #ffffffa2; 
+  color: #ff5e5e;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.page-link:hover {
+  background-color: #ffffff;
+}
+
+.disabled {
+  margin: 0 5px;
+  padding: 10px 15px;
+  background-color: #ffffffa2;
+  color: #ff5e5e;
+  border-radius: 5px;
+}
+
+.current {
+  margin: 0 5px;
+  padding: 10px 15px;
+  background-color: #fd4b4b;
+  color: white;
+  border-radius: 5px;
+}
+
+.ellipsis {
+  margin: 0 5px;
+  padding: 10px 15px;
+  background-color: transparent;
+  color: #666;
+}
+
 @media (max-width: 768px) {
   .container {
-      padding: 10px;
+    padding: 10px;
   }
 
   .post-card {
-      flex: 1 1 100%; /* Take full width */
-      max-width: 100%; /* Take full width */
-      padding: 10px; /* Smaller padding for a compact look */
-      margin-bottom: 10px; /* Reduce margin between cards */
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Optional: adjust shadow for depth */
+    flex: 1 1 100%; /* Take full width */
+    max-width: 100%; /* Take full width */
+    padding: 10px; /* Smaller padding for a compact look */
+    margin-bottom: 10px; /* Reduce margin between cards */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Optional: adjust shadow for depth */
   }
 
   .form-control, .btn-outline-secondary {
-      font-size: 16px; /* Adjust font size */
-      padding: 8px 16px; /* Adjust padding */
+    font-size: 16px; /* Adjust font size */
+    padding: 8px 16px; /* Adjust padding */
   }
 
   .post-image {
-      max-height: 250px; /* Adjust image max height */
+    max-height: 250px; /* Adjust image max height */
   }
 
   .profile-pic {
-      width: 40px;
-      height: 40px;
+    width: 40px;
+    height: 40px;
   }
 
   .title, .content {
-      font-size: small; /* Adjust font size */
+    font-size: small; /* Adjust font size */
   }
 
   .search-form {
-      flex-direction: column;
-      align-items: stretch;
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .btn-outline-secondary {
-      width: 100%; /* Full width button */
+    width: 100%; /* Full width button */
   }
 
   .user-info, .post-header {
-      flex-direction: column;
-      align-items: center;
+    flex-direction: column;
+    align-items: center;
   }
 
   .username {
-      margin-top: 5px;
+    margin-top: 5px;
   }
 }
-
