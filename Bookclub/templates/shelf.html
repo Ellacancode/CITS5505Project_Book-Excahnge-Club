@@ -14,7 +14,7 @@
     <p>BOOK SHELF</p>
 </div>
 <div class="bigsearchbox">
-<form action="{{ url_for('search_books') }}" method="post" class="shelf-searchbox text-center">
+<form action="{{ url_for('main.search_books') }}" method="post" class="shelf-searchbox text-center">
     <label for="search_by" class="book-name">Search by</label>
     <select name="search_by" id="search_by" class="shelf-selector">
         <option value="book_title">Book Title</option>
@@ -48,7 +48,7 @@
                     <img src="../static/shelf_pics/default.png" class="shelf-img" alt="shelfimg">
                 </button>
                 <p class="col-content">{{book.title}}</p>
-                <form method="POST" action="{{ url_for('shelf') }}">
+                <form method="POST" action="{{ url_for('main.shelf') }}">
                     <input type="hidden" name="book_id" value="{{ book.id }}">
                     {% if book.status == "available" %}
                     <button type="submit" class="btn-borrow" id="btn-{{ book.id }}">Borrow</button>

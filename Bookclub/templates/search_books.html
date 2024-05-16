@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-<form action="{{ url_for('search_books') }}" method="post"
+<form action="{{ url_for('main.search_books') }}" method="post"
     style="background-color: white; margin-top: 30px; height: 150px; width: 90%; margin-left: 5%; border-radius: 20px;">
     <label for="search_by" style="display: inline-block; width: 10%; font-weight: bold; letter-spacing: 1px; margin-left: 10%; margin-top: 10px;">Search by</label>
     <select name="search_by" id="search_by" class="search-select">

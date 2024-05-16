@@ -39,7 +39,7 @@ def create_app(config_name=None):
     db.init_app(app)
     bcrypt.init_app(app)
     login_manager.init_app(app)
-    login_manager.login_view = 'login'  # Specifies the login view function
+    login_manager.login_view = 'main.login'  # Specifies the login view function
     login_manager.login_message_category = 'info'  # Set the category for the flash message for non-logged-in user
     migrate.init_app(app, db)
 

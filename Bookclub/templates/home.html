@@ -23,7 +23,7 @@
                     <h1>Building community at UWA through books</h1>
                     <p>Join in discussion, find a book and interact with other book lovers</p>
                     <!-- Add javascript to link to the forum page -->
-                    <button class="start-sharing-btn" onclick="window.location.href='{{ url_for('register') }}';">Start Sharing</button>
+                    <button class="start-sharing-btn" onclick="window.location.href='{{ url_for('main.register') }}';">Start Sharing</button>
                 </div>
             </div>
         </div>
@@ -34,7 +34,7 @@
         <div class="container-for-sections">
             <div class="join">
                 <img src="{{ url_for('static', filename='home_pics/' +'discussion.jpg') }}" alt="discussion">
-                <button onclick="window.location.href='{{ url_for('new_post') }}';">Join in Discussion</button>
+                <button onclick="window.location.href='{{ url_for('main.new_post') }}';">Join in Discussion</button>
 
             
                 <p>Making connection and discuss books with other </p>
@@ -42,13 +42,13 @@
 
             <div class="find">
                 <img src="{{ url_for('static', filename='home_pics/' +'findbook.jpg') }}" alt="findbook">
-                <button onclick="window.location.href='{{ url_for('shelf') }}';">Find a Book</button>
+                <button onclick="window.location.href='{{ url_for('main.shelf') }}';">Find a Book</button>
                 <p>Get inspriation and find new books to read from the book shelf</p>
             </div>
 
             <div class="exchange">
                 <img src="{{ url_for('static', filename='home_pics/' +'exchange.jpg') }}" alt="exchange">
-                <button onclick="window.location.href='{{ url_for('profile') }}';">Customise Profile</button>
+                <button onclick="window.location.href='{{ url_for('main.profile') }}';">Customise Profile</button>
                 <p>Manage and update your personal profile.</p>
             </div>
         </div>
@@ -63,7 +63,7 @@
                     an emotionally satisfying and optimistic ending.</p>
                 <img src="../static/home_pics/romantic1.jpg" class="home-img" alt="Romantic" id="img1">
                 <p class="container-books-num"><b>Discussion online</b></p>
-                <button onclick="window.location.href='{{ url_for('forum') }}';">Join</button>
+                <button onclick="window.location.href='{{ url_for('main.forum') }}';">Join</button>
 
             </div>
             <div class="flex-item" id="flex-card-2">
@@ -72,7 +72,7 @@
                     elements, monsters, or psychological horrors.</p>
                 <img src="../static/home_pics/horror1.jpg" class="home-img" alt="Horror" id="img2">
                 <p class="container-books-num"><b>Discussion online</b></p>
-                <button onclick="window.location.href='{{ url_for('forum') }}';">Join</button>
+                <button onclick="window.location.href='{{ url_for('main.forum') }}';">Join</button>
 
             </div>
             <div class="flex-item" id="flex-card-3">
@@ -81,7 +81,7 @@
                     travel, parallel universes, and extraterrestrial life.</p>
                 <img src="../static/home_pics/science1.jpg" class="home-img" alt="Science" id="img3">
                 <p class="container-books-num"><b>Discussion online</b></p>
-                <button onclick="window.location.href='{{ url_for('forum') }}';">Join</button>
+                <button onclick="window.location.href='{{ url_for('main.forum') }}';">Join</button>
 
             </div>
             <div class="flex-item" id="flex-card-4">
@@ -90,7 +90,7 @@
                     solving a crime, uncovering secrets, or escaping danger.</p>
                 <img src="../static/home_pics/mystery1.jpg" class="home-img" alt="Mystery" id="img4">
                 <p class="container-books-num"><b>Discussion online</b></p>
-                <button onclick="window.location.href='{{ url_for('forum') }}';">Join</button>
+                <button onclick="window.location.href='{{ url_for('main.forum') }}';">Join</button>
 
             </div>
         </div>
