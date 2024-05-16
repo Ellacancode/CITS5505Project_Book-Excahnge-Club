@@ -16,7 +16,7 @@
             <p class="article-content">{{ post.content }}</p>
             {% endif %}
             <div>
-                <form action="{{ url_for('like_post', post_id=post.id) }}" method="post"
+                <form action="{{ url_for('main.like_post', post_id=post.id) }}" method="post"
                     style="display: flex; align-items: center;">
                     {% if post.is_liked_by_user(current_user) %}
                     <button type="submit" class="btn btn-danger btn-sm" style="margin-right: 10px;">
@@ -39,13 +39,13 @@
                             alt="Author Image">
                     </div>
                     <div class="post-info">
-                        <!-- this  is hyper Link  跳转 -->
-                        <a href="{{ url_for('user', username=post.author.username) }}">{{ post.author.username }}</a>
+                        <!-- this  is hyper Link -->
+                        <a href="{{ url_for('main.user', username=post.author.username) }}">{{ post.author.username }}</a>
                         <small class="date-posted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
                         <!-- Controls -->
                         {% if post.author == current_user or current_user.email == 'admin@admin.com' %}
                         <div class="controls">
-                            <a class="btn btn-secondary" href="{{ url_for('update_post', post_id=post.id) }}">Update</a>
+                            <a class="btn btn-secondary" href="{{ url_for('main.update_post', post_id=post.id) }}">Update</a>
                             <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
                                 data-target="#deleteModal">Delete</button>
                         </div>
@@ -67,7 +67,7 @@
                         src="{{ url_for('static', filename='profile_pics/' + comment.author.image_file) }}"
                         alt="authorimage">
                     <div class="metadata">
-                        <a class="comment-author" href="{{ url_for('user', username=comment.author.username) }}">{{
+                        <a class="comment-author" href="{{ url_for('main.user', username=comment.author.username) }}">{{
                             comment.author.username }}</a>
                         <small class="text-muted">{{ comment.date_posted.strftime('%Y-%m-%d') }}</small>
                     </div>
@@ -123,7 +123,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">
+                    <form action="{{ url_for('main.delete_post', post_id=post.id) }}" method="POST">
                         <input type="submit" class="btn-post" value="Delete">
                     </form>
                 </div>

@@ -5,7 +5,7 @@
 </header>
 <div class="create-page">
     <div class="content-section">
-        <form method="POST" action="{{ url_for('new_post') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ url_for('main.new_post') }}" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
             <fieldset class="form-group-create">
                 <legend class="border-bottom mb-4">{{ legend }}</legend>
