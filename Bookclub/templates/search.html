@@ -16,13 +16,13 @@
         <img class="post-image" src="{{ url_for('static', filename='post_images/' + post.image_file) }}"
             alt="Post Image">
         {% endif %}
-        <h2 class="title"><a href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h2>
+        <h2 class="title"><a href="{{ url_for('main.post', post_id=post.id) }}">{{ post.title }}</a></h2>
         <p class="content">{{ post.content }}</p>
         <div class="post-header">
             <img class="profile-pic" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}"
                 alt="Profile Picture">
             <div class="user-info">
-                <a class="username" href="{{ url_for('user', username=post.author.username) }}">{{ post.author.username
+                <a class="username" href="{{ url_for('main.user', username=post.author.username) }}">{{ post.author.username
                     }}</a>
                 <div class="date-posted">{{ post.date_posted.strftime('%Y-%m-%d') }}</div>
             </div>

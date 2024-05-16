@@ -23,19 +23,19 @@
 
             <div class="profile-right2">
                 {% if user == current_user %}
-                <a class="btn-edit-profile" href="{{ url_for('profile') }}">
+                <a class="btn-edit-profile" href="{{ url_for('main.profile') }}">
                     <i class="fa-solid fa-user"></i> Edit profile
                 </a>
 
                 {% elif not current_user.is_following(user) %}
-                <form action="{{ url_for('follow', username=user.username) }}" method="post">
+                <form action="{{ url_for('main.follow', username=user.username) }}" method="post">
                     {{ follow_form.hidden_tag() }}
                     <button type="submit" class="btn-follow">
                         <i class="fa-solid fa-user-plus"></i> Follow
                     </button>
                 </form>
                 {% else %}
-                <form action="{{ url_for('unfollow', username=user.username) }}" method="post">
+                <form action="{{ url_for('main.unfollow', username=user.username) }}" method="post">
                     {{ unfollow_form.hidden_tag() }}
                     <button type="submit" class="btn-unfollow">
                         <i class="fa-solid fa-user-minus"></i> Unfollow
@@ -52,8 +52,8 @@
         {% if posts %}
         {% for post in posts %}
         <div class="post-item">
-            <h4><a href="{{ url_for('post', post_id=post.id)}}">{{ post.title }}</a></h4>
-            <p><a href="{{ url_for('post', post_id=post.id)}}">{{ post.content }}</a></p>
+            <h4><a href="{{ url_for('main.post', post_id=post.id)}}">{{ post.title }}</a></h4>
+            <p><a href="{{ url_for('main.post', post_id=post.id)}}">{{ post.content }}</a></p>
             <small>Posted on {{ post.date_posted.strftime('%Y-%m-%d %H:%M') }}</small>
         </div>
         {% endfor %}

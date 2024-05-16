@@ -38,7 +38,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('forum') }}">Forum</a>
+                        <a class="nav-link" href="{{ url_for('main.forum') }}">Forum</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
@@ -47,25 +47,25 @@
                             <i class="fas fa-caret-down"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="{{ url_for('search_books') }}">Book Search</a>
-                            <a class="dropdown-item" href="{{ url_for('forum') }}">Forum Search</a>
+                            <a class="dropdown-item" href="{{ url_for('main.shelf') }}">Book Search</a>
+                            <a class="dropdown-item" href="{{ url_for('main.forum') }}">Forum Search</a>
 
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('shelf') }}">Book Shelf</a>
+                        <a class="nav-link" href="{{ url_for('main.shelf') }}">Book Shelf</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     {% if current_user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="btn" href="{{ url_for('new_post') }}">New Post</a>
+                        <a class="btn" href="{{ url_for('main.new_post') }}">New Post</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn" href="{{ url_for('profile') }}">Profile</a>
+                        <a class="btn" href="{{ url_for('main.profile') }}">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn_red" href="{{ url_for('logout') }}">Logout</a>
+                        <a class="btn_red" href="{{ url_for('main.logout') }}">Logout</a>
                     </li>
                     {% if current_user.email == 'admin@admin.com'%}
                     <li class="nav-item">
@@ -75,10 +75,10 @@
 
                     {% else %}
                     <li class="nav-item">
-                        <a class="btn" href="{{ url_for('login') }}">Log In</a>
+                        <a class="btn" href="{{ url_for('main.login') }}">Log In</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn_red" href="{{ url_for('register') }}">Sign Up</a>
+                        <a class="btn_red" href="{{ url_for('main.register') }}">Sign Up</a>
                     </li>
                     {% endif %}
                 </ul>
@@ -102,10 +102,16 @@
     <footer class="footer">
         <div class="footer-content">
             <div id="weather-info"></div>
-            <div class="footer-text">© 2024 Book Exchange Club</div>
+            <div class="footer-text">
+                <img src="{{ url_for('static', filename='logo/logo.png') }}" alt="Logo" class="logo-icon">
+                2024 UWA Book Club
+                
+            </div>
+
             <a id="myBtn" title="Go to top" href="#top">
                 <i class="fas fa-arrow-up"></i> TO TOP
             </a>
+            
         </div>
     </footer>
 
