@@ -48,6 +48,10 @@ class User(db.Model, UserMixin):
     comments = db.relationship('Comment', backref='user', lazy=True)
     likes = db.relationship('Like', backref='user', passive_deletes=True)
 
+    def valid_email(email):
+        user = User.query.filter_by(email=email).first()
+        return user is not None
+
     following_relationship = db.relationship(
         'User',
         secondary=followers,

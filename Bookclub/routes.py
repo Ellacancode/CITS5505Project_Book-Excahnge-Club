@@ -2,7 +2,7 @@ import os
 import secrets
 from PIL import Image
 from flask import Blueprint,render_template, url_for, flash, redirect, request, abort
-from Bookclub import db, bcrypt
+from Bookclub import db, bcrypt, mail
 from Bookclub.forms import (
     RegistrationForm, LoginForm, UpdateAccountForm, PostForm, SearchForm,
     CommentForm, EmptyForm, FollowForm, UnfollowForm
@@ -12,6 +12,13 @@ from flask_login import login_user, current_user, logout_user, login_required
 from werkzeug.utils import secure_filename
 from datetime import datetime
 from zoneinfo import ZoneInfo
+from random import choice
+from .forms import ResetPasswordForm
+import string
+from flask_mail import Message
+
+
+
 
 main = Blueprint('main', __name__)
 
@@ -377,19 +384,27 @@ def reset_request():
     return render_template('reset_request.html', title='Reset Password', form=form)
 
 
-@main.route("/reset_password/<token>", methods=['GET', 'POST'])
-def reset_token(token):
-    if current_user.is_authenticated:
-        return redirect(url_for('home'))
-    user = User.verify_reset_token(token)
-    if user is None:
-        flash('That is an invalid or expired token', 'warning')
-        return redirect(url_for('reset_request'))
+@main.route('/reset-password', methods=['GET', 'POST'])
+def reset_password():
     form = ResetPasswordForm()
     if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user.password = hashed_password
-        db.session.commit()
-        flash('Your password has been updated! You are now able to log in', 'success')
-        return redirect(url_for('login'))
-    return render_template('reset_token.html', title='Reset Password', form=form)
+        email = form.email.data
+
+        if User.valid_email(email):
+            # Generate a more secure random password with letters and numbers
+            new_password = ''.join(choice(string.ascii_letters + string.digits) for _ in range(8))
+            user = User.query.filter_by(email=email).first()
+            hashed_password = bcrypt.generate_password_hash(new_password).decode('utf-8')
+            user.password = hashed_password
+            db.session.commit()
+            # Email message
+            msg = Message("Book Club: Please Reset Password", recipients=[email])
+            msg.body = f"This is your new password: {new_password}"
+            print(new_password)
+            mail.send(msg)
+            flash("New reset password has been sent to your email successfully", 'success')
+            return redirect(url_for('main.login'))
+        else:
+            flash("Email does not exist", 'danger') 
+        
+    return render_template('reset_password.html', form=form)

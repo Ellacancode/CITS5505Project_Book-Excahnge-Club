@@ -96,3 +96,7 @@ class FollowForm(FlaskForm):
 # Form for unfollowing users
 class UnfollowForm(FlaskForm):
     submit = SubmitField('Unfollow', validators=[DataRequired()])
+
+class ResetPasswordForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email()])
+    submit = SubmitField("Reset Password")
