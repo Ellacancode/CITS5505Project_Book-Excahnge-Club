@@ -1,5 +1,18 @@
 # CITS5505 Project: Book Club
 
+## how to test on a Mac Computer
+Please follow the exact command 
+1.source Book_env/Scripts/activate
+2.export FLASK_APP=Bookclub 
+3.export FLASK_ENV=testing  (This is to enter the test environment i configured earlier)
+4.python -m unittest discover -s test -p "test_*.py" -v (run all tests)
+5.coverage run -m unittest discover -s test -p "test_*.py" -v (run all tests to check test coverage,this is optional)
+6.coverage report (generate coverage report in terminal)
+7.coverage HTML (get detailed coverage report)
+
+
+
+
 ## Project Overview
 This document provides setup and migration instructions for the Book Club project, a Flask-based web application. 
 ## Setup Instructions
