@@ -1,14 +1,36 @@
 # CITS5505 Project: Book Club
 
-## how to test on a Mac Computer
+## how to run unit tests on a Mac Computer
+
 Please follow the exact command 
+
 1.source Book_env/Scripts/activate
+
 2.export FLASK_APP=Bookclub 
+
 3.export FLASK_ENV=testing  (This is to enter the test environment i configured earlier)
+
 4.python -m unittest discover -s test -p "test_*.py" -v (run all tests)
+
 5.coverage run -m unittest discover -s test -p "test_*.py" -v (run all tests to check test coverage,this is optional)
+
 6.coverage report (generate coverage report in terminal)
+
 7.coverage HTML (get detailed coverage report)
+
+## how to run selenium test on a Mac Computer
+
+1.install selenium:
+
+pip install selenium
+
+2. Download webDriver match your Chome Browser version, and extract and place the Chromedriver executable in the test directory.
+
+3. To run the test, please make sure the server is running
+
+4. In a new terminal:
+   python selenium_test.py
+
 
 
 
