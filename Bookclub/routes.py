@@ -400,7 +400,7 @@ def reset_password():
             db.session.commit()
             # Email message
             msg = Message("Book Club: Please Reset Password", recipients=[email])
-            msg.body = f"This is your new password: {new_password}"
+            msg.body = f"From UWA Book Club, this is your new password: {new_password}"
             print(new_password)
             mail.send(msg)
             flash("New reset password has been sent to your email successfully", 'success')

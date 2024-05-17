@@ -21,7 +21,7 @@
             method: 'GET',
             success: function(data) {
                 // Parse and display the weather information
-                if(data.current_condition[0].temp_C <= 10){
+                if(data.current_condition[0].temp_C <= 15){
                     var weatherInfo = `
                     <p>Temperature: <strong>${data.current_condition[0].temp_C}°C</strong> too cold, stay home and read books.</p >
                     `;
