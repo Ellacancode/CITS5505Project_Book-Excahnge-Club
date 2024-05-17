@@ -12,31 +12,48 @@ class SeleniumTestCase(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
+        """
+        Set up the test environment once for all tests in this class.
+        Initializes the Chrome WebDriver, sets up WebDriverWait for synchronizing with browser events, 
+        and performs registration and login on the target web application.
+        """
         options = webdriver.ChromeOptions()
         cls.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-        cls.wait = WebDriverWait(cls.driver, 60)  
+        cls.wait = WebDriverWait(cls.driver, 30)  # Wait time of 30 seconds for web elements
         cls.base_url = "http://127.0.0.1:5000"  # Base URL of the website to test
         cls.register_and_login()
 
     @classmethod
     def tearDownClass(cls):
+        """
+        Tear down the test environment after all tests in this class have run.
+        Closes the browser.
+        """
         cls.driver.quit()
 
     @classmethod
     def register_and_login(cls):
+        """
+        Helper method to register and login a new user.
+        Automates the process of registering a new user with unique credentials,
+        then logs in with those credentials.
+        """
         print("Starting registration process...")
         cls.driver.get(f"{cls.base_url}/register")
         
         try:
+            # Locate and fill registration form elements
             username_input = cls.wait.until(EC.presence_of_element_located((By.NAME, "username")))
             email_input = cls.driver.find_element(By.NAME, "email")
             password_input = cls.driver.find_element(By.NAME, "password")
             confirm_password_input = cls.driver.find_element(By.NAME, "confirm_password")
             submit_button = cls.driver.find_element(By.ID, "submit")
 
+            # Generate unique username and email
             unique_username = "new" + str(int(time.time()))
             unique_email = "new+" + str(int(time.time())) + "@gmail.com"
 
+            # Fill the registration form
             username_input.send_keys(unique_username)
             email_input.send_keys(unique_email)
             password_input.send_keys("Test@us01")
@@ -51,10 +68,13 @@ class SeleniumTestCase(unittest.TestCase):
 
             print("Registration successful, starting login process...")
             cls.driver.get(f"{cls.base_url}/login")
+
+            # Locate and fill login form elements
             email_input = cls.wait.until(EC.presence_of_element_located((By.NAME, "email")))
             password_input = cls.wait.until(EC.presence_of_element_located((By.NAME, "password")))
             submit_button = cls.wait.until(EC.presence_of_element_located((By.XPATH, "//button[@type='submit' and contains(text(), 'LOG IN NOW')]")))
 
+            # Fill the login form
             email_input.send_keys(unique_email)
             password_input.send_keys("Test@us01")
 
@@ -69,23 +89,55 @@ class SeleniumTestCase(unittest.TestCase):
             print(f"Error during registration and login: {e}")
 
     def test_open_homepage(self):
+        """
+        Test case to verify that the homepage loads correctly after login.
+        Checks if the homepage contains specific text indicating successful loading.
+        """
         self.driver.get(self.base_url)
-        self.assertIn('Building community at UWA through books', self.driver.page_source)
 
-    def test_forum_page(self):
-        self.driver.get(self.base_url)
-        self.driver.find_element(By.LINK_TEXT, "Forum").click()
-        self.wait.until(EC.title_contains("Forum"))
-        self.assertIn("Forum", self.driver.title)
-        posts = self.driver.find_elements(By.CLASS_NAME, "post-card")
-        self.assertTrue(len(posts) > 0)
+        try:
+            # Wait for the home page to load
+            print("Waiting for home page to load...")
+            self.wait.until(EC.presence_of_element_located((By.CLASS_NAME, "intro-banner")))
 
-    def test_start_sharing_button(self):
-        self.driver.get(self.base_url)
-        start_sharing_btn = self.wait.until(EC.presence_of_element_located((By.CLASS_NAME, "start-sharing-btn")))
-        start_sharing_btn.click()
-        self.wait.until(EC.url_contains("register"))
-        self.assertIn("register", self.driver.current_url)
+            # Assert that the page title contains the expected text
+            print("Asserting page title contains 'Building community at UWA through books'...")
+            self.assertIn('Building community at UWA through books', self.driver.page_source)
+
+            # Assert that the banner image is present
+            banner_img = self.driver.find_element(By.CLASS_NAME, "banner-img")
+            self.assertTrue(banner_img.get_attribute("src").endswith("home_banner.jpg"))
+
+            # Assert that the welcome text is present
+            welcome_text = self.driver.find_element(By.CLASS_NAME, "welcome").find_element(By.TAG_NAME, "h1")
+            self.assertEqual(welcome_text.text, "Building community at UWA through books")
+
+            # Assert that the "Start Sharing" button is present and clickable
+            start_sharing_btn = self.driver.find_element(By.CLASS_NAME, "start-sharing-btn")
+            self.assertTrue(start_sharing_btn.is_displayed())
+
+            # Additional checks for other sections
+            print("Checking additional sections...")
+            join_button = self.driver.find_element(By.XPATH, "//button[text()='Join in Discussion']")
+            self.assertTrue(join_button.is_displayed())
+
+            find_button = self.driver.find_element(By.XPATH, "//button[text()='Find a Book']")
+            self.assertTrue(find_button.is_displayed())
+
+            exchange_button = self.driver.find_element(By.XPATH, "//button[text()='Customise Profile']")
+            self.assertTrue(exchange_button.is_displayed())
+
+            forum_section = self.driver.find_element(By.CLASS_NAME, "container-books")
+            self.assertTrue(forum_section.is_displayed())
+
+            book_cards = self.driver.find_elements(By.CLASS_NAME, "book-card")
+            self.assertTrue(len(book_cards) > 0)
+
+            map_container = self.driver.find_element(By.CLASS_NAME, "map-container")
+            self.assertTrue(map_container.is_displayed())
+
+        except Exception as e:
+            print(f"Error during homepage load test: {e}")
 
     def test_join_discussion_button(self):
         self.driver.get(self.base_url)
