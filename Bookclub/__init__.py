@@ -6,6 +6,7 @@ from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_admin import Admin, AdminIndexView
 from flask_admin.contrib.sqla import ModelView
+from flask_mail import Mail
 
 # Add test class configuration
 class TestConfig:
@@ -21,6 +22,9 @@ bcrypt = Bcrypt()
 login_manager = LoginManager()
 migrate = Migrate()
 
+#reset password through email
+mail = Mail()
+
 # Set up configuration
 def create_app(config_name=None):
     app = Flask(__name__)
@@ -31,6 +35,12 @@ def create_app(config_name=None):
         app.config['SECRET_KEY'] = os.urandom(24)
         app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL') or 'sqlite:///project.db'
         app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+        app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+        app.config['MAIL_PORT'] = 587
+        app.config['MAIL_USE_TLS'] = True
+        app.config['MAIL_USERNAME'] = 'lucychenhello@gmail.com'
+        app.config['MAIL_PASSWORD'] = 'ptlk akla vkgq qdah' #app password
+        app.config['MAIL_DEFAULT_SENDER'] = 'lucychenhello@gmail.com'
 
     # Debug
     app.debug = True
@@ -42,6 +52,7 @@ def create_app(config_name=None):
     login_manager.login_view = 'main.login'  # Specifies the login view function
     login_manager.login_message_category = 'info'  # Set the category for the flash message for non-logged-in user
     migrate.init_app(app, db)
+    mail.init_app(app)
 
     # Setup Flask-Admin
     admin = Admin(app, template_mode='bootstrap3')
@@ -63,3 +74,4 @@ def create_app(config_name=None):
     from Bookclub import routes
 
     return app
+
