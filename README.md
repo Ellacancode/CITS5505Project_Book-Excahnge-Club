@@ -29,7 +29,7 @@ pip install selenium
 3. To run the test, please make sure the server is running
 
 4. In a new terminal:
-   python tests_selenium.py
+   python test/tests_selenium.py
 
 
 
