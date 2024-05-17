@@ -27,6 +27,7 @@ main = Blueprint('main', __name__)
 def home():
     return render_template('home.html', title='Home')
 
+# User profile page route: Displays user profile with their posts
 @main.route('/user/<username>')
 @login_required
 def user(username):
@@ -76,7 +77,7 @@ def search_books():
         return render_template('book_result.html', results=results)
     return render_template('search_books.html')
      
-#User registration route handling GET and POST requests, implements registration functionality
+# User registration route: Handles GET and POST requests for user registration
 @main.route("/register", methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
@@ -113,7 +114,7 @@ def logout():
     logout_user()
     return redirect(url_for('main.home'))
 
-
+# Function to upload and save images to a specified path with resizing
 def upload_images(form_picture, storage_path, output_size=(125, 125)):
     random_hex = secrets.token_hex(8)
     _, f_ext = os.path.splitext(form_picture.filename)
@@ -182,8 +183,7 @@ def new_post():
     return render_template('create_post.html', title='New Post',
                            form=form, legend='New Post')
 
-#comments     
-
+# Route to view a post and its comments
 @main.route("/post/<int:post_id>", methods=['GET', 'POST'])
 def post(post_id):
     post = Post.query.get_or_404(post_id)
@@ -226,6 +226,7 @@ def post(post_id):
 
     return render_template('post.html', postTitle=post.title, post=post, form=form, legend='New comment', comments=allComments)
 
+# Route to update an existing post: Requires login and author ownership
 @main.route("/post/<int:post_id>/update", methods=['GET', 'POST'])
 @login_required
 def update_post(post_id):
@@ -261,7 +262,7 @@ def delete_post(post_id):
     return redirect(url_for('main.forum'))
 
 
-#follow  route
+# Route to follow a user: Requires login to access
 @main.route('/follow/<username>', methods=['POST'])
 @login_required
 def follow(username):
@@ -278,7 +279,7 @@ def follow(username):
     else:
         return redirect(url_for('main.forum'))
     
-
+# Route to unfollow a user: Requires login to access
 @main.route('/unfollow/<username>', methods=['POST'])
 @login_required
 def unfollow(username):
@@ -295,7 +296,7 @@ def unfollow(username):
     else:
         return redirect(url_for('main.forum'))
 
-# Like route
+# Route to like or unlike a post: Requires login to access
 @main.route("/post/<int:post_id>/like", methods=['POST'])
 @login_required
 def like_post(post_id):
@@ -312,14 +313,14 @@ def like_post(post_id):
         flash('You liked the post!', 'success')
     return redirect(url_for('main.post', post_id=post_id))
 
-#pass stuff to NavBar 
+# Pass forms to the navigation bar
 @main.context_processor
 def layout():
     form = SearchForm()
     return dict(form=form)
 
 
-# Create search function 
+# Route to search for posts: Allows searching posts by multiple fields
 @main.route('/search', methods=["GET", "POST"])
 def search():
     form = SearchForm()
@@ -343,7 +344,7 @@ def search():
                            searched='',
                            posts=[])
 
-# bookshelf
+#  Bookshelf route: Allows viewing and changing the status of books
 @main.route("/shelf", methods=['GET', 'POST'])
 @login_required
 def shelf(): 

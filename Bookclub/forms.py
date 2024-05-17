@@ -6,7 +6,9 @@ from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextA
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError,Regexp
 from Bookclub.models import User
 
+# Form for registeration
 class RegistrationForm(FlaskForm):
+       # length between 2 and 15 characters
     username = StringField('Username', validators=[DataRequired(), Length(min=2, max=15)])  # Username length between 2 and 15
     email = StringField('Email', validators=[
         DataRequired(),
@@ -20,17 +22,19 @@ class RegistrationForm(FlaskForm):
             message="Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character"
         )
     ])
+    # Confirm Password field with validation
     confirm_password = PasswordField('Confirm Password', validators=[
         DataRequired(),
         EqualTo('password', message='Passwords must match')
     ])
     submit = SubmitField('Sign Up')
 
+    # check if the username is already taken
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()
         if user:
             raise ValidationError('Sorry, the username is unavailable, please choose another one.')
-
+    #check if the email is already registered
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user:
@@ -97,6 +101,26 @@ class FollowForm(FlaskForm):
 class UnfollowForm(FlaskForm):
     submit = SubmitField('Unfollow', validators=[DataRequired()])
 
+<<<<<<< HEAD
 class ResetPasswordForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     submit = SubmitField("Reset Password")
+=======
+
+class RequestResetForm(FlaskForm):
+    email = StringField('Email',
+                        validators=[DataRequired(), Email()])
+    submit = SubmitField('Request Password Reset')
+
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if user is None:
+            raise ValidationError('There is no account with that email. You must register first.')
+
+
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField('Password', validators=[DataRequired()])
+    confirm_password = PasswordField('Confirm Password',
+                                     validators=[DataRequired(), EqualTo('password')])
+    submit = SubmitField('Reset Password')
+>>>>>>> 430c090baf663a5c62aa49dc88a4921fb0bdf5ba
