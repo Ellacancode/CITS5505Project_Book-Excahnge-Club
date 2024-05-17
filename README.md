@@ -1,39 +1,5 @@
 # CITS5505 Project: Book Club
 
-## how to run unit tests on a Mac Computer
-
-Please follow the exact command 
-
-1.source Book_env/Scripts/activate
-
-2.export FLASK_APP=Bookclub 
-
-3.export FLASK_ENV=testing  (This is to enter the test environment i configured earlier)
-
-4.python -m unittest discover -s test -p "test_*.py" -v (run all tests)
-
-5.coverage run -m unittest discover -s test -p "test_*.py" -v (run all tests to check test coverage,this is optional)
-
-6.coverage report (generate coverage report in terminal)
-
-7.coverage HTML (get detailed coverage report)
-
-## how to run selenium test on a Mac Computer
-
-1.install selenium:
-
-pip install selenium
-
-2. Download webDriver match your Chome Browser version, and extract and place the Chromedriver executable in the test directory.
-
-3. To run the test, please make sure the server is running
-
-4. In a new terminal:
-   python test/tests_selenium.py
-
-
-
-
 
 ## Project Overview
 This document provides setup and migration instructions for the Book Club project, a Flask-based web application. 
@@ -101,6 +67,50 @@ Generate a new migration file if there are changes to the database models and up
 flask --app Bookclub db migrate -m "message of migration"
 flask db upgrade
 ```
+
+## How to run unit tests 
+Enter the test environment 
+### For Mac:
+```bash
+export FLASK_ENV=testing  
+```
+### For Window:
+```bash
+$env:FLASK_APP = testing"
+```
+
+### Run the tests:
+```bash
+python -m unittest discover -s test -p "test_*.py" -v 
+```
+Run all tests to check test coverage,this is optional
+```bash
+coverage run -m unittest discover -s test -p "test_*.py" -v 
+```
+Generate coverage report in terminal
+```bash
+coverage report 
+```
+Get detailed coverage report
+```bash
+coverage HTML 
+```
+
+## How to run selenium test 
+
+   1.install selenium:
+
+   ```bash
+   pip install selenium
+   ```  
+2. Download webDriver match your Chome Browser version, and extract and place the Chromedriver executable in the test directory.
+
+3. To run the test, please make sure the server is running
+4. In a new terminal:
+         ```bash
+         python test/tests_selenium.py
+         ```
+
 
 
 ## Project Members
