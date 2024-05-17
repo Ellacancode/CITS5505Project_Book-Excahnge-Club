@@ -67,7 +67,6 @@ Generate a new migration file if there are changes to the database models and up
 flask --app Bookclub db migrate -m "message of migration"
 flask db upgrade
 ```
-
 ## How to run unit tests 
 Enter the test environment 
 ### For Mac:
@@ -98,18 +97,16 @@ coverage HTML
 
 ## How to run selenium test 
 
-   1.install selenium:
-
+1.install selenium:
    ```bash
-   pip install selenium
+      pip install selenium
    ```  
-2. Download webDriver match your Chome Browser version, and extract and place the Chromedriver executable in the test directory.
-
+2. Download webDriver match the Chome Browser version, and extract and place the Chromedriver executable in the test directory.
 3. To run the test, please make sure the server is running
 4. In a new terminal:
-         ```bash
-         python test/tests_selenium.py
-         ```
+   ```bash
+      python test/tests_selenium.py
+   ```      
 
 
 
