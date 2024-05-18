@@ -1,22 +1,45 @@
-import os
-import secrets
-from PIL import Image
-from flask import Blueprint,render_template, url_for, flash, redirect, request, abort
-from Bookclub import db, bcrypt, mail
+# import os
+# import secrets
+# from PIL import Image
+# from flask import Blueprint,render_template, url_for, flash, redirect, request, abort
+# from Bookclub import db, bcrypt, mail
+# from Bookclub.forms import (
+#     RegistrationForm, LoginForm, UpdateAccountForm, PostForm, SearchForm,
+#     CommentForm, EmptyForm, FollowForm, UnfollowForm
+# )
+# from Bookclub.models import User, Post, Book, Comment, Like
+# from flask_login import login_user, current_user, logout_user, login_required  
+# from werkzeug.utils import secure_filename
+# from datetime import datetime
+# from zoneinfo import ZoneInfo
+# from random import choice
+# from .forms import ResetPasswordForm
+# import string
+# from flask_mail import Message
+
+
+# Standard library imports
+import os  # For handling file paths and environment variables
+import secrets  # For generating secure tokens
+import string  # For generating random strings
+
+# Third-party library imports
+from PIL import Image  # For image processing
+from flask import Blueprint, render_template, url_for, flash, redirect, request, abort  # Flask utilities
+from flask_login import login_user, current_user, logout_user, login_required  # Flask-Login utilities
+from werkzeug.utils import secure_filename  # For securing file names
+from datetime import datetime  # For handling date and time
+from zoneinfo import ZoneInfo  # For handling time zones
+from random import choice  # For random selection
+from flask_mail import Message  # For sending emails
+
+# Application-specific imports
+from Bookclub import db, bcrypt, mail  # Importing initialized extensions
 from Bookclub.forms import (
     RegistrationForm, LoginForm, UpdateAccountForm, PostForm, SearchForm,
-    CommentForm, EmptyForm, FollowForm, UnfollowForm
-)
-from Bookclub.models import User, Post, Book, Comment, Like
-from flask_login import login_user, current_user, logout_user, login_required  
-from werkzeug.utils import secure_filename
-from datetime import datetime
-from zoneinfo import ZoneInfo
-from random import choice
-from .forms import ResetPasswordForm
-import string
-from flask_mail import Message
-
+    CommentForm, EmptyForm, FollowForm, UnfollowForm, ResetPasswordForm
+)  # Importing form classes
+from Bookclub.models import User, Post, Book, Comment, Like  # Importing model classes
 
 
 
