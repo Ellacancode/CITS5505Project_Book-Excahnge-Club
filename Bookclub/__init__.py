@@ -32,7 +32,7 @@ def create_app(config_name=None):
     if config_name == 'testing':
         app.config.from_object(TestConfig)
     else:
-        app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
+        app.config['SECRET_KEY'] = os.urandom(24)
         app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL') or 'sqlite:///project.db'
         app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
         app.config['MAIL_SERVER'] = 'smtp.gmail.com'

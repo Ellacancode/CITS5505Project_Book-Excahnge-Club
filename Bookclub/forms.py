@@ -1,9 +1,13 @@
-# Form handling for Flask applications
+# Import FlaskForm from flask_wtf to create form classes
 from flask_wtf import FlaskForm
+# Import FileField and FileAllowed for handling file uploads and validation
 from flask_wtf.file import FileField, FileAllowed
+# Import current_user from flask_login to access the current logged-in user
 from flask_login import current_user
+# Import various fields and validators from wtforms to build form fields and add validation
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField
-from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError,Regexp
+from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, Regexp
+# Import the User model from Bookclub.models to query the database for user validation
 from Bookclub.models import User
 
 # Form for registeration
