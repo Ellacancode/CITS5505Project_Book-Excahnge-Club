@@ -1,3 +1,4 @@
+// javascript for live preview of uploaded images
 document.getElementById('imageUpload').addEventListener('change', function(event) {
     var output = document.getElementById('imagePreview');
     output.style.display = 'block';
