@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 
 {% block page_specific_css %}
+    <!-- Include CSS file for this specific page -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='updatepost.css') }}">
 {% endblock %}
 
@@ -13,18 +14,25 @@
                 <form method="POST" action="#"  enctype="multipart/form-data">
                     {{ form.hidden_tag() }}
                     <div class="form-group">
+                        <!-- Display the label for the title field -->
                         {{ form.title.label(class="form-control-label") }}
+                        <!-- Display the input field for the title -->
                         {{ form.title(class="form-control form-control-lg") }}
                     </div>
                     <div class="form-group">
+                        <!-- Display the label for the content field -->
                         {{ form.content.label(class="form-control-label") }}
+                        <!-- Display the input field for the content -->
                         {{ form.content(class="form-control form-control-lg") }}
                     </div>
                     <div class="form-group">
+                        <!-- Display the label for the picture field -->
                         {{ form.picture.label() }}
+                        <!-- Display the input field for the picture -->
                         {{ form.picture(class="form-control-file") }}
                     </div>
                     <div class="form-group">
+                        <!-- Display the submit button -->
                         {{ form.submit(class="btn btn-custom") }}
                     </div>
                 </form>
