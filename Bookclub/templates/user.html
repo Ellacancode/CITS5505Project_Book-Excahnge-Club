@@ -13,13 +13,13 @@
         <div class="profile-right">
             {% if user.about_me %}
             <section id="about-me">
-                <h4>About Me Details</h4> <!-- Adjusted heading level for internal section -->
-                <p>{{ user.about_me }}</p>
+                <h4>About Me Details</h4> <!-- Heading for about me section -->
+                <p>{{ user.about_me }}</p> <!-- Display user's about me details -->
             </section>
             {% endif %}
             
-            {% if user.last_seen %}<p>Last seen on: {{ user.last_seen.strftime('%Y-%m-%d %H:%M') }}</p>{% endif %}
-            <p>{{ user.followers_count() }} followers, {{ user.following_count() }} following.</p>
+            {% if user.last_seen %}<p>Last seen on: {{ user.last_seen.strftime('%Y-%m-%d %H:%M') }}</p>{% endif %} <!-- Display user's last seen date and time -->
+            <p>{{ user.followers_count() }} followers, {{ user.following_count() }} following.</p> <!-- Display user's followers and following count -->
 
             <div class="profile-right2">
                 {% if user == current_user %}
@@ -47,18 +47,18 @@
     </div>
 </div>
 <div class="posts-wrapper">
-    <h2 class="post-header">Posts by {{ user.username }}</h2> <!-- Ensure this is h2 for consistency -->
+    <h2 class="post-header">Posts by {{ user.username }}</h2> <!-- Heading for user's posts -->
     <div class="user-posts">
         {% if posts %}
         {% for post in posts %}
         <div class="post-item">
-            <h4><a href="{{ url_for('main.post', post_id=post.id)}}">{{ post.title }}</a></h4>
-            <p><a href="{{ url_for('main.post', post_id=post.id)}}">{{ post.content }}</a></p>
-            <small>Posted on {{ post.date_posted.strftime('%Y-%m-%d %H:%M') }}</small>
+            <h4><a href="{{ url_for('main.post', post_id=post.id)}}">{{ post.title }}</a></h4> <!-- Display post title with link to post details -->
+            <p><a href="{{ url_for('main.post', post_id=post.id)}}">{{ post.content }}</a></p> <!-- Display post content with link to post details -->
+            <small>Posted on {{ post.date_posted.strftime('%Y-%m-%d %H:%M') }}</small> <!-- Display post date and time -->
         </div>
         {% endfor %}
         {% else %}
-        <p>No posts yet.</p>
+        <p>No posts yet.</p> <!-- Display message if user has no posts -->
         {% endif %}
     </div>
 </div>
