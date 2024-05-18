@@ -1,9 +1,9 @@
-# User model and database setup for Flask applications
-from datetime import datetime, timezone
-from zoneinfo import ZoneInfo
-from Bookclub import db, login_manager
-from flask_login import UserMixin
-from sqlalchemy.orm import relationship
+# Import necessary modules and packages
+from datetime import datetime, timezone  # For handling date and time
+from zoneinfo import ZoneInfo  # For handling time zones
+from Bookclub import db, login_manager  # Import the database and login manager from the Bookclub package
+from flask_login import UserMixin  # Import UserMixin for user session management
+from sqlalchemy.orm import relationship  # Import relationship for defining relationships between models
 
 
 # Follow table to manage followers
@@ -48,10 +48,12 @@ class User(db.Model, UserMixin):
     comments = db.relationship('Comment', backref='user', lazy=True)
     likes = db.relationship('Like', backref='user', passive_deletes=True)
 
+    # Method to validate email
     def valid_email(email):
         user = User.query.filter_by(email=email).first()
         return user is not None
 
+    # Many-to-many relationship to manage following
     following_relationship = db.relationship(
         'User',
         secondary=followers,
@@ -60,6 +62,7 @@ class User(db.Model, UserMixin):
         back_populates='followers_relationship'
     )
 
+    # Many-to-many relationship to manage followers
     followers_relationship = db.relationship(
         'User',
         secondary=followers,
@@ -68,37 +71,47 @@ class User(db.Model, UserMixin):
         back_populates='following_relationship'
     )
 
+    # String representation of the User model
     def __repr__(self):
         return f"User('{self.username}', '{self.email}', '{self.image_file}', '{self.about_me}', '{self.last_seen}')"
 
+    # Method to get followers count
     def followers_count(self):
         return len(self.followers_relationship)
 
+    # Method to get following count
     def following_count(self):
         return len(self.following_relationship)
 
+    # Method to check if a user is following another user
     def is_following(self, user):
         return user in self.following_relationship
 
+    # Method to check if a user is followed by another user
     def is_followed_by(self, user):
         return user in self.followers_relationship
-
+    
+    # Method to follow a user
     def follow(self, user):
         if not self.is_following(user):
             self.following_relationship.append(user)
 
+    # Method to unfollow a user
     def unfollow(self, user):
         if self.is_following(user):
             self.following_relationship.remove(user)
 
+    # Method to like a post
     def like_post(self, post):
         if not self.has_liked_post(post):
             post.likes.append(self)
 
+    # Method to unlike a post
     def unlike_post(self, post):
         if self.has_liked_post(post):
             post.likes.remove(self)
 
+    # Method to check if a user has liked a post
     def has_liked_post(self, post):
         return Like.query.filter_by(user_id=self.id, post_id=post.id).first() is not None
 
