@@ -1,83 +1,85 @@
-{% extends "layout.html" %}
-{% block page_specific_css %}
+{% extends "layout.html" %} 
 
-
+{% block page_specific_css %} 
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='register.css') }}">
-
 {% endblock %}
-{% block content %}
+
+<!-- Main content block for the registration page -->
+{% block content %} 
 <div class="registration-page">
     <div class="content-section">
-        <form method="POST" action="#">
-            {{ form.hidden_tag() }}
+        <!-- Registration form, uses POST method for data submission -->
+        <form method="POST" action="#"> 
+            {{ form.hidden_tag() }} 
             <div class="section-container">
-                <h2 class="community-header">Join a Community of Readers</h2>
+                <h2 class="community-header">Join a Community of Readers</h2> 
                 <fieldset class="form-group">
-                    <legend class="border-bottom mb-4"></legend>
+                    <legend class="border-bottom mb-4"></legend> <!-- Divider for form sections -->
                     <div class="form-group">
-                        {{ form.username.label(class="form-control-label") }}
-                        {% if form.username.errors %}
-                        {{ form.username(class="form-control form-control-lg is-invalid") }}
+                        <!-- Label for username input -->
+                        {{ form.username.label(class="form-control-label") }} 
+                        {% if form.username.errors %} <!-- Conditional to check for input errors -->
+                        {{ form.username(class="form-control form-control-lg is-invalid") }} 
                         <div class="invalid-feedback">
                             {% for error in form.username.errors %}
-                            <span>{{ error }}</span>
+                            <span>{{ error }}</span> 
                             {% endfor %}
                         </div>
                         {% else %}
-                        {{ form.username(class="form-control form-control-lg") }}
+                        {{ form.username(class="form-control form-control-lg") }} 
                         {% endif %}
                     </div>
                     <div class="form-group">
-                        {{ form.email.label(class="form-control-label") }}
+                        <!-- Label for email input -->
+                        {{ form.email.label(class="form-control-label") }} 
                         {% if form.email.errors %}
-                        {{ form.email(class="form-control form-control-lg is-invalid") }}
+                        {{ form.email(class="form-control form-control-lg is-invalid") }} 
                         <div class="invalid-feedback">
                             {% for error in form.email.errors %}
-                            <span>{{ error }}</span>
+                            <span>{{ error }}</span> 
                             {% endfor %}
                         </div>
                         {% else %}
-                        {{ form.email(class="form-control form-control-lg") }}
+                        {{ form.email(class="form-control form-control-lg") }} <!-- Email input field -->
                         {% endif %}
                     </div>
                     <div class="form-group">
-                        {{ form.password.label(class="form-control-label") }}
+                        {{ form.password.label(class="form-control-label") }} <!-- Label for password input -->
                         {% if form.password.errors %}
-                        {{ form.password(class="form-control form-control-lg is-invalid") }}
+                        {{ form.password(class="form-control form-control-lg is-invalid") }} 
                         <div class="invalid-feedback">
                             {% for error in form.password.errors %}
-                            <span>{{ error }}</span>
+                            <span>{{ error }}</span> 
                             {% endfor %}
                         </div>
                         {% else %}
-                        {{ form.password(class="form-control form-control-lg") }}
+                        {{ form.password(class="form-control form-control-lg") }} <!-- Password input field -->
                         {% endif %}
                     </div>
                     <div class="form-group">
-                        {{ form.confirm_password.label(class="form-control-label") }}
+                        {{ form.confirm_password.label(class="form-control-label") }} <!-- Label for confirm password input -->
                         {% if form.confirm_password.errors %}
-                        {{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
+                        {{ form.confirm_password(class="form-control form-control-lg is-invalid") }} <!-- Confirm password input field with error class -->
                         <div class="invalid-feedback">
                             {% for error in form.confirm_password.errors %}
-                            <span>{{ error }}</span>
+                            <span>{{ error }}</span> 
                             {% endfor %}
                         </div>
                         {% else %}
-                        {{ form.confirm_password(class="form-control form-control-lg") }}
+                        {{ form.confirm_password(class="form-control form-control-lg") }} <!-- Confirm password input field -->
                         {% endif %}
                     </div>
                 </fieldset>
                 <div class="form-group">
-                    {{ form.submit(class="btn btn-signup") }}
+                    {{ form.submit(class="btn btn-signup") }} <!-- Submit button for the form -->
                 </div>
                 <div class="border-top pt-3">
                     <small class="text-muted">
-                        Already Have An Account? <a class="ml-2" href="{{ url_for('main.login') }}">Sign In</a>
+                        Already Have An Account? <a class="ml-2" href="{{ url_for('main.login') }}">Sign In</a> <!-- Link to sign-in page -->
                     </small>
                 </div>
             </div>
         </form>
     </div>
-
 </div>
 {% endblock content %}
