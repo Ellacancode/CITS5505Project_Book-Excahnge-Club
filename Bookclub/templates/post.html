@@ -1,53 +1,48 @@
-{% extends "layout.html" %}
+{% extends "layout.html" %} 
 
-{% block page_specific_css %}
+{% block page_specific_css %} 
 <link rel="stylesheet" href="{{ url_for('static', filename='post.css') }}">
 {% endblock %}
 
-{% block content %}
+{% block content %} 
 <main class="container">
     <div class="container">
-        <!-- Post Title, Image, and Author Details -->
+        <!-- Displays the title, image, and content of a blog post -->
         <article class="media content-section">
-            <h2 class="article-title">{{ post.title }}</h2>
+            <h2 class="article-title">{{ post.title }}</h2> <!-- Post title -->
             {% if post.image_file != 'default.jpg' %}
-            <img class="post-image img-fluid" src="{{ url_for('static', filename='post_images/' + post.image_file) }}"
-                alt="Post Image">
-            <p class="article-content">{{ post.content }}</p>
+            <img class="post-image img-fluid" src="{{ url_for('static', filename='post_images/' + post.image_file) }}" alt="Post Image">
+            <!-- Main content of the post -->
+            <p class="article-content">{{ post.content }}</p> 
             {% endif %}
             <div>
-                <form action="{{ url_for('main.like_post', post_id=post.id) }}" method="post"
-                    style="display: flex; align-items: center;">
+                <!-- Form for liking or unliking a post -->
+                <form action="{{ url_for('main.like_post', post_id=post.id) }}" method="post" style="display: flex; align-items: center;">
                     {% if post.is_liked_by_user(current_user) %}
-                    <button type="submit" class="btn btn-danger btn-sm" style="margin-right: 10px;">
-                        <i class="fa-regular fa-thumbs-up"></i> Unlike
-                    </button>
+                    <button type="submit" class="btn btn-danger btn-sm" style="margin-right: 10px;">Unlike</button>
                     {% else %}
-                    <button type="submit" class="btn btn-primary btn-sm" style="margin-right: 10px;">
-                        <i class="fa-regular fa-thumbs-up"></i> Like
-                    </button>
+                    <button type="submit" class="btn btn-primary btn-sm" style="margin-right: 10px;">Like</button>
                     {% endif %}
-                    <small class="text-muted">{{ post.likes | length }} likes</small>
+                    <small class="text-muted">{{ post.likes | length }} likes</small> 
                 </form>
             </div>
             <div class="author-section">
+                <!-- Displays the post author and update/delete controls if applicable -->
                 <div class="post">
                     <div class="author">
                         <p>Author</p>
                         <img class="main-author-image"
-                            src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}"
-                            alt="Author Image">
+                            src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="Author Image">
                     </div>
                     <div class="post-info">
-                        <!-- this  is hyper Link -->
-                        <a href="{{ url_for('main.user', username=post.author.username) }}">{{ post.author.username }}</a>
-                        <small class="date-posted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
-                        <!-- Controls -->
+                        <a href="{{ url_for('main.user', username=post.author.username) }}">{{ post.author.username }}</a> 
+                        <small class="date-posted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small> 
                         {% if post.author == current_user or current_user.email == 'admin@admin.com' %}
+                        <!-- Link to update post -->
                         <div class="controls">
-                            <a class="btn btn-secondary" href="{{ url_for('main.update_post', post_id=post.id) }}">Update</a>
+                            <a class="btn btn-secondary" href="{{ url_for('main.update_post', post_id=post.id) }}">Update</a> 
                             <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
-                                data-target="#deleteModal">Delete</button>
+                                data-target="#deleteModal">Delete</button> 
                         </div>
                         {% endif %}
                     </div>
@@ -55,62 +50,53 @@
             </div>
         </article>
     </div>
-    <!-- Right Column for Comments and New Comment Form -->
 
+    <!-- Section for displaying and submitting comments -->
     <article>
-        <h4 class="comment-label">Comments:</h4>
+        <h4 class="comment-label">Comments:</h4> <!-- Comments section heading -->
         {% for comment in comments %}
         <div class="media-body">
             <div class="media content-section">
                 <div class="comment-header">
                     <img class="author2-image"
-                        src="{{ url_for('static', filename='profile_pics/' + comment.author.image_file) }}"
-                        alt="authorimage">
+                        src="{{ url_for('static', filename='profile_pics/' + comment.author.image_file) }}" alt="author image">
                     <div class="metadata">
-                        <a class="comment-author" href="{{ url_for('main.user', username=comment.author.username) }}">{{
-                            comment.author.username }}</a>
-                        <small class="text-muted">{{ comment.date_posted.strftime('%Y-%m-%d') }}</small>
+                        <a class="comment-author" href="{{ url_for('main.user', username=comment.author.username) }}">{{ comment.author.username }}</a>
+                        <small class="text-muted">{{ comment.date_posted.strftime('%Y-%m-%d') }}</small> 
                     </div>
                 </div>
-
-
-                <!-- Show comment image at the top if it exists -->
                 {% if comment.image_file and comment.image_file != 'default.jpg' %}
+                <!-- Comment text and comment pictures -->
                 <img class="comment-image img-fluid"
-                    src="{{ url_for('static', filename='comment_pics/' + comment.image_file) }}" alt="Comment Image">
+                    src="{{ url_for('static', filename='comment_pics/' + comment.image_file) }}" alt="Comment Image"> 
                 {% endif %}
-
-                <!-- Show comment text content -->
-                <p class="comment-content">{{ comment.content }}</p>
+                <p class="comment-content">{{ comment.content }}</p> 
             </div>
         </div>
         {% endfor %}
 
-
-
-        <!-- New Comment Form -->
+        <!-- Form for submitting a new comment -->
         <div class="commentbox">
             <form method="POST" action="#" enctype="multipart/form-data">
-                {{ form.hidden_tag() }}
+                {{ form.hidden_tag() }} 
                 <fieldset>
                     <h3 class="new-comment-label">{{ legend }}</h3>
                     <div class="form-group">
-                        {{ form.content(class="form-control form-control-lg", placeholder="Enter your comment here...")
-                        }}
+                        {{ form.content(class="form-control form-control-lg", placeholder="Enter your comment here...") }}
                     </div>
                     <div class="form-group">
                         {{ form.picture.label() }}
                         {{ form.picture(class="form-control-file") }}
                     </div>
                     <div class="form-group">
-                        {{ form.submit(class="btn btn-post") }}
+                        {{ form.submit(class="btn btn-post") }} 
                     </div>
                 </fieldset>
             </form>
         </div>
     </article>
 
-    <!-- Modal for Delete Confirmation -->
+    <!-- Modal for confirming the deletion of a post -->
     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">

@@ -18,8 +18,6 @@ import string
 from flask_mail import Message
 
 
-
-
 main = Blueprint('main', __name__)
 
 # Home page route: Displays the home page
@@ -359,32 +357,6 @@ def shelf():
     return render_template('shelf.html', title='BookShelf', books=books)
 
 
-def send_reset_email(user):
-    token = user.get_reset_token()
-    msg = Message('Password Reset Request',
-                  sender='noreply@demo.com',
-                  recipients=[user.email])
-    msg.body = f'''To reset your password, visit the following link:
-{url_for('reset_token', token=token, _external=True)}
-
-If you did not make this request then simply ignore this email and no changes will be made.
-'''
-    mail.send(msg)
-
-
-@main.route("/reset_password", methods=['GET', 'POST'])
-def reset_request():
-    if current_user.is_authenticated:
-        return redirect(url_for('home'))
-    form = RequestResetForm()
-    if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
-        send_reset_email(user)
-        flash('An email has been sent with instructions to reset your password.', 'info')
-        return redirect(url_for('login'))
-    return render_template('reset_request.html', title='Reset Password', form=form)
-
-
 @main.route('/reset-password', methods=['GET', 'POST'])
 def reset_password():
     form = ResetPasswordForm()
@@ -408,4 +380,4 @@ def reset_password():
         else:
             flash("Email does not exist", 'danger') 
         
-    return render_template('reset_password.html', form=form)
+    return render_template('reset_password.html', form=form) 

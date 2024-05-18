@@ -29,8 +29,6 @@ class Book(db.Model):
     isbn = db.Column(db.String(20), nullable=True)
     description = db.Column(db.String(255))
 
-
-
 # Define a function for the default last_seen value
 def perth_time_now():
     return datetime.now(ZoneInfo("Australia/Perth"))
