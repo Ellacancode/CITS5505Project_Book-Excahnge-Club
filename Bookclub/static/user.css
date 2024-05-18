@@ -1,3 +1,4 @@
+/* Style for Container */
 .container {
     width: 100%;
     margin: 0 auto;
@@ -7,34 +8,34 @@
     align-items: center; /* Center aligns all child elements */
 }
 
-
+/* style for user profile  */
 .user-profile {
-    display: flex;
+    display: flex; /* Align items horizontally */
     justify-content: center; 
     align-items: center; 
     background-color: #ffffff;
     padding: 5px 20px;
     border-radius: 30px;
-    width: 100%;
+    width: 100%; /* Full width */
     margin-top: -10px;
     width: 80%;
-    align-items: center;
+    align-items: center; /* Center items vertically */
 }
 
 .profile-left, .profile-right {
     flex: 1; /* Allows both sections to take equal space */
-    padding: 10px;
+    padding: 10px;/* Padding inside each section */
 }
 
 
 
 .user-profile h1 {
-    font-size: 2em;
+    font-size: 2em; /* Font size for the username */
     text-align: left;
 }
 
 .user-profile p {
-    font-size: 1em;
+    font-size: 1em; /* Font size for paragraphs */
     margin: 0;
     color: #7d7d7d;
 }
@@ -42,7 +43,7 @@
 
 .user-profile .btn-follow,
 .user-profile .btn-unfollow  {
-    width: 250px;
+    width: 250px;/* Button width */
     padding: 10px 0; /* Adjust padding to be only vertical */
     font-size: 16px; /* Adjust the font size to match the button in the image */
     color: rgb(255, 255, 255);
@@ -57,7 +58,7 @@
 
 .user-profile .btn-follow:hover,
 .user-profile .btn-unfollow:hover {
-    font-weight: bold;
+    font-weight: bold;/* Bold text on hover */
     border: solid 1px black;
 }
 
@@ -74,7 +75,7 @@
 }
 
 .user-profile .btn-edit-profile:hover {
-    font-weight: bold;
+    font-weight: bold; /* Bold text on hover */
     border: solid 1px black;
 }
 
@@ -91,7 +92,7 @@
 
 .post-history h3 {
     font-size: 1.5em;
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* Space below the heading */
     color: #333;
 }
 
@@ -101,7 +102,7 @@
 }
 
 .main-author-image {
-    width: 100%;
+    width: 100%; /* Full width */
     margin-top: 10px;
     margin-bottom: 10px;
     max-width: 250px;
