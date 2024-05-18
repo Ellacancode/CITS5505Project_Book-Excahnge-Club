@@ -1,8 +1,30 @@
 # CITS5505 Project: Book Club
+This document provides purpose,setup and migration instructions for the Book Club project, a Flask-based web application. 
 
 
-## Project Overview
-This document provides setup and migration instructions for the Book Club project, a Flask-based web application. 
+## Project Purpose
+
+The UWA Book Club website is designed to effectively engage students in sharing their ideas about books, reading books, and borrowing books. Our mission is to build a community at UWA through a shared love of books.
+
+**Purpose**
+By registering and logging into our website, students can:
+
+Participate in Discussions: Join discussions in the forum by posting or commenting. Use the forum search to explore other users' interactions.<br>
+Interact with Peers: Follow other users and like their posts to engage with the community.<br>
+Discover Books: Find books via the bookshelf page by browsing or searching by title, genre, author, or status.<br>
+Personalize Profiles: Customize their profiles by updating their "About Me" section and profile picture.<br>
+
+**Admin Functions**
+Our website includes special features for administrators:
+
+Moderation: Admins have special accounts to log in and monitor posts, comments, and books. If any content contains inappropriate language or behavior, admins can delete posts, users, comments, or likes.
+We designed the UWA Book Club website with love and hope it brings value to our community. 
+
+## Let's start your reading journey together. Simply register and join us today!
+
+
+
+
 
 
 ## Project Members
@@ -54,13 +76,12 @@ The Controller handles user requests, processes data via models (User, Post, Boo
 
 The view is the component of the app through which users directly interact.  The HTML files within the "template" folder serve as the views. Users can access information, read it, and interact with it[3].
 
-## Images
 
-![Home Page](Bookclub/static/1.png)
+![Home Page](Bookclub/static/readme/1.png)
 
-![User Profile](Bookclub/static/2.png)
+![User Profile](Bookclub/static/readme/2.png)
 
-![Forum Page](Bookclub/static/3.png)
+![Forum Page](Bookclub/static/readme/3.jpg)
 
 ## Setup Instructions
 
