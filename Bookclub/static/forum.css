@@ -1,24 +1,32 @@
+/* Base styles for HTML and body */
 html, body {
   height: auto; 
   padding: 0;
   margin: 0;
-  background: #f9f9f9; 
+  background: linear-gradient(to right, #f9f9f9 0%, #faece9 50%, #f9dfd9 100%);
   display: block; 
 }
+
+/* Styles for header with search */
 .header-with-search {
   display: flex;  
   align-items: center;  
   justify-content: space-between;  
+  margin-top: 30px;
 }
 
+/* Styles for search form */
 .search-form {
   display: flex;
   align-items: center;
 }
 
+/* Styles for form controls */
 .form-control {
   margin-right: 10px;  
 }
+
+/* Styles for main container */
 .container {
   display: flex;
   flex-wrap: wrap;
@@ -29,15 +37,15 @@ html, body {
   max-width: 1200px; 
 }
 
-
+/* Styles for post card */
 .post-card {
-  flex: 0 0 calc(33.33% - 20px); 
+  flex: 0 0 calc(33.33% - 20px);  /* Ensure this calculation allows for any padding/margins */
+  max-width: calc(33.33% - 20px); /* This line can help enforce sizing if flexbox settings aren't enough */
   display: flex;
   flex-direction: column;
   align-items: center; 
   text-align: center; 
   justify-content: space-between; 
-
   padding: 20px;
   background: #fff;
   border: 1px solid #ddd;
@@ -45,6 +53,7 @@ html, body {
   margin-bottom: 20px; 
 }
 
+/* Styles for title */
 .title {
   text-align: left; 
   width: 100%; 
@@ -52,6 +61,7 @@ html, body {
   font-size: x-large;
 }
 
+/* Styles for content */
 .content {
   text-align: left; 
   width: 100%; 
@@ -59,19 +69,21 @@ html, body {
   font-size: medium;
 }
 
+/* Styles for post image */
 .post-image {
   width: 100%; 
   height: auto; 
   min-height: 200px; 
   object-fit: cover; 
   margin-bottom: 15px; 
+  max-width: 100%; /* ensures image does not exceed its container's width */
 }
-
 
 .post-title, .content {
   width: 100%; 
 }
 
+/* Styles for profile picture */
 .profile-pic {
   border-radius: 50%;
   width: 50px; 
@@ -79,32 +91,28 @@ html, body {
   margin-right: 10px; 
 }
 
+/* Styles for user information */
 .user-info {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; 
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
 }
 
-
-@media (max-width: 768px) {
-  .post-card {
-      flex: 1 1 100%; 
-  }
-}
-
+/* Styles for post header */
 .post-header {
   display: flex;
   align-items: center; 
   width: 100%;
 }
 
-
+/* Styles for username */
 .username {
   font-weight: bold;
   color: #333;
   text-decoration: none;
 }
 
+/* Styles for date posted */
 .date-posted {
   color: #666;
 }
@@ -116,4 +124,118 @@ html, body {
 
 .content {
   margin-top: 1em;
+}
+
+.btn-outline-secondary {
+  background-color: rgb(252, 98, 98);  /* Red background */
+  color: #ffffff;             /* White text */
+  border: none;       
+  padding: 10px 30px; 
+  font-size: 20px;            /* Increase font size for larger button */
+}
+
+.btn-outline-secondary:hover, .btn-outline-secondary:focus {
+  background-color: rgb(252, 98, 98);  /* Darker red on hover/focus */
+  color: #ffffff;             /* White text remains the same */
+}
+
+/* Styles for pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Styles for page link */
+.page-link {
+  margin: 0 5px;
+  padding: 10px 15px;
+  background-color: #ffffffa2; 
+  color: #ff5e5e;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+/* Hover styles for page link */
+.page-link:hover {
+  background-color: #ffffff;
+}
+
+/* Styles for disabled pagination link */
+.disabled {
+  margin: 0 5px;
+  padding: 10px 15px;
+  background-color: #ffffffa2;
+  color: #ff5e5e;
+  border-radius: 5px;
+}
+
+/* Styles for current page link */
+.current {
+  margin: 0 5px;
+  padding: 10px 15px;
+  background-color: #fd4b4b;
+  color: white;
+  border-radius: 5px;
+}
+
+/* Styles for ellipsis */
+.ellipsis {
+  margin: 0 5px;
+  padding: 10px 15px;
+  background-color: transparent;
+  color: #666;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  .post-card {
+    flex: 1 1 100%; /* Take full width */
+    max-width: 100%; /* Take full width */
+    padding: 10px; /* Smaller padding for a compact look */
+    margin-bottom: 10px; /* Reduce margin between cards */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Optional: adjust shadow for depth */
+  }
+
+  .form-control, .btn-outline-secondary {
+    font-size: 16px; /* Adjust font size */
+    padding: 8px 16px; /* Adjust padding */
+  }
+
+  .post-image {
+    max-height: 250px; /* Adjust image max height */
+  }
+
+  .profile-pic {
+    width: 40px;
+    height: 40px;
+  }
+
+  .title, .content {
+    font-size: small; /* Adjust font size */
+  }
+
+  .search-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-outline-secondary {
+    width: 100%; /* Full width button */
+  }
+
+  .user-info, .post-header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .username {
+    margin-top: 5px;
+  }
 }

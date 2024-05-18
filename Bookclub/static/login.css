@@ -1,50 +1,48 @@
+/* Base layout settings to ensure full coverage and positioning */
 html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%; /* Ensure it covers the full width of the screen */
-    height: 100%; /* Ensure it covers the full height of the screen */
-    box-sizing: border-box; /* This ensures padding does not add to the total width */
-    background-color: #f0f0f0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow-x: hidden; 
 }
-
-.login-container {
+/* Styling for the main container of the login page, sets background and alignment */
+.login-page {
     display: flex;
-    align-items: left;
-    justify-content: center;
-    background-color: #f0f0f0;
-    margin-top: -20px;
+    align-items: center; 
+    justify-content: center; 
+    background: url('login_pics/login_bg.jpg') no-repeat center center fixed;
+    background-size: cover; 
+    min-height: 100vh; 
+    width: 100vw; 
 }
 
+/* Styling for the login form area, with adjustments for layout and transparency */
 .login-form {
-    width: 800px;
-    padding: 200px;
-    height: 810px;
-    background: #f0f0f0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-right: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh; 
+    width: 30%; 
+    margin: auto; 
+    background-color: rgba(255, 255, 255, 0.65); 
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 10px;
 }
 
-.login-form h2 {
-    margin-bottom: 20px;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-check-input {
-    margin-top: 6px;
-}
-
-.form-check-label {
-    margin-left: 20px;
-}
-
+/* Primary button styling, defining full width and standard margins */
 .btn-primary {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
     background-color: rgb(211, 55, 55);
+    
+}
+
+.btn-primary:hover {
+    background-color: #ffffff; 
+    color: rgb(211, 55, 55); 
 }
 
 
@@ -56,6 +54,10 @@ html, body {
     color: white;
 }
 
+.btn-signup:hover {
+    background-color: #ffffff; 
+    color: rgb(14, 13, 13); 
+}
 
 .invalid-feedback {
     display: block;
@@ -63,11 +65,32 @@ html, body {
 }
 
 
-.login-background img {
-    float: right;
-    padding-right: 0px;
-    width: 910px;
-    padding: 0px;
-    height: 810px;
+.bookclub-member {
+    color: #dc3545;
 }
 
+.border-bottom.mb-4 {
+    display: flex; 
+    justify-content: center; 
+    width: 100%; 
+    
+}
+/* Responsive adjustments to ensure the form remains usable on various screen sizes */
+@media (max-width: 992px) {
+    .login-form {
+        width: 50%; 
+    }
+}
+
+@media (max-width: 768px) {
+    .login-form {
+        width: 70%; 
+    }
+}
+
+@media (max-width: 576px) {
+    .login-form {
+        width: 85%; 
+        padding: 20px; 
+    }
+}

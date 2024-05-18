@@ -1,7 +1,8 @@
-/* 搜索结果页面样式 */
+/* book result search container */
 .search-results-page {
-    max-width: 80%; /* 限制页面最大宽度 */
-    margin: 40px auto; /* 设置页面居中和顶部间距 */
+    height: 800px;
+    max-width: 80%;
+    margin: 40px auto;
     padding: 20px;
     border-radius: 10px;
     background-color: #f8f8f8;
@@ -9,19 +10,23 @@
     text-align: center;
 }
 
+/* title */
 .search-results-page h1 {
     margin-bottom: 20px;
     text-align: center;
 }
 
+/* container for cards */
 .card-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
     margin-top: 20px;
+    overflow-y: auto;
 }
 
+/* cards */
 .book-card {
     width: 250px;
     background-color: #fff;
@@ -33,23 +38,27 @@
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
+/* cards hover */
 .book-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+/* book title */
 .book-info h2 {
     font-size: 1.5em;
     margin-bottom: 10px;
     color: #333;
 }
 
+/* book text */
 .book-info p {
     font-size: 1em;
     margin: 5px 0;
     color: #555;
 }
 
+/* strong change text color */
 .book-info strong {
     color: #333;
 }

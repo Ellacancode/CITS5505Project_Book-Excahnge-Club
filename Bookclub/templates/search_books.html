@@ -1,24 +1,36 @@
 {% extends "layout.html" %}
 
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='search_book.css') }}">
+{% endblock %}
+
 {% block content %}
-<form action="{{ url_for('search_books') }}" method="post">
-    <input type="text" name="query" placeholder="Search for books...">
-    <select name="search_by">
-        <option value="book_title">Book Name</option>
+<!-- Form for searching books -->
+<form action="{{ url_for('main.search_books') }}" method="post"
+    style="background-color: white; margin-top: 30px; height: 150px; width: 90%; margin-left: 5%; border-radius: 20px;">
+     <!-- Label for the search criteria -->
+    <label for="search_by" style="display: inline-block; width: 10%; font-weight: bold; letter-spacing: 1px; margin-left: 10%; margin-top: 10px;">Search by</label>
+     <!-- Dropdown for selecting search criteria -->
+    <select name="search_by" id="search_by" class="search-select">
+        <option value="book_title">Book Title</option>
         <option value="genre">Genre</option>
         <option value="author">Author</option>
-        <option value="publisher">Publisher</option>
-        <option value="id">Book ID</option>
         <option value="status">Status</option>
         <option value="isbn">ISBN</option>
     </select>
-    <button type="submit">Search</button>
+    <!-- Input field for the search query -->
+    <input type="text" name="query" placeholder="Search for books..." class="searchb-input">
+     <!-- Submit button for the search form -->
+    <button type="submit" class="searchb-submit">Search</button>
 </form>
+<!-- Display search results if available -->
 {% if results %}
-    <ul>
+<ul>
     {% for book in results %}
-        <li>{{ book.name }} by {{ book.author }} - {{ book.genre }}</li>
+     <!-- List each book's title, author, and genre -->
+    <li>{{ book.title }} by {{ book.author }} - {{ book.genre }}</li>
     {% endfor %}
-    </ul>
+</ul>
 {% endif %}
 {% endblock %}
+

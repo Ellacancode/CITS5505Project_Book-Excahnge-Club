@@ -1,110 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Exchange Club</title>
+    <title>UWA Book Club</title>
+    <link rel="icon" href="{{ url_for('static', filename='logo/logo.png') }}">
     <!-- Link to FontAwesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
-    
+
+    <!-- css urls -->
     {% block page_specific_css %}
-        <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='forum.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='post.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='user.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='creat_post.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='shelf.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='book_result.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='forum.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='post.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='user.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='creat_post.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='shelf.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='book_result.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='search_book.css') }}">
     {% endblock %}
 </head>
-<body>
 
+<body>
     <div class="page-wrapper">
         <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="/">&nbsp;<i class="fa-solid fa-landmark"></i>&nbsp;Book Exchange Club</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <!-- layout title -->
+            <a class="navbar-brand" href="/">&nbsp;<i class="fa-solid fa-landmark" id="top"></i>&nbsp;UWA Book Club</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <!-- navigation bar -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
+                    <!-- url for forum page -->
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('forum') }}">Forum</a>
+                        <a class="nav-link" href="{{ url_for('main.forum') }}">Forum</a>
                     </li>
+                    <!-- dropdown lists for urls for shelf and forum -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                           Explore
+                        <a class="nav-link" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Explore
                             <i class="fas fa-caret-down"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="{{ url_for('search_books') }}">Book Search</a>
-                            <a class="dropdown-item" href="{{ url_for('forum') }}">Forum Search</a>
-                        
+                            <a class="dropdown-item" href="{{ url_for('main.shelf') }}">Book Search</a>
+                            <a class="dropdown-item" href="{{ url_for('main.forum') }}">Forum Search</a>
+
                         </div>
                     </li>
+                    <!-- url for book shelf -->
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('shelf') }}">Book Shelf</a>
+                        <a class="nav-link" href="{{ url_for('main.shelf') }}">Book Shelf</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
+                    <!-- check whether user login -->
                     {% if current_user.is_authenticated %}
+                    <!-- new post url -->
                     <li class="nav-item">
-                        <a class="btn" href="{{ url_for('new_post') }}">New Post</a>
+                        <a class="btn" href="{{ url_for('main.new_post') }}">New Post</a>
                     </li>
+                    <!-- profile url -->
                     <li class="nav-item">
-                        <a class="btn" href="{{ url_for('profile') }}">Profile</a>
+                        <a class="btn" href="{{ url_for('main.profile') }}">Profile</a>
                     </li>
+                    <!-- logout url -->
                     <li class="nav-item">
-                        <a class="btn_red" href="{{ url_for('logout') }}">Logout</a>
+                        <a class="btn_red" href="{{ url_for('main.logout') }}">Logout</a>
                     </li>
-                    {% if current_user.email == 'admin@admin.com'%}   
+                    <!-- check whether is admin email -->
+                    {% if current_user.email == 'admin@admin.com'%}
+                    <!-- admin url -->
                     <li class="nav-item">
                         <a class="btn" href="http://127.0.0.1:5000/admin">Admin</a>
                     </li>
-                    {% endif%}       
+                    {% endif%}
 
                     {% else %}
+                    <!-- login url -->
                     <li class="nav-item">
-                        <a class="btn" href="{{ url_for('login') }}">Log In</a>
+                        <a class="btn" href="{{ url_for('main.login') }}">Log In</a>
                     </li>
+                    <!-- register url -->
                     <li class="nav-item">
-                        <a class="btn_red" href="{{ url_for('register') }}">Sign Up</a>
+                        <a class="btn_red" href="{{ url_for('main.register') }}">Sign Up</a>
                     </li>
                     {% endif %}
                 </ul>
             </div>
         </nav>
 
+        <!-- category message container -->
         <div class="content-wrapper">
             <div class="flash-message">
                 {% with messages = get_flashed_messages(with_categories=true) %}
-                    {% if messages %}
-                        {% for category, message in messages %}
-                            <div class="alert alert-{{ category }}">{{ message }}</div>
-                        {% endfor %}
-                    {% endif %}
+                {% if messages %}
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+                {% endif %}
                 {% endwith %}
                 {% block content %}{% endblock %}
             </div>
         </div>
-
-        <footer class="footer">
-            <div class="text-center">
-                <span class="text-muted">© 2024 Book Exchange Club</span>
-            </div>
-        </footer>
     </div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery and Bootstrap Bundle (includes Popper) -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div id="weather-info"></div>
+            <!-- logo image -->
+            <div class="footer-text">
+                <img src="{{ url_for('static', filename='logo/logo.png') }}" alt="Logo" class="logo-icon">
+                2024 UWA Book Club
+                
+            </div>
 
+            <!-- button to top -->
+            <a id="myBtn" title="Go to top" href="#top">
+                <i class="fas fa-arrow-up"></i> TO TOP
+            </a>
+            
+        </div>
+    </footer>
+
+    <!-- jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='shelf.js') }}"></script>
+    <script src="{{ url_for('static', filename='layout.js') }}"></script>
+    <script src="{{ url_for('static', filename='profile.js') }}"></script>
+    <script src="{{ url_for('static', filename='create_post.js') }}"></script>
+    <script src="{{ url_for('static', filename='home.js') }}"></script>
 </body>
+
 </html>

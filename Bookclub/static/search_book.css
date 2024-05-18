@@ -1,0 +1,122 @@
+/* CSS for search input */
+.searchb-input {
+    display: inline-block;
+    width: 15%;
+    margin-left: 2%;
+    border-radius: 20px;
+}
+
+/* CSS for search submit button */
+.searchb-submit {
+    display: inline-block;
+    width: 15%;
+    margin-left: 3%;
+    background-color: rgb(211, 55, 55);
+    border-radius: 20px;
+    color: white;
+    border: hidden;
+    letter-spacing: 2px;
+    font-size: 18px;
+}
+
+/* CSS for search submit button on hover */
+.searchb-submit:hover {
+    background-color: rgb(107, 12, 12);
+    font-weight: bold;
+}
+
+/* CSS for search select dropdown */
+.search-select {
+    display: inline-block;
+    width: 15%;
+    margin-left: 2%;
+    border-radius: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+/* CSS for container */
+.container {
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 65%;
+    margin: 20px auto;
+    border-radius: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* CSS for title */
+.title {
+    text-align: center;
+    font-size: 35px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+/* CSS for flex container */
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+/* CSS for flex items */
+.flex-item {
+    background-color: white;
+    width: 20%;
+    margin: 1%;
+    height: 600px;
+    padding: 10px;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    border-radius: 5px;
+}
+
+/* CSS for flex item paragraphs */
+.flex-item p {
+    text-align: center;
+}
+
+/* CSS for flex item buttons */
+.flex-item button {
+    width: 70%;
+    height: 40px;
+    background-color: rgb(211, 55, 55);
+    border: hidden;
+    border-radius: 15px;
+    color: white;
+    display: block;
+    margin: 20px auto 0;
+}
+
+/* CSS for flex items on screens with max width of 1200px */
+@media (max-width: 1200px) {
+    .flex-item {
+        width: 45%; /* 2 items per row */
+    }
+}
+
+/* CSS for flex items on screens with max width of 600px */
+@media (max-width: 600px) {
+    .flex-item {
+        width: 98%; /* 1 item per row */
+    }
+}
+
+/* CSS for home image */
+.home-img {
+    cursor: pointer;
+    width: 80%;
+    height: 200px;
+    margin-left: 10%;
+    border-radius: 15px;
+}
+
+/* CSS for forum image */
+.forum-img {
+    float: right;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 1px solid gray;
+}

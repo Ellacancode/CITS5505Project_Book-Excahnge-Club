@@ -1,19 +1,37 @@
-import os
-import secrets
-from PIL import Image
-from flask import render_template, url_for, flash, redirect, request, abort
-from Bookclub import app, db, bcrypt
+# Standard library imports
+import os  # For handling file paths and environment variables
+import secrets  # For generating secure tokens
+import string  # For generating random strings
+
+# Third-party library imports
+from PIL import Image  # For image processing
+from flask import Blueprint, render_template, url_for, flash, redirect, request, abort  # Flask utilities
+from flask_login import login_user, current_user, logout_user, login_required  # Flask-Login utilities
+from werkzeug.utils import secure_filename  # For securing file names
+from datetime import datetime  # For handling date and time
+from zoneinfo import ZoneInfo  # For handling time zones
+from random import choice  # For random selection
+from flask_mail import Message  # For sending emails
+
+# Application-specific imports
+from Bookclub import db, bcrypt, mail  # Importing initialized extensions
 from Bookclub.forms import (
     RegistrationForm, LoginForm, UpdateAccountForm, PostForm, SearchForm,
-    CommentForm, EmptyForm, FollowForm, UnfollowForm
-)
-from Bookclub.models import User, Post, Book, Comment, Like
-from flask_login import login_user, current_user, logout_user, login_required
-from werkzeug.utils import secure_filename
-from datetime import datetime
-from zoneinfo import ZoneInfo
+    CommentForm, EmptyForm, FollowForm, UnfollowForm, ResetPasswordForm
+)  # Importing form classes
+from Bookclub.models import User, Post, Book, Comment, Like  # Importing model classes
 
-@app.route('/user/<username>')
+
+# create a main
+main = Blueprint('main', __name__)
+
+# Home page route: Displays the home page
+@main.route("/", methods=['GET'])
+def home():
+    return render_template('home.html', title='Home')
+
+# User profile page route: Displays user profile with their posts
+@main.route('/user/<username>')
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
@@ -31,33 +49,42 @@ def user(username):
         form=form
     )
 
-@app.route("/")
-def home():
-    return render_template('home.html', title='Home')
 
-@app.route("/forum")
+# Forum page route: Displays all posts on the forum page
+@main.route("/forum")
 def forum():
-    posts = Post.query.order_by(Post.date_posted.desc()).all()
+    # Add Pagination
+    page = request.args.get('page', 1, type=int)
+    posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=6)
     return render_template('forum.html', posts=posts)
 
-@app.route("/search_books", methods=['GET', 'POST'])
+# Search books route: Allows searching books by title, genre, author, status, or ISBN
+@main.route("/search_books", methods=['GET', 'POST'])
 def search_books():
     results = []
     if request.method == 'POST':
         query = request.form.get('query')
         search_by = request.form.get('search_by')
+        
         if search_by == 'book_title':
             results = Book.query.filter(Book.title.ilike(f'%{query}%')).all()
         elif search_by == 'genre':
             results = Book.query.filter(Book.genre.ilike(f'%{query}%')).all()
+        elif search_by == 'author':
+            results = Book.query.filter(Book.author.ilike(f'%{query}%')).all()
+        elif search_by == 'status':
+            results = Book.query.filter(Book.status.ilike(f'%{query}%')).all()
+        elif search_by == 'isbn':
+            results = Book.query.filter(Book.isbn.ilike(f'%{query}%')).all()
         
         return render_template('book_result.html', results=results)
     return render_template('search_books.html')
-
-@app.route("/register", methods=['GET', 'POST'])
+     
+# User registration route: Handles GET and POST requests for user registration
+@main.route("/register", methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for('home'))
+        return redirect(url_for('main.home'))
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
@@ -65,55 +92,58 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash('Your account has been created! You are now able to log in', 'success')
-        return redirect(url_for('login'))
+        return redirect(url_for('main.login'))
     return render_template('register.html', title='Register', form=form)
 
-@app.route("/login", methods=['GET', 'POST'])
+# Login route for handling user logins with form validation and session management
+@main.route("/login", methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('home'))
+        return redirect(url_for('main.home'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user, remember=form.remember.data)
             next_page = request.args.get('next')
-            return redirect(next_page) if next_page else redirect(url_for('home'))
+            return redirect(next_page) if next_page else redirect(url_for('main.home'))
         else:
             flash('Login Unsuccessful. Please check email and password', 'danger')
     return render_template('login.html', title='Login', form=form)
 
-@app.route("/logout")
+# Logout route to handle user session termination
+@main.route("/logout")
 def logout():
     logout_user()
-    return redirect(url_for('home'))
+    return redirect(url_for('main.home'))
 
-#     return picture_fn
+# Function to upload and save images to a specified path with resizing
 def upload_images(form_picture, storage_path, output_size=(125, 125)):
-    # Generate a unique file name
     random_hex = secrets.token_hex(8)
     _, f_ext = os.path.splitext(form_picture.filename)
     picture_fn = random_hex + f_ext
 
-    # Determine the path to save the image
-    picture_path = os.path.join(app.root_path, storage_path, picture_fn)
+    picture_path = os.path.join(main.root_path, storage_path, picture_fn)
 
-    # Open the image and create a thumbnail
     i = Image.open(form_picture)
     i.thumbnail(output_size)  # Resize the image using the provided output_size
-    i.save(picture_path)
 
+    if i.mode != 'RGB':
+        i = i.convert('RGB')  # Convert image to RGB mode to ensure compatibility
+
+    i.save(picture_path)
     return picture_fn
 
 # Update last_seen before each request for authenticated users
-@app.before_request
+@main.before_request
 def before_request():
     if current_user.is_authenticated:
         current_user.last_seen = datetime.now(ZoneInfo("Australia/Perth"))
+        print(f"Updating last_seen to Perth time: {current_user.last_seen}")
         db.session.commit()
 
 # Profile update route, requires login to access
-@app.route("/profile", methods=['GET', 'POST'])
+@main.route("/profile", methods=['GET', 'POST'])
 @login_required
 def profile():
     form = UpdateAccountForm()
@@ -125,18 +155,21 @@ def profile():
         current_user.email = form.email.data
         current_user.about_me = form.about_me.data
         current_user.last_seen = datetime.now(ZoneInfo("Australia/Perth"))
+        print(f"Updating profile: {current_user.last_seen}")
         db.session.commit()
         flash('Your account has been updated!', 'success')
-        return redirect(url_for('profile'))
+        return redirect(url_for('main.profile'))
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
         form.about_me.data = current_user.about_me
     image_file = url_for('static', filename='profile_pics/' + current_user.image_file)
-    return render_template('profile.html', title='Profile', image_file=image_file, form=form)
+    return render_template('profile.html', title='Profile',
+                           image_file=image_file, form=form)
+
 
 # Route to create a new post, requires login to access
-@app.route("/post/new", methods=['GET', 'POST'])
+@main.route("/post/new", methods=['GET', 'POST'])
 @login_required
 def new_post():
     form = PostForm()
@@ -149,12 +182,13 @@ def new_post():
         db.session.add(post)
         db.session.commit()
         flash('Your post has been created!', 'success')
-        return redirect(url_for('forum'))
+        return redirect(url_for('main.forum'))
     return render_template('create_post.html', title='New Post',
                            form=form, legend='New Post')
-#comments     
 
-@app.route("/post/<int:post_id>", methods=['GET', 'POST'])
+# Route to view a post and its comments
+@main.route("/post/<int:post_id>", methods=['GET', 'POST'])
+@login_required
 def post(post_id):
     post = Post.query.get_or_404(post_id)
     allComments = Comment.query.filter_by(to_post_id=post_id).all()
@@ -192,15 +226,16 @@ def post(post_id):
         db.session.add(comment)
         db.session.commit()
         flash('Your comment has been created!', 'success')
-        return redirect(url_for('post', post_id=post_id))
+        return redirect(url_for('main.post', post_id=post_id))
 
     return render_template('post.html', postTitle=post.title, post=post, form=form, legend='New comment', comments=allComments)
 
-@app.route("/post/<int:post_id>/update", methods=['GET', 'POST'])
+# Route to update an existing post: Requires login and author ownership
+@main.route("/post/<int:post_id>/update", methods=['GET', 'POST'])
 @login_required
 def update_post(post_id):
     post = Post.query.get_or_404(post_id)
-    if post.author != current_user:
+    if post.author != current_user and current_user.email != 'admin@admin.com':
         abort(403)
     form = PostForm()
     if form.validate_on_submit():
@@ -211,26 +246,28 @@ def update_post(post_id):
         post.content = form.content.data
         db.session.commit()
         flash('Your post has been updated!', 'success')
-        return redirect(url_for('post', post_id=post.id))
+        return redirect(url_for('main.post', post_id=post.id))
     elif request.method == 'GET':
         form.title.data = post.title
         form.content.data = post.content
     image_file = url_for('static', filename='profile_pics/' + post.image_file)
     return render_template('update_post.html', title='Update Post', form=form, legend='Update Post', image_file=image_file)
 
-@app.route("/post/<int:post_id>/delete", methods=['POST'])
+# Route to delete an existing post, requires login and user must be the author
+@main.route("/post/<int:post_id>/delete", methods=['POST'])
 @login_required
 def delete_post(post_id):
     post = Post.query.get_or_404(post_id)
-    if post.author != current_user:
+    if post.author != current_user and current_user.email != 'admin@admin.com':
         abort(403)
     db.session.delete(post)
     db.session.commit()
     flash('Your post has been deleted!', 'success')
-    return redirect(url_for('home'))
+    return redirect(url_for('main.forum'))
 
-#####  这是follower ！！！！  部分
-@app.route('/follow/<username>', methods=['POST'])
+
+# Route to follow a user: Requires login to access
+@main.route('/follow/<username>', methods=['POST'])
 @login_required
 def follow(username):
     form = EmptyForm()
@@ -238,15 +275,16 @@ def follow(username):
         user = User.query.filter_by(username=username).first_or_404()
         if user == current_user:
             flash('You cannot follow yourself!', 'danger')
-            return redirect(url_for('user', username=username))
+            return redirect(url_for('main.user', username=username))
         current_user.follow(user)
         db.session.commit()
         flash(f'You are now following {username}!', 'success')
-        return redirect(url_for('user', username=username))
+        return redirect(url_for('main.user', username=username))
     else:
-        return redirect(url_for('forum'))
-
-@app.route('/unfollow/<username>', methods=['POST'])
+        return redirect(url_for('main.forum'))
+    
+# Route to unfollow a user: Requires login to access
+@main.route('/unfollow/<username>', methods=['POST'])
 @login_required
 def unfollow(username):
     form = EmptyForm()
@@ -254,38 +292,16 @@ def unfollow(username):
         user = User.query.filter_by(username=username).first_or_404()
         if user == current_user:
             flash('You cannot unfollow yourself!', 'danger')
-            return redirect(url_for('user', username=username))
+            return redirect(url_for('main.user', username=username))
         current_user.unfollow(user)
         db.session.commit()
         flash(f'You are no longer following {username}.', 'success')
-        return redirect(url_for('user', username=username))
+        return redirect(url_for('main.user', username=username))
     else:
-        return redirect(url_for('forum'))
+        return redirect(url_for('main.forum'))
 
-
-#pass stuff to NavBar 
-@app.context_processor
-def layout():
-    form = SearchForm()
-    return dict(form=form)
-
-
-@app.route('/search', methods=["POST"])
-def search():
-    form = SearchForm()
-    posts = Post.query
-    if form.validate_on_submit():
-        post_searched = form.searched.data
-        posts = posts.filter(Post.content.like(f'%{post_searched}%'))
-        posts = posts.order_by(Post.title).all()
-        return render_template(
-            "search.html",
-            form=form,
-            searched=post_searched,
-            posts=posts
-        )
-# Like route
-@app.route("/post/<int:post_id>/like", methods=['POST'])
+# Route to like or unlike a post: Requires login to access
+@main.route("/post/<int:post_id>/like", methods=['POST'])
 @login_required
 def like_post(post_id):
     post = Post.query.get_or_404(post_id)
@@ -299,6 +315,76 @@ def like_post(post_id):
         db.session.add(new_like)
         db.session.commit()
         flash('You liked the post!', 'success')
-    return redirect(url_for('post', post_id=post_id))
+    return redirect(url_for('main.post', post_id=post_id))
+
+# Pass forms to the navigation bar
+@main.context_processor
+def layout():
+    form = SearchForm()
+    return dict(form=form)
 
 
+# Route to search for posts: Allows searching posts by multiple fields
+@main.route('/search', methods=["GET", "POST"])
+def search():
+    form = SearchForm()
+    posts = Post.query
+    if form.validate_on_submit():
+        search_term = form.searched.data
+        # Perform filtering using OR to search across multiple fields
+        posts = posts.filter(
+            (Post.title.ilike(f'%{search_term}%')) |
+            (Post.date_posted.ilike(f'%{search_term}%')) |
+            (Post.content.ilike(f'%{search_term}%')) |
+            (Post.user_id == int(search_term) if search_term.isdigit() else False)
+        ).order_by(Post.date_posted.desc()).all()
+
+        return render_template("search.html",
+                               form=form,
+                               searched=search_term,
+                               posts=posts)
+    return render_template("search.html",
+                           form=form,
+                           searched='',
+                           posts=[])
+
+#  Bookshelf route: Allows viewing and changing the status of books
+@main.route("/shelf", methods=['GET', 'POST'])
+@login_required
+def shelf(): 
+    if request.method == 'POST':
+        book_id = request.form.get('book_id')
+        book = Book.query.get(book_id)
+        if book:
+            book.status = 'borrowed' if book.status == 'available' else 'available'
+            db.session.commit()
+
+    books = Book.query.order_by(Book.id.asc()).all()
+    return render_template('shelf.html', title='BookShelf', books=books)
+
+
+# reset the passowrd~
+@main.route('/reset-password', methods=['GET', 'POST'])
+def reset_password():
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        email = form.email.data
+
+        if User.valid_email(email):
+            # Generate a more secure random password with letters and numbers
+            new_password = ''.join(choice(string.ascii_letters + string.digits) for _ in range(8))
+            user = User.query.filter_by(email=email).first()
+            hashed_password = bcrypt.generate_password_hash(new_password).decode('utf-8')
+            user.password = hashed_password
+            db.session.commit()
+            # Email message
+            msg = Message("Book Club: Please Reset Password", recipients=[email])
+            msg.body = f"From UWA Book Club, this is your new password: {new_password}"
+            print(new_password)
+            mail.send(msg)
+            flash("New reset password has been sent to your email successfully", 'success')
+            return redirect(url_for('main.login'))
+        else:
+            flash("Email does not exist", 'danger') 
+        
+    return render_template('reset_password.html', form=form)
