@@ -16,6 +16,17 @@ This document provides setup and migration instructions for the Book Club projec
 |           |              |                 |
 
 
+## The architecture of the web application
+**Model View Controller**
+<br>
+<div align=center><img src="https://www.mathworks.com/company/newsletters/articles/developing-matlab-apps-using-the-model-view-controller-pattern/_jcr_content/mainParsys/image.adapt.full.medium.jpg/1668175030977.jpg"[1] width="420" height="280" alt="MVC"/>
+</div>
+<br>
+MVC is widely attributed to Trygve Reenskaug, who reportedly invented it in the 1970s. Since then, it has gained immense popularity as a dominant pattern for server-side web applications[2].
+
+<br>
+
+
 ## Setup Instructions
 
 ### Step 1: Create a Virtual Environment
@@ -121,5 +132,18 @@ coverage HTML
       python test/tests_selenium.py
    ```      
 
+
+
+## Acknowledgments
+
+* Built following the [Flask Mega-Tutorial](https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world) by **Miguel Grinberg**.
+
+
+[1]https://www.mathworks.com/company/newsletters/articles/developing-matlab-apps-using-the-model-view-controller-pattern.html
+
+[2]Reenskaug, T. (1979). Models-Views-Controllers. Retrieved from http://heim.ifi.uio.no/~trygver/themes/mvc/mvc-index.html
+
+[3]http://heim.ifi.uio.no/~trygver/themes/mvc/mvc-index.html
+ 
 
 
