@@ -3,18 +3,16 @@
 {% block content %}
 
 <div class="container">
-     <!-- Header for the User Profile -->
+    <!-- Header for the User Profile -->
     <h2 class="header">User Profile</h2>
-    {% if user == current_user %}
     <div class="user-profile">
         <div class="profile-left">
             <!-- Display the username and profile picture -->
             <h1>{{ user.username }}</h1>
-            <img class="main-author-image" src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}"
-                alt="Author Image">
+            <img class="main-author-image" src="{{ url_for('static', filename='profile_pics/' + user.image_file) }}" alt="Author Image">
         </div>
         <div class="profile-right">
-             <!-- Section for "About Me" details, if available -->
+            <!-- Section for "About Me" details, if available -->
             {% if user.about_me %}
             <section id="about-me">
                 <h4>About Me Details</h4> <!-- Adjusted heading level for internal section -->
@@ -22,22 +20,22 @@
             </section>
             {% endif %}
 
-             <!-- Display the last seen date and time -->
-             <!-- Adjusted date format -->
-            {% if user.last_seen %}<p>Last seen on: {{ user.last_seen.strftime('%Y-%m-%d %H:%M') }}</p>{% endif %}
+            <!-- Display the last seen date and time -->
+            <!-- Adjusted date format -->
+            {% if user.last_seen %}
+            <p>Last seen on: {{ user.last_seen.strftime('%Y-%m-%d %H:%M') }}</p>
+            {% endif %}
             <!-- Display the number of followers and following -->
             <p>{{ user.followers_count() }} followers, {{ user.following_count() }} following.</p>
 
             <div class="profile-right2">
                 <!-- Current user can edit their own profile -->
                 {% if user == current_user %}
-                <!--current user can -->
                 <a class="btn-edit-profile" href="{{ url_for('main.profile') }}">
                     <i class="fa-solid fa-user"></i> Edit profile
                 </a>
-                
-                <!-- Display follow/unfollow button based on the following status -->
                 {% elif not current_user.is_following(user) %}
+                <!-- Display follow/unfollow button based on the following status -->
                 <form action="{{ url_for('main.follow', username=user.username) }}" method="post">
                     {{ follow_form.hidden_tag() }}
                     <button type="submit" class="btn-follow">
@@ -56,11 +54,12 @@
         </div>
     </div>
 </div>
+
 <!-- Section for displaying posts by the user -->
 <div class="posts-wrapper">
     <h2 class="post-header">Posts by {{ user.username }}</h2> <!-- Ensure this is h2 for consistency -->
     <div class="user-posts">
-         <!-- Check if there are any posts -->
+        <!-- Check if there are any posts -->
         {% if posts %}
         <!-- Loop through each post and display its title, content, and date posted -->
         {% for post in posts %}
