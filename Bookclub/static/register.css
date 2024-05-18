@@ -1,34 +1,38 @@
+/* Base layout settings for full coverage and positioning with no horizontal scrolling */
 html, body {
     width: 100%;
     height: 100%;
     position: relative;
-    overflow-x: hidden; /* Prevents horizontal scrolling */
+    overflow-x: hidden;
 }
 
+/* Styling for the registration page background and alignment */
 .registration-page {
     display: flex;
-    align-items: center; /* Centers vertically */
-    justify-content: center; /* Centers horizontally */
+    align-items: center;
+    justify-content: center;
     background: url('register_pics/register_bg.jpg') no-repeat center center fixed;
-    background-size: cover; /* Ensures it covers the full area */
-    min-height: 100vh; /* This ensures the minimum height of the element is the full viewport height */
-    width: 100vw; /* This ensures the width is the full viewport width */
+    background-size: cover;
+    min-height: 100vh;
+    width: 100vw;
 }
 
+/* Main container styling for registration content, including centering and background */
 .content-section {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 60vh; /* Adjust height as needed */
-    width: 37%; /* Maintain the width or adjust as needed */
-    margin: auto; /* Center the box horizontally */
-    background-color: rgba(255, 255, 255, 0.65); /* Semi-transparent white */
+    min-height: 60vh;
+    width: 37%;
+    margin: auto;
+    background-color: rgba(255, 255, 255, 0.65);
     padding: 30px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     border-radius: 10px;
 }
 
+/* Layout for containers holding form elements */
 .section-container {
     display: flex;
     flex-direction: column;
@@ -36,20 +40,23 @@ html, body {
     width: 100%;
 }
 
+/* Uniform styling for form elements within the registration form */
 .form-group {
-    width: 90%; /* Adjust to fit your design */
+    width: 90%;
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+/* Base styles for all input fields and buttons, ensuring full width usage and padding */
 input, button {
     width: 100%;
     padding: 8px 15px;
     box-sizing: border-box;
 }
 
+/* Label styling with consistent color and spacing */
 label {
     display: block;
     margin-bottom: 5px;
@@ -57,6 +64,7 @@ label {
     width: 100%;
 }
 
+/* Removes default styling from fieldsets for a cleaner look */
 fieldset {
     border: none;
     padding: 0;
@@ -64,36 +72,39 @@ fieldset {
     width: 100%;
 }
 
+/* Styling for section titles within forms */
 legend {
     text-align: center;
     width: 100%;
     padding: 10px;
 }
 
+/* Styling for the primary action button */
 .btn-signup {
-    background-color: rgb(211, 55, 55); /* Red color similar to the one in your image */
+    background-color: rgb(211, 55, 55);
     color: white;
     border: none;
     padding: 10px 20px;
     border-radius: 20px;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    transition: background-color 0.3s;
     display: block;
-    width: 50%; /* Adjust as necessary */
+    width: 50%;
     margin: 20px auto;
 }
 
+/* Hover effect for the signup button */
 .btn-signup:hover {
-    background-color: #e04a3f; /* Slightly darker shade for hover */
+    background-color: #e04a3f;
 }
 
+/* Color matching for header elements */
 .community-header {
-    color: rgb(211, 55, 55); /* Matching the button color */
+    color: rgb(211, 55, 55);
 }
 
-
-/* Responsive adjustments */
+/* Responsive adjustments for better mobile viewing */
 @media (max-width: 768px) {
     .content-section {
         width: 95%;
@@ -109,6 +120,6 @@ legend {
     }
 
     .community-header {
-        font-size: 18px; /* Smaller font size for smaller devices */
+        font-size: 18px;
     }
 }
