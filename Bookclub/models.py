@@ -1,9 +1,13 @@
-# User model and database setup for Flask applications
-from datetime import datetime, timezone
-from zoneinfo import ZoneInfo
-from Bookclub import db, login_manager
-from flask_login import UserMixin
-from sqlalchemy.orm import relationship
+# Standard library imports
+from datetime import datetime, timezone  # For handling date and time
+from zoneinfo import ZoneInfo  # For handling time zones
+
+# Third-party library imports
+from flask_login import UserMixin  # For user session management in Flask
+from sqlalchemy.orm import relationship  # For defining relationships between models
+
+# Application-specific imports
+from Bookclub import db, login_manager  # Importing the database and login manager from the Bookclub package
 
 
 # Follow table to manage followers
