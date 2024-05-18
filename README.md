@@ -20,7 +20,7 @@ Our website includes special features for administrators，you can login using a
 Moderation: Admins have special accounts to log in and monitor posts, comments, and books. If any content contains inappropriate language or behavior, admins can delete posts, users, comments, or likes.
 We designed the UWA Book Club website with love and hope it brings value to our community. 
 
-** Let's start your reading journey together. Simply register and join us today!**
+## Let's start your reading journey together. Simply register and join us today!
 
 
 
