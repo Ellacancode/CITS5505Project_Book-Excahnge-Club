@@ -23,7 +23,24 @@ This document provides setup and migration instructions for the Book Club projec
 </div>
 <br>
 MVC is widely attributed to Trygve Reenskaug, who reportedly invented it in the 1970s. Since then, it has gained immense popularity as a dominant pattern for server-side web applications[2].
+In this project, we have 6 tables with 6 relationships.
+<br>
 
+**Model - Tables:**
+#### <span style="color: green;">User</span>: Represents users of the application.
+#### <span style="color: green;">Post</span>: Represents blog posts created by users.
+#### <span style="color: green;">Comment</span>: Represents comments made on blog posts.
+#### <span style="color: green;">Like</span>: Represents likes given to blog posts by users.
+#### <span style="color: green;">Book</span>: Represents books in the database.
+#### <span style="color: green;">Followers</span>: A many-to-many relationship table to manage user followers.
+
+**Model - Relationships:**
+#### <span style="color: green;">User-Post</span>: One-to-many relationship. Each user can have multiple posts.
+#### <span style="color: green;">User-Comment</span>: One-to-many relationship. Each user can have multiple comments.
+#### <span style="color: green;">User-Like</span>: One-to-many relationship. Each user can have multiple likes.
+#### <span style="color: green;">Post-Comment</span>: One-to-many relationship. Each post can have multiple comments.
+#### <span style="color: green;">Post-Like</span>: One-to-many relationship. Each post can have multiple likes.
+#### <span style="color: green;">User-Followers</span>: Many-to-many relationship managed by the followers table. Users can follow and be followed by multiple users.
 <br>
 
 
@@ -136,14 +153,12 @@ coverage HTML
 
 ## Acknowledgments
 
-* Built following the [Flask Mega-Tutorial](https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world) by **Miguel Grinberg**.
+[1] https://www.mathworks.com/company/newsletters/articles/developing-matlab-apps-using-the-model-view-controller-pattern.html
 
+[2] Reenskaug, T. (1979). Models-Views-Controllers. Retrieved from http://heim.ifi.uio.no/~trygver/themes/mvc/mvc-index.html
 
-[1]https://www.mathworks.com/company/newsletters/articles/developing-matlab-apps-using-the-model-view-controller-pattern.html
-
-[2]Reenskaug, T. (1979). Models-Views-Controllers. Retrieved from http://heim.ifi.uio.no/~trygver/themes/mvc/mvc-index.html
-
-[3]http://heim.ifi.uio.no/~trygver/themes/mvc/mvc-index.html
+[3] http://heim.ifi.uio.no/~trygver/themes/mvc/mvc-index.html
  
+[4] [Flask Mega-Tutorial](https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world) by **Miguel Grinberg**.
 
-
+[5] Insights and assistance provided by ChatGPT, a language model by OpenAI.
