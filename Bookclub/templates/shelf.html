@@ -7,7 +7,7 @@
 
 {% block content %}
 <header>
-    <!-- Include Bootstrap JavaScript -->
+    <!-- Include Bootstrap's JavaScript bundle -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <!-- Include custom JavaScript for the shelf page -->
     <script src="{{ url_for('static', filename='shelf.js') }}"></script>
@@ -15,6 +15,7 @@
 <div class="shelf-tit">
     <p>BOOK SHELF</p>
 </div>
+<!-- Search box for searching books -->
 <div class="bigsearchbox">
 <form action="{{ url_for('main.search_books') }}" method="post" class="shelf-searchbox text-center">
     <label for="search_by" class="book-name">Search by</label>
@@ -29,7 +30,7 @@
     <button type="submit" class="shelf-btn">Search</button>
 </form>
 </div>
-
+<!-- Display search results if available -->
 {% if results %}
 <ul>
     {% for book in results %}
@@ -37,13 +38,12 @@
     {% endfor %}
 </ul>
 {% endif %}
-
+<!-- Display books in a grid format -->
 <div class="shelf-container">
     <div class="row">
         {% for book in books %}
         <div class="col-md-3 col-cub">
             <div class="shelf-book">
-                <!-- Button to open modal with book details -->
                 <button type="button" class="btn-book" data-toggle="modal" data-target="#myModal"
                     data-book-id="{{ book.id }}" data-book-title="{{book.title}}" data-book-author="{{ book.author }}"
                     data-book-isbn="{{ book.isbn }}" data-book-genre="{{ book.genre }}"
@@ -54,10 +54,8 @@
                 <form method="POST" action="{{ url_for('main.shelf') }}">
                     <input type="hidden" name="book_id" value="{{ book.id }}">
                     {% if book.status == "available" %}
-                    <!-- Button to borrow the book -->
                     <button type="submit" class="btn-borrow" id="btn-{{ book.id }}">Borrow</button>
                     {% else %}
-                    <!-- Display "Not Available" if the book is not available -->
                     <p class="txt-unava" id="btn-{{ book.id }}">Not Available</p>
                     {% endif %}
                 </form>
@@ -66,16 +64,16 @@
         {% endfor %}
     </div>
 </div>
-
+<!-- Modal to display book details -->
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content -->
         <div class="modal-content">
             <div class="modal-header">
+                <!-- Button to close the modal -->
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <!-- Book details displayed in the modal -->
                 <p id="modal-id"></p>
                 <p id="modal-tit"></p>
                 <p id="modal-aut"></p>
