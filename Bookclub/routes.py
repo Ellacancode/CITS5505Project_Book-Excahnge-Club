@@ -1,23 +1,3 @@
-# import os
-# import secrets
-# from PIL import Image
-# from flask import Blueprint,render_template, url_for, flash, redirect, request, abort
-# from Bookclub import db, bcrypt, mail
-# from Bookclub.forms import (
-#     RegistrationForm, LoginForm, UpdateAccountForm, PostForm, SearchForm,
-#     CommentForm, EmptyForm, FollowForm, UnfollowForm
-# )
-# from Bookclub.models import User, Post, Book, Comment, Like
-# from flask_login import login_user, current_user, logout_user, login_required  
-# from werkzeug.utils import secure_filename
-# from datetime import datetime
-# from zoneinfo import ZoneInfo
-# from random import choice
-# from .forms import ResetPasswordForm
-# import string
-# from flask_mail import Message
-
-
 # Standard library imports
 import os  # For handling file paths and environment variables
 import secrets  # For generating secure tokens
@@ -42,7 +22,7 @@ from Bookclub.forms import (
 from Bookclub.models import User, Post, Book, Comment, Like  # Importing model classes
 
 
-
+# create a main
 main = Blueprint('main', __name__)
 
 # Home page route: Displays the home page
@@ -208,6 +188,7 @@ def new_post():
 
 # Route to view a post and its comments
 @main.route("/post/<int:post_id>", methods=['GET', 'POST'])
+@login_required
 def post(post_id):
     post = Post.query.get_or_404(post_id)
     allComments = Comment.query.filter_by(to_post_id=post_id).all()
@@ -382,32 +363,7 @@ def shelf():
     return render_template('shelf.html', title='BookShelf', books=books)
 
 
-def send_reset_email(user):
-    token = user.get_reset_token()
-    msg = Message('Password Reset Request',
-                  sender='noreply@demo.com',
-                  recipients=[user.email])
-    msg.body = f'''To reset your password, visit the following link:
-{url_for('reset_token', token=token, _external=True)}
-
-If you did not make this request then simply ignore this email and no changes will be made.
-'''
-    mail.send(msg)
-
-
-@main.route("/reset_password", methods=['GET', 'POST'])
-def reset_request():
-    if current_user.is_authenticated:
-        return redirect(url_for('home'))
-    form = RequestResetForm()
-    if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
-        send_reset_email(user)
-        flash('An email has been sent with instructions to reset your password.', 'info')
-        return redirect(url_for('login'))
-    return render_template('reset_request.html', title='Reset Password', form=form)
-
-
+# reset the passowrd~
 @main.route('/reset-password', methods=['GET', 'POST'])
 def reset_password():
     form = ResetPasswordForm()
