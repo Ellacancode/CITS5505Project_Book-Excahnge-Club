@@ -1,3 +1,4 @@
+/* Styles for the account content section */
 .acc-content-section {
     margin: 0 auto; 
     align-items: center;
@@ -9,27 +10,33 @@
     margin-bottom: 20px;
 }
 
+/* Styles for the account image */
 .account-img{
     border-radius: 30px;
     width: 35%;
     max-width: 350px;
 }
+/* Styles for the media body */
 .acc-media-body{
     margin-left: 60px;
 }
+/* Styles for the border bottom */
 .acc-border-bottom{
     letter-spacing: 1px;
 }
+/* Styles for the input title */
 .inputtit-update{
     margin-top: -20px;
     letter-spacing: 1px;
     margin-bottom: 0px;
 }
+/* Styles for form controls */
 .form-control{
     height: 50px;
     border-radius: 30px;
     font-size: 15px;
 }
+/* Styles for update button */
 .btn-update{
     display: flex;
     justify-content: center;
@@ -41,11 +48,13 @@
     border-radius: 20px;
     outline: none;
 }
+/* update button hover */
 .btn-update:hover{
     background-color: rgb(107, 31, 31);
     color: white;
     text-decoration: none;
 }
+/* Styles for the right div in update section */
 .update-rightdiv{
     width: 80%;
     background-color: #f9f0ed;
@@ -59,6 +68,7 @@
     justify-items: center;
     margin-top: 20px;
 }
+/* Styles for the preview image block */
 .preview-image-block{
     margin: 0 auto;
     width: 80%;
@@ -67,14 +77,17 @@
     border-radius: 25px;
     margin-top: 20px;
 }
+/* Styles for the preview image */
 .preview-image{
     border-radius: 25px;
 }
 
+/* Styles for profile title */
 .profile-title {
     font-weight: 500;
 }
 
+/* Styles for form group profile */
 .form-group-profile {
     display: flex;
     flex-direction: column;
@@ -83,6 +96,7 @@
     width: 70%;
 }
 
+/* Styles for image preview */
 #imagePreview {
     height: 100%; 
     width: 100%;
@@ -96,6 +110,7 @@ body, html {
     font-family: Arial, sans-serif; /* Use a universal font that looks good on all devices */
 }
 
+/* Container styles */
 .container {
     width: 100%;
     padding-right: 15px;
