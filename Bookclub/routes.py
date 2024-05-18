@@ -1,23 +1,25 @@
-import os
-import secrets
-from PIL import Image
-from flask import Blueprint,render_template, url_for, flash, redirect, request, abort
-from Bookclub import db, bcrypt, mail
+# Import necessary modules and packages
+import os  # For interacting with the operating system
+import secrets  # For generating secure tokens
+from PIL import Image  # For image processing
+from flask import Blueprint, render_template, url_for, flash, redirect, request, abort  # For Flask functionality
+from Bookclub import db, bcrypt, mail  # Import database, password hashing, and email functionality
+from Bookclub.models import User, Post, Book, Comment, Like  # Import database models
+from flask_login import login_user, current_user, logout_user, login_required  # For user authentication
+from werkzeug.utils import secure_filename  # For secure file uploads
+from datetime import datetime  # For working with dates and times
+from zoneinfo import ZoneInfo  # For working with time zones
+from random import choice  # For random selection
+from .forms import ResetPasswordForm  # Import form for password reset
+import string  # For working with strings
+from flask_mail import Message  # For sending emails
+
 from Bookclub.forms import (
     RegistrationForm, LoginForm, UpdateAccountForm, PostForm, SearchForm,
     CommentForm, EmptyForm, FollowForm, UnfollowForm
 )
-from Bookclub.models import User, Post, Book, Comment, Like
-from flask_login import login_user, current_user, logout_user, login_required  
-from werkzeug.utils import secure_filename
-from datetime import datetime
-from zoneinfo import ZoneInfo
-from random import choice
-from .forms import ResetPasswordForm
-import string
-from flask_mail import Message
 
-
+# Create a blueprint for the main routes
 main = Blueprint('main', __name__)
 
 # Home page route: Displays the home page
@@ -43,7 +45,6 @@ def user(username):
         unfollow_form=unfollow_form,
         form=form
     )
-
 
 # Forum page route: Displays all posts on the forum page
 @main.route("/forum")
@@ -162,7 +163,6 @@ def profile():
     return render_template('profile.html', title='Profile',
                            image_file=image_file, form=form)
 
-
 # Route to create a new post, requires login to access
 @main.route("/post/new", methods=['GET', 'POST'])
 @login_required
@@ -259,7 +259,6 @@ def delete_post(post_id):
     flash('Your post has been deleted!', 'success')
     return redirect(url_for('main.forum'))
 
-
 # Route to follow a user: Requires login to access
 @main.route('/follow/<username>', methods=['POST'])
 @login_required
@@ -317,7 +316,6 @@ def layout():
     form = SearchForm()
     return dict(form=form)
 
-
 # Route to search for posts: Allows searching posts by multiple fields
 @main.route('/search', methods=["GET", "POST"])
 def search():
@@ -357,6 +355,32 @@ def shelf():
     return render_template('shelf.html', title='BookShelf', books=books)
 
 
+def send_reset_email(user):
+    token = user.get_reset_token()
+    msg = Message('Password Reset Request',
+                  sender='noreply@demo.com',
+                  recipients=[user.email])
+    msg.body = f'''To reset your password, visit the following link:
+{url_for('reset_token', token=token, _external=True)}
+
+If you did not make this request then simply ignore this email and no changes will be made.
+'''
+    mail.send(msg)
+
+
+@main.route("/reset_password", methods=['GET', 'POST'])
+def reset_request():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+    form = RequestResetForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        send_reset_email(user)
+        flash('An email has been sent with instructions to reset your password.', 'info')
+        return redirect(url_for('login'))
+    return render_template('reset_request.html', title='Reset Password', form=form)
+
+
 @main.route('/reset-password', methods=['GET', 'POST'])
 def reset_password():
     form = ResetPasswordForm()
@@ -380,4 +404,4 @@ def reset_password():
         else:
             flash("Email does not exist", 'danger') 
         
-    return render_template('reset_password.html', form=form) 
+    return render_template('reset_password.html', form=form)
