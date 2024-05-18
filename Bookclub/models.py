@@ -114,64 +114,67 @@ class User(db.Model, UserMixin):
         return Like.query.filter_by(user_id=self.id, post_id=post.id).first() is not None
 
 
-#Post model to represent blog posts
+# Post model to represent blog posts
 class Post(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100), nullable=False)
-    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    content = db.Column(db.Text, nullable=False)
-    image_file = db.Column(db.String(50), nullable=True, default='default.jpg')
+    id = db.Column(db.Integer, primary_key=True)  # Unique identifier for each post
+    title = db.Column(db.String(100), nullable=False)  # Title of the post, required field
+    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)  # Date when the post was created
+    content = db.Column(db.Text, nullable=False)  # Content of the post, required field
+    image_file = db.Column(db.String(50), nullable=True, default='default.jpg')  # Optional image for the post
     user_id = db.Column(
         db.Integer,
         db.ForeignKey('user.id', name='fk_post_user', ondelete='CASCADE'),
         nullable=False
-    )
-    comments = db.relationship('Comment', backref='post', lazy=True, passive_deletes=True)
-    likes = db.relationship('Like', backref='post', lazy=True, passive_deletes=True)
+    )  # Foreign key to reference the user who created the post
+    comments = db.relationship('Comment', backref='post', lazy=True, passive_deletes=True)  # Relationship to comments
+    likes = db.relationship('Like', backref='post', lazy=True, passive_deletes=True)  # Relationship to likes
 
+    # String representation of the Post model
     def __repr__(self):
         return f"Post('{self.title}', '{self.date_posted}', '{self.image_file}')"
 
+    # Method to check if a post is liked by a user
     def is_liked_by_user(self, user):
         if not user.is_authenticated:
             return False
         return Like.query.filter_by(user_id=user.id, post_id=self.id).first() is not None
-   
 
-#Comment model to represent comments on blog posts
+# Comment model to represent comments on blog posts
 class Comment(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)  # Unique identifier for each comment
     to_post_id = db.Column(
         db.Integer,
         db.ForeignKey('post.id', name='fk_comment_post', ondelete='CASCADE'),
         nullable=False
-    )
-    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    content = db.Column(db.Text, nullable=False)
-    image_file = db.Column(db.String(50), nullable=True, default='default.jpg')
+    )  # Foreign key to reference the post that the comment belongs to
+    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)  # Date when the comment was created
+    content = db.Column(db.Text, nullable=False)  # Content of the comment, required field
+    image_file = db.Column(db.String(50), nullable=True, default='default.jpg')  # Optional image for the comment
     user_id = db.Column(
         db.Integer,
         db.ForeignKey('user.id', name='fk_comment_user', ondelete='CASCADE'),
         nullable=False
-    )
+    )  # Foreign key to reference the user who created the comment
 
+    # String representation of the Comment model
     def __repr__(self):
         return f"Comment('{self.content}', '{self.date_posted}', '{self.image_file}')"
-    
-# Like model to represtent likes for the post
+
+# Like model to represent likes for the post
 class Like(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)  # Unique identifier for each like
     post_id = db.Column(
         db.Integer,
         db.ForeignKey('post.id', name='fk_like_post', ondelete='CASCADE'),
         nullable=False
-    )
+    )  # Foreign key to reference the post that the like belongs to
     user_id = db.Column(
         db.Integer,
         db.ForeignKey('user.id', name='fk_like_user', ondelete='CASCADE'),
         nullable=False
-    )
-    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    )  # Foreign key to reference the user who liked the post
+    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)  # Date when the like was created
 
+    # String representation of the Like model
     def __repr__(self):
         return f"Like('User ID: {self.user_id}', 'Post ID: {self.post_id}', '{self.date_posted}')"
