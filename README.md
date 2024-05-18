@@ -15,15 +15,12 @@ Discover Books: Find books via the bookshelf page by browsing or searching by ti
 Personalize Profiles: Customize their profiles by updating their "About Me" section and profile picture.<br>
 
 **Admin Functions**
-Our website includes special features for administrators:
+Our website includes special features for administrators，you can login using admin@admin.com and password Admin@12
 
 Moderation: Admins have special accounts to log in and monitor posts, comments, and books. If any content contains inappropriate language or behavior, admins can delete posts, users, comments, or likes.
 We designed the UWA Book Club website with love and hope it brings value to our community. 
 
-## Let's start your reading journey together. Simply register and join us today!
-
-
-
+** Let's start your reading journey together. Simply register and join us today!**
 
 
 
@@ -83,7 +80,7 @@ The view is the component of the app through which users directly interact.  The
 
 ![Forum Page](Bookclub/static/readme/3.jpg)
 
-## Setup Instructions
+## How to launch the project
 
 ### Step 1: Create a Virtual Environment
 These instructions are tailored for a Windows environment.
@@ -188,11 +185,8 @@ coverage HTML
       python test/tests_selenium.py
    ```      
 
-## Admin
-**Account:** Admin@12 
 
-**Password:** admin@admin.com
-## Acknowledgments
+## References
 
 [1] https://www.mathworks.com/company/newsletters/articles/developing-matlab-apps-using-the-model-view-controller-pattern.html
 
