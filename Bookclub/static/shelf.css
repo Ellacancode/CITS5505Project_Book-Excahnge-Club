@@ -1,3 +1,4 @@
+/* Shelf Title */
 .shelf-tit {
     height: 120px;
     width: 150%;
@@ -17,6 +18,7 @@
     font-weight: bold;
 }
 
+/* Shelf Container */
 .shelf-container {
     margin-left: 15%;
     width: 70%;
@@ -26,12 +28,14 @@
     /* overflow-y: auto; */
 }
 
+/* Column Cube */
 .col-cub {
     height: 350px;
     padding: 15px;
     margin-bottom: 100px;
 }
 
+/* Shelf Book */
 .shelf-book {
     display: inline-block;
     cursor: pointer;
@@ -39,14 +43,17 @@
     height: 100%;
     border-radius: 25px;
     text-align: center;
+    /* Shelf Book */
     background-color: white;
 }
 
+/* Column Content */
 .col-content {
     font-size: 15px;
     font-weight: bold;
 }
 
+/* Shelf Image */
 .shelf-img {
     width: 100%;
     height: 90%;
@@ -54,6 +61,7 @@
     z-index: 1;
 }
 
+/* Shelf Image Hover */
 .shelf-img:hover {
     border: 3px solid transparent;
     box-shadow: 0 0 5px 3px #f8edd8;
@@ -61,11 +69,15 @@
 }
 
 
+/* Big Search Box */
 .bigsearchbox {
     align-items: center !important;
     justify-content: center !important;
 
 }
+
+
+/* Shelf Search Box */
 .shelf-searchbox {
     align-items: center !important;
     justify-content: center !important;
@@ -78,8 +90,10 @@
     padding-top: 55px;
 
 
+    
 }
 
+/* Shelf Selector */
 .shelf-selector {
     display: inline-block;
     width: 20%;
@@ -89,6 +103,7 @@
     border: 1px solid #ccc;
 }
 
+/* Shelf Searcher */
 .shelf-searcher {
     display: inline-block;
     width: 20%;
@@ -96,6 +111,7 @@
     border-radius: 20px;
 }
 
+/* Shelf Button */
 .shelf-btn {
     display: inline-block;
     width: 20%;
@@ -108,6 +124,7 @@
     font-size: 18px;
 }
 
+/* Shelf Button Hover */
 .shelf-btn:hover {
     background-color: rgb(107, 31, 31);
     color: white;
@@ -115,6 +132,7 @@
     font-weight: bold;
 }
 
+/* Borrow Button */
 .btn-borrow {
     width: 60%;
     height: 50px;
@@ -125,11 +143,13 @@
     color: white;
 }
 
+/* Borrow Button Hover */
 .btn-borrow:hover {
     background-color: rgb(1, 75, 1);
     font-weight: bold;
 }
 
+/* Unavailable Text */
 .txt-unava {
     line-height: 50px;
     margin-left: 20%;
@@ -141,12 +161,14 @@
     color: white;
 }
 
+/* Book Name */
 .book-name {
     display: inline-block;
     width: 10%;
     font-weight: bold;
 }
 
+/* Book Button */
 .btn-book {
     width: 100%;
     height: 100%;

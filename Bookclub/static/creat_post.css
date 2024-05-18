@@ -1,3 +1,4 @@
+/* body */
 html, body {
     width: 100%;
     height: 100%;
@@ -5,6 +6,7 @@ html, body {
     overflow-x: hidden; /* Prevents horizontal scrolling */
 }
 
+/* create page layout */
 .create-page {
     display: flex;
     align-items: center; /* Centers vertically */
@@ -15,6 +17,7 @@ html, body {
     width: 100vw; /* This ensures the width is the full viewport width */
 }
 
+/* content container */
 .content-section {
     display: flex;
     flex-direction: column;
@@ -29,6 +32,7 @@ html, body {
     backdrop-filter: blur(10px); /* Adds a blur effect to the background */
 }
 
+/* forms */
 .form-group-create {
     display: flex;
     flex-direction: column; /* Stack elements vertically */
@@ -37,6 +41,7 @@ html, body {
     margin-top: 10px;
 }
 
+/* forms button */
 .btn-custom {
     background-color: #cd4024; /* Sets the background color */
     border-color: #d4d4d4; /* Sets the border color to match the background */
@@ -49,24 +54,27 @@ html, body {
     transition: background-color 0.3s, border-color 0.3s;
 }
 
+/* buttons hover */
 .btn-custom:hover {
     background-color: #e62626; /* Darkened manually by 10% */
     border-color: #bebebe; /* Darkened manually by 10% */
 }
 
-
+/* fit the screen size */
 @media (max-width: 992px) {
     .content-section {
         width: 50%; /* Wider on smaller desktops and tablets */
     }
 }
 
+/* fit the screen size */
 @media (max-width: 768px) {
     .content-section {
         width: 70%; /* Takes more space on small tablets */
     }
 }
 
+/* fit the screen size */
 @media (max-width: 576px) {
     .content-section {
         width: 85%; /* Full width on mobile devices */

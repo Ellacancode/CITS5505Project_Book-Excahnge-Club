@@ -7,15 +7,20 @@
 {% block content %}
 <main class="container">
     <section class="forum">
+        <!-- Header section with search bar -->
         <div class="header-with-search">
             <h2 class="forum-header">Recent Blog Posts</h2>
+            <!-- Search form -->
             <form method="POST" action="{{ url_for('main.search')}}" class="search-form">
                 {{ form.hidden_tag()}}
+                <!-- Search input field -->
                 <input class="form-control me-2" type="search" placeholder="Search Forum" aria-label="Search" name="searched">
+                <!-- Search button -->
                 <button class="btn btn-outline-secondary" type="submit">Search</button>
             </form>
         </div>
         <div class="container">
+            <!-- Loop through each post -->
             {% for post in posts.items %}
             <div class="post-card">
                 <!-- Start by displaying the image if it exists -->
@@ -29,29 +34,37 @@
                 <p class="content">{{ post.content }}</p>
                 <!-- Post header with profile picture and username/date -->
                 <div class="post-header">
+                    <!-- Profile picture -->
                     <img class="profile-pic" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}" alt="Profile Picture">
                     <div class="user-info">
+                        <!-- Username with link to user profile -->
                         <a class="username" href="{{ url_for('main.user', username=post.author.username) }}">{{ post.author.username }}</a>
+                        <!-- Date posted -->
                         <div class="date-posted">{{ post.date_posted.strftime('%Y-%m-%d') }}</div>
                     </div>
                 </div>
             </div>
+            <!-- If there are no posts -->
             {% else %}
             <p>No posts have been made yet.</p>
             {% endfor %}
         </div>
         <!-- Pagination -->
         <div class="pagination">
+            <!-- If there are previous pages -->
             {% if posts.has_prev %}
             <a href="{{ url_for('main.forum', page=posts.prev_num) }}" class="page-link">&laquo; Prev</a>
+            <!-- If there are no previous pages -->
             {% else %}
             <span class="disabled">&laquo; Prev</span>
             {% endif %}
 
             {% for page_num in posts.iter_pages() %}
                 {% if page_num %}
+                     <!-- If current page -->
                     {% if page_num == posts.page %}
                         <span class="current">{{ page_num }}</span>
+                    <!-- If not current page -->
                     {% else %}
                         <a href="{{ url_for('main.forum', page=page_num) }}" class="page-link">{{ page_num }}</a>
                     {% endif %}
@@ -60,8 +73,10 @@
                 {% endif %}
             {% endfor %}
 
+             <!-- If there are next pages -->
             {% if posts.has_next %}
             <a href="{{ url_for('main.forum', page=posts.next_num) }}" class="page-link">Next &raquo;</a>
+            <!-- If there are no next pages -->
             {% else %}
             <span class="disabled">Next &raquo;</span>
             {% endif %}

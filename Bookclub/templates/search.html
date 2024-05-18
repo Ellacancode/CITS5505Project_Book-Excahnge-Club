@@ -9,14 +9,18 @@
     <h2>You searched for: <em>{{ searched }}</em></h2>
 </div>
 
+<!-- search container -->
 <div class="container">
     {% for post in posts %}
     <div class="post-card">
+        <!-- check page -->
         {% if post.image_file != 'default.jpg' %}
         <img class="post-image" src="{{ url_for('static', filename='post_images/' + post.image_file) }}"
             alt="Post Image">
         {% endif %}
+        <!-- title -->
         <h2 class="title"><a href="{{ url_for('main.post', post_id=post.id) }}">{{ post.title }}</a></h2>
+        <!-- content -->
         <p class="content">{{ post.content }}</p>
         <div class="post-header">
             <img class="profile-pic" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}"
@@ -24,13 +28,16 @@
             <div class="user-info">
                 <a class="username" href="{{ url_for('main.user', username=post.author.username) }}">{{ post.author.username
                     }}</a>
+                <!-- data frame -->
                 <div class="date-posted">{{ post.date_posted.strftime('%Y-%m-%d') }}</div>
             </div>
         </div>
     </div>
 
+    <!-- if not found -->
     {% else %}
     <div class="centered-text">
+        <!-- not found text -->
         <p>Sorry, your search: <strong>{{ searched }}</strong> was not found.</p>
     </div>
 </div>
