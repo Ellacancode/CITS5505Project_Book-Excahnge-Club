@@ -4,15 +4,19 @@
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='login.css') }}">
 {% endblock %}
 
+<!-- Main content block -->
 {% block content %}
 <div class="login-page">
     <div class="login-form">
         <h2 class="bookclub-member">Bookclubs member?</h2>
         <h4 class="border-bottom mb-4">Log In</h4>
-        <form method="POST" action="#">
-            {{ form.hidden_tag() }}
-            <fieldset class="form-group">
-                {{ form.email.label(class="form-control-label") }}
+        <!-- Start of the login form, method set to POST -->
+        <form method="POST" action="#"> 
+            <!-- Generates CSRF protection token -->
+            {{ form.hidden_tag() }} 
+            <fieldset class="form-group"> 
+                <!-- Email input label -->
+                {{ form.email.label(class="form-control-label") }} 
                 {{ form.email(class="form-control form-control-lg") }}
                 {% if form.email.errors %}
                 <div class="invalid-feedback">
@@ -23,9 +27,11 @@
                 {% endif %}
             </fieldset>
             <div class="form-group">
+                <!-- Password input label -->
                 {{ form.password.label(class="form-control-label") }}
                 {{ form.password(class="form-control form-control-lg") }}
                 {% if form.password.errors %}
+                <!-- Conditional to check for password errors -->
                 <div class="invalid-feedback">
                     {% for error in form.password.errors %}
                     <span>{{ error }}</span>
@@ -39,8 +45,10 @@
             </div>
             <button type="submit" class="btn btn-primary">LOG IN NOW</button>
             <small class="form-text text-muted">
+                <!-- Link for password reset -->
                 <a href="{{ url_for('main.reset_password') }}">Forgot password?</a>
             </small>
+            <!-- Link to registration page -->
             <a class="btn btn-signup" href="{{ url_for('main.register') }}">SIGN UP</a>
         </form>
     </div>
