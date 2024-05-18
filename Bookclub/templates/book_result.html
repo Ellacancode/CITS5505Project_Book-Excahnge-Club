@@ -1,23 +1,32 @@
 {% extends "layout.html" %}
 
 {% block content %}
+<!-- Container for search results page -->
 <div class="search-results-page" style="height: auto;">
     <h1>Search Results</h1>
+    <!-- Check if there are search results -->
     {% if results %}
     <div class="card-container">
+         <!-- Loop through each search result -->
         {% for book in results %}
         <div class="book-card" style="margin-bottom: 20px;">
             <div class="book-info">
+                <!-- Display book title -->
                 <h2>{{ book.title }}</h2>
+                <!-- Display book author -->
                 <p><strong>Author:</strong> {{ book.author }}</p>
+                <!-- Display book genre -->
                 <p><strong>Genre:</strong> {{ book.genre }}</p>
+                <!-- Display book status -->
                 <p><strong>Status:</strong> {{ book.status }}</p>
             </div>
         </div>
+        <!-- End of loop through search results -->
         {% endfor %}
     </div>
     {% else %}
     <p>No results found.</p>
+     <!-- End of check for search results -->
     {% endif %}
 </div>
 {% endblock %}

@@ -5,33 +5,49 @@
 </header>
 <div class="create-page">
     <div class="content-section">
+        <!-- Form for creating a new post -->
         <form method="POST" action="{{ url_for('main.new_post') }}" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
+             <!-- Fieldset for the form group -->
             <fieldset class="form-group-create">
+                <!-- Legend for the form -->
                 <legend class="border-bottom mb-4">{{ legend }}</legend>
+                <!-- Form group for the title -->
                 <div class="form-group-create">
+                    <!-- Label for the title field -->
                     {{ form.title.label(class="form-control-label") }}
+                    <!-- If there are errors for the title field -->
                     {% if form.title.errors %}
+                    <!-- Display the title field with error styling -->
                     {{ form.title(class="form-control form-control-lg is-invalid") }}
                     <div class="invalid-feedback">
                         {% for error in form.title.errors %}
                         <span>{{ error }}</span>
                         {% endfor %}
                     </div>
+                    <!-- If there are no errors for the title field -->
                     {% else %}
+                     <!-- Display the title field -->
                     {{ form.title(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
                 <div class="form-group-create">
+                    <!-- Form group for the content -->
                     {{ form.content.label(class="form-control-label") }}
+                     <!-- If there are errors for the content field -->
                     {% if form.content.errors %}
+                    <!-- Display the content field with error styling -->
                     {{ form.content(class="form-control form-control-lg is-invalid") }}
                     <div class="invalid-feedback">
+                        <!-- Loop through each content error -->
                         {% for error in form.content.errors %}
+                        <!-- Display the error message -->
                         <span>{{ error }}</span>
                         {% endfor %}
                     </div>
+                    <!-- If there are no errors for the content field -->
                     {% else %}
+                    <!-- Display the content field -->
                     {{ form.content(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
@@ -39,12 +55,16 @@
                 <!--  Upload picture -->
                 <div class="form-group-create">
                     {{ form.picture.label() }}
+                    <!-- Display the picture upload field -->
                     {{ form.picture(class="form-control-file", id="imageUpload") }}
+                    <!-- If there are errors for the picture field -->
                     {% if form.picture.errors %}
+                    <!-- Loop through each picture error -->
                     {% for error in form.picture.errors %}
                     <span class="text-danger">{{ error }}</span><br>
                     {% endfor %}
                     {% endif %}
+                    <!-- Container for the preview image -->
                     <div class="update-rightdiv" style="background-color: white;">
                         <p>Preview</p>
                         <div class="preview-image-block"><img class="preview-image" id="imagePreview" src="#" alt="preview"></div>
@@ -53,6 +73,7 @@
 
             </fieldset>
             <div class="form-group-create">
+                <!-- Display the submit button -->
                 {{ form.submit(class="btn btn-custom") }}
             </div>
         </form>

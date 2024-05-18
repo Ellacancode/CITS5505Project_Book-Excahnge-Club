@@ -1,3 +1,4 @@
+/* Base styles for HTML and body */
 html, body {
   height: auto; 
   padding: 0;
@@ -6,6 +7,7 @@ html, body {
   display: block; 
 }
 
+/* Styles for header with search */
 .header-with-search {
   display: flex;  
   align-items: center;  
@@ -13,15 +15,18 @@ html, body {
   margin-top: 30px;
 }
 
+/* Styles for search form */
 .search-form {
   display: flex;
   align-items: center;
 }
 
+/* Styles for form controls */
 .form-control {
   margin-right: 10px;  
 }
 
+/* Styles for main container */
 .container {
   display: flex;
   flex-wrap: wrap;
@@ -32,6 +37,7 @@ html, body {
   max-width: 1200px; 
 }
 
+/* Styles for post card */
 .post-card {
   flex: 0 0 calc(33.33% - 20px);  /* Ensure this calculation allows for any padding/margins */
   max-width: calc(33.33% - 20px); /* This line can help enforce sizing if flexbox settings aren't enough */
@@ -47,6 +53,7 @@ html, body {
   margin-bottom: 20px; 
 }
 
+/* Styles for title */
 .title {
   text-align: left; 
   width: 100%; 
@@ -54,6 +61,7 @@ html, body {
   font-size: x-large;
 }
 
+/* Styles for content */
 .content {
   text-align: left; 
   width: 100%; 
@@ -61,6 +69,7 @@ html, body {
   font-size: medium;
 }
 
+/* Styles for post image */
 .post-image {
   width: 100%; 
   height: auto; 
@@ -74,6 +83,7 @@ html, body {
   width: 100%; 
 }
 
+/* Styles for profile picture */
 .profile-pic {
   border-radius: 50%;
   width: 50px; 
@@ -81,24 +91,28 @@ html, body {
   margin-right: 10px; 
 }
 
+/* Styles for user information */
 .user-info {
   display: flex;
   flex-direction: column;
   align-items: flex-start; 
 }
 
+/* Styles for post header */
 .post-header {
   display: flex;
   align-items: center; 
   width: 100%;
 }
 
+/* Styles for username */
 .username {
   font-weight: bold;
   color: #333;
   text-decoration: none;
 }
 
+/* Styles for date posted */
 .date-posted {
   color: #666;
 }
@@ -125,6 +139,7 @@ html, body {
   color: #ffffff;             /* White text remains the same */
 }
 
+/* Styles for pagination */
 .pagination {
   display: flex;
   justify-content: center;
@@ -132,6 +147,7 @@ html, body {
   margin-top: 20px;
 }
 
+/* Styles for page link */
 .page-link {
   margin: 0 5px;
   padding: 10px 15px;
@@ -142,10 +158,12 @@ html, body {
   transition: background-color 0.3s;
 }
 
+/* Hover styles for page link */
 .page-link:hover {
   background-color: #ffffff;
 }
 
+/* Styles for disabled pagination link */
 .disabled {
   margin: 0 5px;
   padding: 10px 15px;
@@ -154,6 +172,7 @@ html, body {
   border-radius: 5px;
 }
 
+/* Styles for current page link */
 .current {
   margin: 0 5px;
   padding: 10px 15px;
@@ -162,6 +181,7 @@ html, body {
   border-radius: 5px;
 }
 
+/* Styles for ellipsis */
 .ellipsis {
   margin: 0 5px;
   padding: 10px 15px;
@@ -169,6 +189,7 @@ html, body {
   color: #666;
 }
 
+/* Media query for smaller screens */
 @media (max-width: 768px) {
   .container {
     padding: 10px;

@@ -1,3 +1,4 @@
+/* CSS for search input */
 .searchb-input {
     display: inline-block;
     width: 15%;
@@ -5,6 +6,7 @@
     border-radius: 20px;
 }
 
+/* CSS for search submit button */
 .searchb-submit {
     display: inline-block;
     width: 15%;
@@ -17,11 +19,13 @@
     font-size: 18px;
 }
 
+/* CSS for search submit button on hover */
 .searchb-submit:hover {
     background-color: rgb(107, 12, 12);
     font-weight: bold;
 }
 
+/* CSS for search select dropdown */
 .search-select {
     display: inline-block;
     width: 15%;
@@ -31,6 +35,7 @@
     border: 1px solid #ccc;
 }
 
+/* CSS for container */
 .container {
     background-color: rgba(255, 255, 255, 0.5);
     width: 65%;
@@ -40,6 +45,7 @@
     box-sizing: border-box;
 }
 
+/* CSS for title */
 .title {
     text-align: center;
     font-size: 35px;
@@ -47,12 +53,14 @@
     letter-spacing: 2px;
 }
 
+/* CSS for flex container */
 .flex-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
 }
 
+/* CSS for flex items */
 .flex-item {
     background-color: white;
     width: 20%;
@@ -64,10 +72,12 @@
     border-radius: 5px;
 }
 
+/* CSS for flex item paragraphs */
 .flex-item p {
     text-align: center;
 }
 
+/* CSS for flex item buttons */
 .flex-item button {
     width: 70%;
     height: 40px;
@@ -79,18 +89,21 @@
     margin: 20px auto 0;
 }
 
+/* CSS for flex items on screens with max width of 1200px */
 @media (max-width: 1200px) {
     .flex-item {
         width: 45%; /* 2 items per row */
     }
 }
 
+/* CSS for flex items on screens with max width of 600px */
 @media (max-width: 600px) {
     .flex-item {
         width: 98%; /* 1 item per row */
     }
 }
 
+/* CSS for home image */
 .home-img {
     cursor: pointer;
     width: 80%;
@@ -99,6 +112,7 @@
     border-radius: 15px;
 }
 
+/* CSS for forum image */
 .forum-img {
     float: right;
     width: 100px;
