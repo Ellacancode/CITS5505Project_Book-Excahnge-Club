@@ -5,39 +5,41 @@
 {% endblock %}
 {% block content %}
 
+<!-- Display the search query -->
 <div class="centered-text">
     <h2>You searched for: <em>{{ searched }}</em></h2>
 </div>
 
-<!-- search container -->
 <div class="container">
+     <!-- Loop through the posts returned from the search -->
     {% for post in posts %}
     <div class="post-card">
-        <!-- check page -->
+        <!-- Display the post image if it's not the default image -->
         {% if post.image_file != 'default.jpg' %}
         <img class="post-image" src="{{ url_for('static', filename='post_images/' + post.image_file) }}"
             alt="Post Image">
         {% endif %}
-        <!-- title -->
+          <!-- Display the post title as a link to the post -->
         <h2 class="title"><a href="{{ url_for('main.post', post_id=post.id) }}">{{ post.title }}</a></h2>
-        <!-- content -->
+        <!-- Display the post content -->
         <p class="content">{{ post.content }}</p>
+        <!-- Display the author information and post date -->
         <div class="post-header">
             <img class="profile-pic" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}"
                 alt="Profile Picture">
             <div class="user-info">
+                  <!-- Link to the author's profile -->
                 <a class="username" href="{{ url_for('main.user', username=post.author.username) }}">{{ post.author.username
                     }}</a>
-                <!-- data frame -->
+                     <!-- Display the date the post was published -->
                 <div class="date-posted">{{ post.date_posted.strftime('%Y-%m-%d') }}</div>
             </div>
         </div>
     </div>
 
-    <!-- if not found -->
     {% else %}
+    <!-- Display a message if no posts are found -->
     <div class="centered-text">
-        <!-- not found text -->
         <p>Sorry, your search: <strong>{{ searched }}</strong> was not found.</p>
     </div>
 </div>
