@@ -4,14 +4,17 @@
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='profile.css') }}">
 {% endblock %}
 
+<!-- Main content block of the page -->
 {% block content %}
 <header>
     <script src="{{ url_for('static', filename='profile.js') }}"></script>
 </header>
 <div class="acc-content-section">
     <div class="media">
+        <!-- User profile image -->
         <img class="account-img" src="{{ image_file }}" alt="accountimg">
         <div class="acc-media-body">
+            <!-- User information display -->
             <h2 class="account-heading">{{ current_user.username }}</h2>
             <p class="text-secondary">{{ current_user.email }}</p>
 
@@ -25,12 +28,12 @@
 
         </div>
     </div>
-    
+    <!-- Form for updating user profile information -->
     <form method="POST" action="#" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
         <fieldset class="form-group">
             <legend class="profile-title">Profile Information</legend>
-            
+             <!-- Input for updating username -->           
             <div class="form-group-profile">
                 <p class="inputtit-update">{{ form.username.label(class="form-control-label") }}</p>
                 {% if form.username.errors %}
@@ -44,6 +47,7 @@
                 {{ form.username(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
+            <!-- Input for updating email -->
             <div class="form-group-profile">
                 <p class="inputtit-update">{{ form.email.label(class="form-control-label") }}</p>
                 {% if form.email.errors %}
@@ -57,6 +61,7 @@
                 {{ form.email(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
+            <!-- Input for updating about me -->
             <div class="form-group-profile">
                 <p class="inputtit-update">{{ form.about_me.label(class="form-control-label") }}</p>
                 {% if form.about_me.errors %}
@@ -70,7 +75,7 @@
                 {{ form.about_me(class="form-control form-control-lg") }}
                 {% endif %}
             </div>
-            
+            <!-- Input for updating profile picture -->            
             <div class="form-group-profile">
                 <p class="inputtit-update">{{ form.picture.label() }}</p>
                 {{ form.picture(class="form-control-file", id="imageUpload") }}
