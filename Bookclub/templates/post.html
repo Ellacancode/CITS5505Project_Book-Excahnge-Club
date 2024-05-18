@@ -7,15 +7,18 @@
 {% block content %}
 <main class="container">
     <div class="container">
-        <!-- Post Title, Image, and Author Details -->
+        <!-- Displays the title, image, and content of a blog post -->
         <article class="media content-section">
+            <!-- Post title -->
             <h2 class="article-title">{{ post.title }}</h2>
             {% if post.image_file != 'default.jpg' %}
             <img class="post-image img-fluid" src="{{ url_for('static', filename='post_images/' + post.image_file) }}"
                 alt="Post Image">
+                <!-- Main content of the post -->
             <p class="article-content">{{ post.content }}</p>
             {% endif %}
             <div>
+                <!-- Form for liking or unliking a post -->
                 <form action="{{ url_for('main.like_post', post_id=post.id) }}" method="post"
                     style="display: flex; align-items: center;">
                     {% if post.is_liked_by_user(current_user) %}
@@ -31,6 +34,7 @@
                 </form>
             </div>
             <div class="author-section">
+            <!-- Displays the post author and update/delete controls if applicable -->
                 <div class="post">
                     <div class="author">
                         <p>Author</p>
@@ -39,10 +43,10 @@
                             alt="Author Image">
                     </div>
                     <div class="post-info">
-                        <!-- this  is hyper Link -->
+                        <!-- Link to author profile -->
                         <a href="{{ url_for('main.user', username=post.author.username) }}">{{ post.author.username }}</a>
+                        <!-- Link to update post -->
                         <small class="date-posted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
-                        <!-- Controls -->
                         {% if post.author == current_user or current_user.email == 'admin@admin.com' %}
                         <div class="controls">
                             <a class="btn btn-secondary" href="{{ url_for('main.update_post', post_id=post.id) }}">Update</a>
@@ -55,8 +59,7 @@
             </div>
         </article>
     </div>
-    <!-- Right Column for Comments and New Comment Form -->
-
+    <!-- Section for displaying and submitting comments -->
     <article>
         <h4 class="comment-label">Comments:</h4>
         {% for comment in comments %}
@@ -72,9 +75,7 @@
                         <small class="text-muted">{{ comment.date_posted.strftime('%Y-%m-%d') }}</small>
                     </div>
                 </div>
-
-
-                <!-- Show comment image at the top if it exists -->
+                <!-- Show comment image at the top -->
                 {% if comment.image_file and comment.image_file != 'default.jpg' %}
                 <img class="comment-image img-fluid"
                     src="{{ url_for('static', filename='comment_pics/' + comment.image_file) }}" alt="Comment Image">
@@ -85,9 +86,6 @@
             </div>
         </div>
         {% endfor %}
-
-
-
         <!-- New Comment Form -->
         <div class="commentbox">
             <form method="POST" action="#" enctype="multipart/form-data">
@@ -109,7 +107,6 @@
             </form>
         </div>
     </article>
-
     <!-- Modal for Delete Confirmation -->
     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
         aria-hidden="true">
