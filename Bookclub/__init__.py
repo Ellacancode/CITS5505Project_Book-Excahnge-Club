@@ -1,16 +1,17 @@
+# Import necessary modules and extensions
 from flask import Flask
-import os
-from flask_sqlalchemy import SQLAlchemy
-from flask_bcrypt import Bcrypt
-from flask_login import LoginManager
-from flask_migrate import Migrate
-from flask_admin import Admin, AdminIndexView
-from flask_admin.contrib.sqla import ModelView
-from flask_mail import Mail
+import os  # For accessing environment variables and generating secret keys
+from flask_sqlalchemy import SQLAlchemy  # For database handling
+from flask_bcrypt import Bcrypt  # For password hashing
+from flask_login import LoginManager  # For user session management
+from flask_migrate import Migrate  # For database migrations
+from flask_admin import Admin, AdminIndexView  # For administrative interface
+from flask_admin.contrib.sqla import ModelView  # For SQLAlchemy model views in the admin interface
+from flask_mail import Mail  # For sending emails
 
 # Add test class configuration
 class TestConfig:
-    SECRET_KEY = '5791628bb0b13ce0c676dfde280ba244'  # Use a different secret key for testing
+    SECRET_KEY = os.urandom(24)  # Use a different secret key for testing
     TESTING = True
     SQLALCHEMY_DATABASE_URI = 'sqlite:///test.db'  # Test database
     SQLALCHEMY_TRACK_MODIFICATIONS = False
