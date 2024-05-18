@@ -3,6 +3,19 @@
 
 ## Project Overview
 This document provides setup and migration instructions for the Book Club project, a Flask-based web application. 
+
+
+## Project Members
+
+| UWA ID    | Name         | GitHub Username |
+|-----------|------------  |-----------------|
+| 23829101  | Long Qin     | LongQin0121     |
+| 23844446  | Ella Zhang   | Ellacancode     |
+| 23825634  | Yunwei Zhang | Yunwei-Zhang    |
+| 21978612  | Lucy Chen    | lucychen0305    |
+|           |              |                 |
+
+
 ## Setup Instructions
 
 ### Step 1: Create a Virtual Environment
@@ -110,12 +123,3 @@ coverage HTML
 
 
 
-## Project Members
-
-| UWA ID    | Name         | GitHub Username |
-|-----------|------------  |-----------------|
-| 23829101  | Long Qin     | LongQin0121     |
-| 23844446  | Ella Zhang   | Ellacancode     |
-| 23825634  | Yunwei Zhang | Yunwei-Zhang    |
-| 21978612  | Lucy Chen    | lucychen0305    |
-|           |              |                 |
