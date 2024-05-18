@@ -27,12 +27,13 @@ In this project, we have 6 tables with 6 relationships.
 <br>
 
 **Model - Tables:**
-#### <span style="color: green;">User</span>: Represents users of the application.
-#### <span style="color: green;">Post</span>: Represents blog posts created by users.
-#### <span style="color: green;">Comment</span>: Represents comments made on blog posts.
-#### <span style="color: green;">Like</span>: Represents likes given to blog posts by users.
-#### <span style="color: green;">Book</span>: Represents books in the database.
-#### <span style="color: green;">Followers</span>: A many-to-many relationship table to manage user followers.
+<br>
+**User:** Represents users of the application.<br>
+**Post:** Represents blog posts created by users.<br>
+**Comment:** Represents comments made on blog posts.<br>
+**Like:** Represents likes given to blog posts by users.<br>
+**Book:** Represents books in the database.<br>
+**Followers:** A many-to-many relationship table to manage user followers.<br>
 
 **Model - Relationships:**
 #### <span style="color: green;">User-Post</span>: One-to-many relationship. Each user can have multiple posts.
@@ -43,6 +44,23 @@ In this project, we have 6 tables with 6 relationships.
 #### <span style="color: green;">User-Followers</span>: Many-to-many relationship managed by the followers table. Users can follow and be followed by multiple users.
 <br>
 
+**Controller**
+
+The controller acts as an intermediary between the models and views. It facilitates the transfer of data between the browser and the app, as well as vice versa. In this project, the "routes.py" file functions as the controller. <br> Controller
+
+The Controller handles user requests, processes data via models (User, Post, Book, Comment, Like), and renders templates. It manages routes for registration, login, posting, commenting, and searching books.
+
+**View**
+
+The view is the component of the app through which users directly interact.  The HTML files within the "template" folder serve as the views. Users can access information, read it, and interact with it[3].
+
+## Images
+
+![Home Page](Bookclub/static/1.png)
+
+![User Profile](Bookclub/static/2.png)
+
+![Forum Page](Bookclub/static/3.png)
 
 ## Setup Instructions
 
@@ -149,8 +167,10 @@ coverage HTML
       python test/tests_selenium.py
    ```      
 
+## Admin
+**Account:** Admin@12 
 
-
+**Password:** admin@admin.com
 ## Acknowledgments
 
 [1] https://www.mathworks.com/company/newsletters/articles/developing-matlab-apps-using-the-model-view-controller-pattern.html
