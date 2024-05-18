@@ -40,7 +40,7 @@ def create_app(config_name=None):
         app.config['MAIL_USE_TLS'] = True
         app.config['MAIL_USERNAME'] = 'lucychenhello@gmail.com'
         app.config['MAIL_PASSWORD'] = 'ptlk akla vkgq qdah' #app password
-        app.config['MAIL_DEFAULT_SENDER'] = 'lucychenhello@gmail.com'
+        app.config['MAIL_DEFAULT_SENDER'] = 'lucychenhello@gmail.com' 
 
     # Debug
     app.debug = True
