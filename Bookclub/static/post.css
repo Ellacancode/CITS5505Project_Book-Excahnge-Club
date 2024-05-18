@@ -1,82 +1,82 @@
+/* Basic layout settings for full page coverage with a gradient background */
 html, body {
     background: linear-gradient(to right, #f9f9f9 0%, #faece9 70%, #f9dfd9 100%);
 }
 
+/* Central section styles for flexibility and alignment */
 .content-section {
     display: flex;
-    flex-direction: column; /* Stacks children vertically */
-    align-items: center; /* Aligns children in the center of the 'content-section' */
+    flex-direction: column; 
+    align-items: center; 
     margin-bottom: -40px;
 }
-
+/* Styling for titles within articles for emphasis */
 .article-title {
     align-items: center;
     margin-top: 50px;
     font-size: 40px;
     letter-spacing: 0;
-    font-family: Arial, sans-serif; /* Use Arial font family */
-    font-weight: 700; /* Explicitly set font weight */
+    font-family: Arial, sans-serif; 
+    font-weight: 700; 
     margin-bottom: 30px;
 }
 
-
+/* Image styles within posts for consistency and responsiveness */
 .post-image {
-    width: 100%; /* Restricts width to 90% of their container */
-    margin-bottom: 20px; /* Adds space below images */
+    width: 100%; 
+    margin-bottom: 20px; 
     height: auto;
-    max-width: 400px; /* Maximum width the image can reach */    
+    max-width: 400px;   
     align-items: center;
 }
 
+/* Smaller image styles used within articles */
 .article-img {
-    width: 70px; /* Adjust the size as needed */
-    /* border-radius: 50%;  */
-    object-fit: cover; /* Keeps the aspect ratio */
+    width: 70px; 
+    object-fit: cover; 
 }
 
+/* Container for text content associated with media elements */
 .media-body {
-    width: 100%; /* Ensures the comment box takes up the remainder of the column space */
-    min-height: 100px; /* Gives a minimum height to the comment box */
-    border: 1px solid #ccc; /* Adds a border for better visibility */
-    margin-bottom: 10px; /* Adds space between comments */
-    background-color: #f8f9fa; /* A light background color for the comment box */
+    width: 100%; 
+    min-height: 100px; 
+    border: 1px solid #ccc; 
+    margin-bottom: 10px; 
+    background-color: #f8f9fa; 
 }
-
+/* Styling for images within comments for layout consistency */
 .comment-image {
     align-items: center;
-    width: 40%; /* Makes embedded images responsive within the comment box */
-    margin-top: -50px; /* Adds space above the image */
-    max-width: 400px; /* Maximum width the image can reach */
+    width: 40%; 
+    margin-top: -50px; 
+    max-width: 400px; 
 
 }
-
+/* Post information styling to organize content vertically */
 .post-info {
     display: flex;
-    flex-direction: column; /* Aligns children vertically */
+    flex-direction: column; 
     font-size: large;
     align-items: center;
     margin-bottom: 10px;
 }
 
-
-
-
+/* Profile image styles for visual enhancement */
 .profile-img {
-    width: 30%; /* smaller profile picture */
+    width: 30%; 
     border-radius: 50%;
-    margin-right: 10px; /* Space between the image and the username */
+    margin-right: 10px; 
 }
 
 .commentbox {
     width: 100%;
 }
 
+/* Main author image styles for alignment and size */
 .main-author-image {
     width: 100%;
     margin-bottom: 10px;
     max-width: 120px;
-    /* border-radius: 50%; */
-
 }
 
 .comment-label {
@@ -87,32 +87,33 @@ html, body {
 
 .comment-header {
     display: flex;
-    flex-direction: row; /* Align items horizontally */
-    align-items: center; /* Center-align items vertically */
-    width: 100%; /* Full width of its container */
-    justify-content: flex-start; /* Aligns content to the start of the container */
+    flex-direction: row; 
+    align-items: center; 
+    width: 100%; 
+    justify-content: flex-start; 
 }
 
 
 .author2-image {
-    width: 100%; /* Fixed width for the image */
-    border-radius: 50%; /* Circle shape */
-    margin-right: 20px; /* Space to the right of the image */
+    width: 100%; 
+    border-radius: 50%;
+    margin-right: 20px; 
     max-width: 90px;
 }
 
+/* Metadata styling within comments for organization */
 .metadata {
     display: flex;
-    flex-direction: column; /* Stack username and date vertically */
-    justify-content: center; /* Center content vertically */
+    flex-direction: column; 
+    justify-content: center; 
 }
 
 .comment-author {
-    font-weight: bold; /* Bold font for emphasis */
+    font-weight: bold; 
 }
 
 .text-muted {
-    font-size: 0.8rem; /* Smaller font size for the date */
+    font-size: 0.8rem; 
 }
 
 
@@ -131,12 +132,11 @@ html, body {
 }
 
 .comment-image {
-    width: 60%; /* Adjust based on your needs */
+    width: 60%; 
     margin: 10px auto 20px; 
     margin-top: -40px;
 }
 
-/* Ensures the comment box takes up the remainder of the column space */
 .media-body {
     width: 100%;
     padding: 10px;
@@ -144,8 +144,6 @@ html, body {
     margin-bottom: 10px;
     background-color: #ffffff;
 }
-
-
 
 .new-comment-label {
     margin-top: 50px;
@@ -160,28 +158,27 @@ html, body {
 .author {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centers items horizontally in the container */
-    justify-content: center; /* Centers items vertically */
+    align-items: center; 
+    justify-content: center; 
     font-weight: bold;
     font-size: 20px;
 }
 
 .controls {
-    display: flex; /* Uses flexbox to layout children */
-    align-items: center; /* Centers the buttons vertically */
-    justify-content: space-between; /* Optional: Distributes extra space evenly */
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
 }
 article-title
 .btn {
-    margin-right: 10px; /* Adds margin to the right of each button */
+    margin-right: 10px; 
 }
 
-
 .author-section {
-    border: 1px solid #ccc; /* Light grey border */
-    padding: 10px;          /* Padding inside the border */
-    margin: 10px;           /* Space around the section */
-    border-radius: 10px;     /* Optional: rounded corners */
+    border: 1px solid #ccc; 
+    padding: 10px;          
+    margin: 10px;          
+    border-radius: 10px;    
     margin-top: 20px;
     background-color: #ffffff;
 }
@@ -204,16 +201,16 @@ article-title
 
 .btn-secondary {
     width: 150px;
-    padding: 10px 0; /* Adjust padding to be only vertical */
-    font-size: 16px; /* Adjust the font size to match the button in the image */
+    padding: 10px 0; 
+    font-size: 16px; 
     color: rgb(0, 0, 0);
     background-color: rgb(255, 255, 255);
     border: 1px solid #cccccc;
     border-radius: 50px;
     cursor: pointer;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Optional: add a subtle shadow */
-    text-align: center; /* Center text in the button */
-    font-family: Arial, sans-serif; /* Optional: specify font, assuming Arial */
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); 
+    text-align: center; 
+    font-family: Arial, sans-serif; 
 }
 
 .btn-secondary:hover {
@@ -223,29 +220,29 @@ article-title
 
 .btn-post {
     width: 150px;
-    padding: 10px 0; /* Adjust padding to be only vertical */
-    font-size: 16px; /* Adjust the font size to match the button in the image */
+    padding: 10px 0; 
+    font-size: 16px; 
     color: rgb(255, 255, 255);
     background-color: rgb(211, 55, 55);
     border: 1px solid #cccccc;
     border-radius: 50px;
     cursor: pointer;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); /* Optional: add a subtle shadow */
-    text-align: center; /* Center text in the button */
-    font-family: Arial, sans-serif; /* Optional: specify font, assuming Arial */
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); 
+    text-align: center; 
+    font-family: Arial, sans-serif; 
 }
 
 .btn-post:hover {
     font-weight: bold;
     border: solid 1px black;
 }
-/* Universal Base Styles */
+
 img {
-    max-width: 100%;  /* Ensure all images are responsive */
+    max-width: 100%;  
     height: auto;
 }
 
-/* Media Queries */
+/* Responsive media queries for layout adjustments on smaller screens */
 @media (max-width: 768px) {
     .content-section {
         flex-direction: column;
@@ -274,26 +271,26 @@ img {
     }
 
     .btn {
-        width: 100%; /* Full width buttons are easier to tap */
-        padding: 12px; /* Larger touch targets */
-        margin-bottom: 10px; /* More space between buttons */
+        width: 100%; 
+        padding: 12px; 
+        margin-bottom: 10px; 
     }
 
     .commentbox, .media-body {
-        padding: 10px; /* More padding on smaller screens */
+        padding: 10px; 
     }
 
     .form-group {
-        font-size: large; /* Larger form elements for easier interaction */
+        font-size: large; 
     }
 }
 
 @media (max-width: 480px) {
     .article-title {
-        font-size: 18px; /* Even smaller font size for very small screens */
+        font-size: 18px; 
     }
     
     .btn {
-        font-size: 14px;  /* Smaller font size for buttons */
+        font-size: 14px;  
     }
 }
